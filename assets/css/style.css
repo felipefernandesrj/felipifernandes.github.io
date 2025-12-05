@@ -1,7 +1,36 @@
 /* ================================================
    Felipi Fernandes - Personal Portfolio
-   Custom Styles
+   Design System & Custom Styles
    ================================================ */
+
+/* ================================================
+   Design System - Color Variables
+   Base: #c8c5bc (warm beige/gray)
+   ================================================ */
+
+:root {
+    /* Warm Neutral Palette */
+    --warm-50:  #faf9f7;  /* Branco quente (background claro) */
+    --warm-100: #f7f6f4;  /* Branco quente */
+    --warm-200: #eae8e4;  /* Cinza muito claro quente */
+    --warm-300: #dddad4;  /* Cinza claro quente */
+    --warm-400: #c8c5bc;  /* COR BASE */
+    --warm-500: #b0aca2;  /* Cinza médio quente */
+    --warm-600: #8f8b81;  /* Cinza quente */
+    --warm-700: #6b6860;  /* Cinza escuro quente */
+    --warm-800: #4a4843;  /* Quase preto quente */
+    --warm-900: #2a2825;  /* Preto quente */
+    --warm-950: #1a1917;  /* Preto profundo quente */
+    
+    /* Semantic Colors */
+    --color-background: var(--warm-50);
+    --color-surface: var(--warm-100);
+    --color-border: var(--warm-300);
+    --color-text-primary: var(--warm-900);
+    --color-text-secondary: var(--warm-600);
+    --color-text-muted: var(--warm-500);
+    --color-accent: var(--warm-400);
+}
 
 /* Screen Reader Only - Accessibility */
 .sr-only {
@@ -21,15 +50,17 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Custom Selection */
+/* Custom Selection - Warm */
 ::selection {
-    background-color: rgba(17, 24, 39, 0.15);
-    color: #111827;
+    background-color: rgba(200, 197, 188, 0.4);
+    color: var(--warm-900);
 }
 
 /* Body base styles */
 body {
     overflow-x: hidden;
+    background-color: var(--warm-50);
+    color: var(--warm-900);
 }
 
 /* ================================================
@@ -41,7 +72,7 @@ nav {
 }
 
 nav.scrolled {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px rgba(42, 40, 37, 0.08);
 }
 
 /* ================================================
@@ -49,7 +80,7 @@ nav.scrolled {
    ================================================ */
 
 .hero-gradient {
-    background: linear-gradient(180deg, rgba(249, 250, 251, 0) 0%, rgba(249, 250, 251, 1) 100%);
+    background: linear-gradient(180deg, rgba(250, 249, 247, 0) 0%, rgba(250, 249, 247, 1) 100%);
 }
 
 /* ================================================
