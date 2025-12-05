@@ -1,0 +1,265 @@
+/* ================================================
+   Felipi Fernandes - Personal Portfolio
+   Custom Styles
+   ================================================ */
+
+/* Screen Reader Only - Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Selection */
+::selection {
+    background-color: rgba(17, 24, 39, 0.15);
+    color: #111827;
+}
+
+/* Body base styles */
+body {
+    overflow-x: hidden;
+}
+
+/* ================================================
+   Navbar Styles
+   ================================================ */
+
+nav {
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================================
+   Hero Section
+   ================================================ */
+
+.hero-gradient {
+    background: linear-gradient(180deg, rgba(249, 250, 251, 0) 0%, rgba(249, 250, 251, 1) 100%);
+}
+
+/* ================================================
+   Project Cards
+   ================================================ */
+
+.project-card {
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Card Tags */
+.project-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.project-tag.tag-javascript {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.project-tag.tag-html {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.project-tag.tag-css {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.project-tag.tag-frontend {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.project-tag.tag-standalone {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+.project-tag.tag-bootstrap {
+    background-color: #ede9fe;
+    color: #7c3aed;
+}
+
+.project-tag.tag-backend {
+    background-color: #ede9fe;
+    color: #5b21b6;
+}
+
+.project-tag.tag-ia,
+.project-tag.tag-ai {
+    background-color: #fce7f3;
+    color: #9d174d;
+}
+
+.project-tag.tag-api {
+    background-color: #cffafe;
+    color: #0e7490;
+}
+
+.project-tag.tag-tool,
+.project-tag.tag-ferramenta {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.project-tag.tag-default {
+    background-color: #f3f4f6;
+    color: #6b7280;
+}
+
+/* ================================================
+   Buttons
+   ================================================ */
+
+.btn-primary {
+    background-color: #111827;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1f2937;
+}
+
+.btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+}
+
+/* ================================================
+   Animations
+   ================================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Stagger animation for cards */
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ================================================
+   Loading State
+   ================================================ */
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ================================================
+   Footer
+   ================================================ */
+
+footer {
+    background-color: #fafafa;
+}
+
+/* ================================================
+   Responsive Adjustments
+   ================================================ */
+
+@media (max-width: 640px) {
+    .project-card {
+        padding: 1.25rem;
+    }
+    
+    .project-card .flex-wrap.gap-2 {
+        flex-direction: column;
+    }
+    
+    .project-card .flex-wrap.gap-2 > a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ================================================
+   Print Styles
+   ================================================ */
+
+@media print {
+    nav,
+    footer,
+    .animate-bounce {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+    }
+    
+    .project-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #e5e7eb !important;
+    }
+}
