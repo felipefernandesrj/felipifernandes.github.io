@@ -113,9 +113,9 @@
             "id": "qrcode-generator",
             "name": "Gerador de QR Code",
             "description": "Gerador completo de QR Codes permanentes: URLs, Texto, Telefone, E-mail, SMS, WhatsApp, WiFi e vCard. Sem expiração, sem cadastro.",
-            "demo": "/app/qrcode/index.html",
-            "download": "/app/qrcode/index.html",
-            "source": "https://github.com/felipefernandesrj/felipifernandes.github.io/tree/main/app/qrcode",
+            "demo": "/projects/qrcode/index.html",
+            "download": "/projects/qrcode/index.html",
+            "source": "https://github.com/felipefernandesrj/felipifernandes.github.io/tree/main/projects/qrcode",
             "icon": "qr-code",
             "tags": ["JavaScript", "Bootstrap", "Ferramenta", "Standalone"]
         }
