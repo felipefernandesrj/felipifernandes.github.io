@@ -50,6 +50,12 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Fix para artefatos de renderização do AOS */
+[data-aos] {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
 /* Custom Selection - Warm */
 ::selection {
     background-color: rgba(200, 197, 188, 0.4);
@@ -251,7 +257,21 @@ nav.scrolled {
    ================================================ */
 
 footer {
-    background-color: #fafafa;
+    background-color: var(--warm-950);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* Previne artefatos de renderização */
+}
+
+footer * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* Remove qualquer efeito de overflow de animações anteriores */
+footer::before,
+footer::after {
+    display: none !important;
 }
 
 /* ================================================
