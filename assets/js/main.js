@@ -36,11 +36,11 @@
         placeholderCount: 2,
         animationDuration: 800,
         animationDelay: 100,
-        counterApiNamespace: 'felipifernandes'
+        downloadsStorageKey: 'ff_downloads'
     };
 
     // ================================================
-    // Download Counter Functions
+    // Download Counter Functions (localStorage based)
     // ================================================
 
     function formatDownloadCount(count) {
@@ -52,22 +52,33 @@
         return count.toString();
     }
 
-    async function getDownloadCount(projectId) {
+    function getDownloadsData() {
         try {
-            const url = `https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`;
-            console.log('[Downloads] Fetching:', url);
-            const response = await fetch(url);
-            if (!response.ok) {
-                console.log('[Downloads] Response not OK:', response.status);
-                return 0;
-            }
-            const data = await response.json();
-            console.log('[Downloads] Count for', projectId, ':', data.count);
-            return data.count || 0;
-        } catch (error) {
-            console.warn('[Downloads] Error:', error);
-            return 0;
+            const data = localStorage.getItem(CONFIG.downloadsStorageKey);
+            return data ? JSON.parse(data) : {};
+        } catch {
+            return {};
         }
+    }
+
+    function saveDownloadsData(data) {
+        try {
+            localStorage.setItem(CONFIG.downloadsStorageKey, JSON.stringify(data));
+        } catch {
+            // localStorage não disponível
+        }
+    }
+
+    function getDownloadCount(projectId) {
+        const data = getDownloadsData();
+        return data[projectId] || 0;
+    }
+
+    function incrementDownloadCount(projectId) {
+        const data = getDownloadsData();
+        data[projectId] = (data[projectId] || 0) + 1;
+        saveDownloadsData(data);
+        return data[projectId];
     }
 
     // ================================================
@@ -257,19 +268,11 @@
         const downloadsEl = card.querySelector('.project-downloads');
         const downloadsCountEl = card.querySelector('.downloads-count');
         if (downloadsEl && downloadsCountEl && project.id) {
-            console.log('[Downloads] Loading count for project:', project.id);
-            loadProjectDownloadCount(project.id, downloadsCountEl);
-        } else {
-            console.log('[Downloads] Missing elements or project.id:', { downloadsEl: !!downloadsEl, downloadsCountEl: !!downloadsCountEl, projectId: project.id });
+            const count = getDownloadCount(project.id);
+            downloadsCountEl.textContent = formatDownloadCount(count);
         }
 
         return card;
-    }
-
-    async function loadProjectDownloadCount(projectId, element) {
-        const count = await getDownloadCount(projectId);
-        console.log('[Downloads] Setting element text to:', formatDownloadCount(count));
-        element.textContent = formatDownloadCount(count);
     }
 
     // ================================================

@@ -824,7 +824,7 @@
         const CONFIG = {
             metaUrl: 'projects-meta.json',
             securityAssetsPath: '/assets/images/security/',
-            counterApiNamespace: 'felipifernandes'
+            downloadsStorageKey: 'ff_downloads'
         };
 
         // ========== STATE ==========
@@ -896,33 +896,34 @@
             return count.toString();
         }
 
-        async function getDownloadCount(projectId) {
+        // ========== DOWNLOAD COUNTER (localStorage) ==========
+        function getDownloadsData() {
             try {
-                const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`);
-                if (!response.ok) {
-                    return 0;
-                }
-                const data = await response.json();
-                return data.count || 0;
-            } catch (error) {
-                console.warn('Could not fetch download count:', error);
-                return 0;
+                const data = localStorage.getItem(CONFIG.downloadsStorageKey);
+                return data ? JSON.parse(data) : {};
+            } catch {
+                return {};
             }
         }
 
-        async function incrementDownloadCount(projectId) {
+        function saveDownloadsData(data) {
             try {
-                const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}/up`);
-                if (!response.ok) {
-                    console.warn('Counter API error:', response.status);
-                    return downloadCount + 1;
-                }
-                const data = await response.json();
-                return data.count || 0;
-            } catch (error) {
-                console.warn('Could not increment download count:', error);
-                return downloadCount + 1;
+                localStorage.setItem(CONFIG.downloadsStorageKey, JSON.stringify(data));
+            } catch {
+                // localStorage não disponível
             }
+        }
+
+        function getDownloadCount(projectId) {
+            const data = getDownloadsData();
+            return data[projectId] || 0;
+        }
+
+        function incrementDownloadCount(projectId) {
+            const data = getDownloadsData();
+            data[projectId] = (data[projectId] || 0) + 1;
+            saveDownloadsData(data);
+            return data[projectId];
         }
 
         function updateDownloadCountDisplay(count) {
@@ -1001,14 +1002,10 @@
             loadSourceCode(project);
 
             // Load download count
-            loadDownloadCount(project.id);
+            const count = getDownloadCount(project.id);
+            updateDownloadCountDisplay(count);
 
             showViewer();
-        }
-
-        async function loadDownloadCount(projectId) {
-            const count = await getDownloadCount(projectId);
-            updateDownloadCountDisplay(count);
         }
 
         async function loadSourceCode(project) {
@@ -1084,9 +1081,9 @@
             }
         }
 
-        async function handleDownload(e) {
+        function handleDownload(e) {
             if (currentProject) {
-                const newCount = await incrementDownloadCount(currentProject.id);
+                const newCount = incrementDownloadCount(currentProject.id);
                 updateDownloadCountDisplay(newCount);
             }
         }
