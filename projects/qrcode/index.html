@@ -3,77 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de QR Code | Rede d1000</title>
+    <title>Gerador de QR Code</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --d1000-yellow: #fdb913;
-            --d1000-orange: #f68b1f;
-            --d1000-green: #71bf4b;
-            --d1000-blue: #006cb7;
-            --d1000-dark: #1a1a1a;
-            --d1000-dark-lighter: #2d2d2d;
+            --warm-50: #faf9f7;
+            --warm-100: #f7f6f4;
+            --warm-200: #eae8e4;
+            --warm-300: #dddad4;
+            --warm-400: #c8c5bc;
+            --warm-500: #b0aca2;
+            --warm-600: #8f8b81;
+            --warm-700: #6b6860;
+            --warm-800: #4a4843;
+            --warm-900: #2a2825;
+            --warm-950: #1a1917;
         }
 
         body {
-            background-color: var(--d1000-dark);
+            background-color: var(--warm-100);
             min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        .brand-circles { display: flex; gap: 8px; align-items: center; }
-        .brand-circle { width: 32px; height: 32px; border-radius: 50%; border: 6px solid; }
-        .circle-yellow { border-color: var(--d1000-yellow); }
-        .circle-orange { border-color: var(--d1000-orange); }
-        .circle-green { border-color: var(--d1000-green); }
-        .circle-blue { border-color: var(--d1000-blue); }
+        .main-title { color: var(--warm-900); font-weight: 700; }
+        .main-subtitle { color: var(--warm-600); }
 
-        .main-title { color: white; font-weight: 700; }
-        .main-subtitle { color: rgba(255,255,255,0.7); }
+        .card { border: none; border-radius: 1rem; box-shadow: 0 4px 24px rgba(42, 40, 37, 0.08); overflow: hidden; }
+        .card-header-tabs { background: var(--warm-900); padding: 1rem; }
+        .nav-pills .nav-link { color: var(--warm-400); border-radius: 0.5rem; margin: 0.25rem; transition: all 0.3s ease; }
+        .nav-pills .nav-link:hover { color: var(--warm-100); background: rgba(255,255,255,0.1); }
+        .nav-pills .nav-link.active { background: var(--warm-100); color: var(--warm-900); font-weight: 500; }
 
-        .card { border: none; border-radius: 1rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
-        .card-header-tabs { background: var(--d1000-dark-lighter); padding: 1rem; }
-        .nav-pills .nav-link { color: rgba(255,255,255,0.7); border-radius: 0.5rem; margin: 0.25rem; transition: all 0.3s ease; }
-        .nav-pills .nav-link:hover { color: white; background: rgba(255,255,255,0.1); }
-        .nav-pills .nav-link.active { background: var(--d1000-orange); color: white; font-weight: 500; }
+        .card-body { background: var(--warm-50); }
+        .form-label { font-weight: 500; color: var(--warm-900); }
+        .form-control:focus, .form-select:focus { border-color: var(--warm-400); box-shadow: 0 0 0 0.2rem rgba(200, 197, 188, 0.3); }
 
-        .card-body { background: white; }
-        .form-label { font-weight: 500; color: #333; }
-        .form-control:focus, .form-select:focus { border-color: var(--d1000-blue); box-shadow: 0 0 0 0.2rem rgba(0, 108, 183, 0.15); }
-
-        .section-title { color: var(--d1000-dark); font-weight: 600; }
-        .section-title i { color: var(--d1000-blue); }
+        .section-title { color: var(--warm-900); font-weight: 600; }
+        .section-title i { color: var(--warm-700); }
 
         .btn-generate {
-            background: linear-gradient(135deg, var(--d1000-orange) 0%, var(--d1000-yellow) 100%);
-            border: none; color: white; font-weight: 600; padding: 0.875rem 1.5rem; transition: all 0.3s ease;
+            background: var(--warm-900);
+            border: none; color: var(--warm-50); font-weight: 600; padding: 0.875rem 1.5rem; transition: all 0.3s ease;
         }
-        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(246, 139, 31, 0.4); color: white; }
+        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(42, 40, 37, 0.2); background: var(--warm-800); color: var(--warm-50); }
 
         .qr-box {
             min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: #f8f9fa; border: 2px dashed #dee2e6; border-radius: 1rem;
+            background: var(--warm-100); border: 2px dashed var(--warm-300); border-radius: 1rem;
         }
 
-        #qrcode-container { padding: 1rem; background: white; border-radius: 0.75rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; }
+        #qrcode-container { padding: 1rem; background: white; border-radius: 0.75rem; box-shadow: 0 4px 20px rgba(42, 40, 37, 0.08); position: relative; }
         #qrcode-display svg { display: block; }
 
-        .qr-placeholder { text-align: center; color: #adb5bd; }
+        .qr-placeholder { text-align: center; color: var(--warm-500); }
         .qr-placeholder i { font-size: 4rem; margin-bottom: 1rem; opacity: 0.5; }
 
-        .btn-download-png { background: var(--d1000-green); border: none; color: white; font-weight: 600; }
-        .btn-download-png:hover { background: #5fa93d; color: white; }
-        .btn-download-svg { background: var(--d1000-blue); border: none; color: white; font-weight: 600; }
-        .btn-download-svg:hover { background: #005a9a; color: white; }
-        .btn-reset { background: #e9ecef; border: none; color: #495057; }
-        .btn-reset:hover { background: #dee2e6; }
+        .btn-download-png { background: var(--warm-700); border: none; color: white; font-weight: 600; }
+        .btn-download-png:hover { background: var(--warm-800); color: white; }
+        .btn-download-svg { background: var(--warm-600); border: none; color: white; font-weight: 600; }
+        .btn-download-svg:hover { background: var(--warm-700); color: white; }
+        .btn-reset { background: var(--warm-200); border: none; color: var(--warm-700); }
+        .btn-reset:hover { background: var(--warm-300); }
 
-        footer { color: rgba(255,255,255,0.6); }
-        footer i { color: var(--d1000-yellow); }
-
-        .decorative-circles { position: fixed; bottom: -100px; left: -50px; display: flex; opacity: 0.1; pointer-events: none; z-index: 0; }
-        .decorative-circle { width: 200px; height: 200px; border-radius: 50%; border: 40px solid; }
+        footer { color: var(--warm-600); font-size: 0.875rem; }
+        footer a { color: var(--warm-900); text-decoration: underline; }
+        footer a:hover { color: var(--warm-700); }
 
         .spinner-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -89,23 +86,8 @@
     </style>
 </head>
 <body class="py-4">
-    <div class="decorative-circles">
-        <div class="decorative-circle" style="border-color: var(--d1000-yellow);"></div>
-        <div class="decorative-circle" style="border-color: var(--d1000-orange); margin-left: -60px;"></div>
-        <div class="decorative-circle" style="border-color: var(--d1000-green); margin-left: -60px;"></div>
-        <div class="decorative-circle" style="border-color: var(--d1000-blue); margin-left: -60px;"></div>
-    </div>
-
-    <div class="container position-relative" style="z-index: 1;">
+    <div class="container">
         <header class="text-center mb-4">
-            <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
-                <div class="brand-circles">
-                    <div class="brand-circle circle-yellow"></div>
-                    <div class="brand-circle circle-orange"></div>
-                    <div class="brand-circle circle-green"></div>
-                    <div class="brand-circle circle-blue"></div>
-                </div>
-            </div>
             <h1 class="main-title h2 mb-2"><i class="bi bi-qr-code me-2"></i>Gerador de QR Code</h1>
             <p class="main-subtitle mb-0">Crie QR Codes permanentes para links, contatos, WiFi e muito mais</p>
         </header>
@@ -176,7 +158,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="form-whatsapp">
-                                <h5 class="section-title mb-3"><i class="bi bi-whatsapp me-2" style="color: #25D366;"></i>WhatsApp</h5>
+                                <h5 class="section-title mb-3"><i class="bi bi-whatsapp me-2"></i>WhatsApp</h5>
                                 <div class="mb-3">
                                     <label for="whatsapp-phone" class="form-label">Número de Telefone <span class="text-danger">*</span></label>
                                     <input type="tel" class="form-control" id="whatsapp-phone" placeholder="5521999999999">
@@ -286,7 +268,7 @@
         </main>
 
         <footer class="text-center mt-4">
-            <p class="mb-0"><i class="bi bi-check-circle-fill me-1"></i>QR Codes gerados são permanentes e não expiram</p>
+            <p class="mb-0">Este App foi desenvolvido e distribuído gratuitamente por <a href="https://felipifernandes.github.io" target="_blank" rel="noopener">Felipi Fernandes</a></p>
         </footer>
     </div>
 
@@ -385,7 +367,7 @@
             width: 220,
             height: 220,
             padding: 2,
-            color: '#1a1a1a',
+            color: '#2a2825',
             background: '#ffffff',
             ecl: 'H'
         });
@@ -419,7 +401,7 @@
         const container = document.getElementById('qrcode-container');
         const loader = document.createElement('div');
         loader.className = 'spinner-overlay';
-        loader.innerHTML = `<div class="spinner-border" style="color: var(--d1000-green);" role="status"></div><p class="mt-2 mb-0 text-muted small">Gerando PNG...</p>`;
+        loader.innerHTML = `<div class="spinner-border" style="color: var(--warm-700);" role="status"></div><p class="mt-2 mb-0 text-muted small">Gerando PNG...</p>`;
         container.appendChild(loader);
 
         setTimeout(() => {
