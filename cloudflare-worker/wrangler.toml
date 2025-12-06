@@ -3,13 +3,6 @@ main = "download-counter.js"
 compatibility_date = "2024-01-01"
 
 # KV Namespace binding
-# Primeiro crie o KV no dashboard: Workers & Pages > KV > Create namespace
-# Nome: DOWNLOADS
-# Depois pegue o ID e substitua abaixo
-
 [[kv_namespaces]]
 binding = "DOWNLOADS"
-id = "SEU_KV_NAMESPACE_ID_AQUI"
-
-# Preview ID (para desenvolvimento local)
-# preview_id = "SEU_PREVIEW_KV_ID_AQUI"
+id = "50830742d4194691a3ca3afc473b441c"

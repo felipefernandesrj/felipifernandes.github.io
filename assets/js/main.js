@@ -36,8 +36,8 @@
         placeholderCount: 2,
         animationDuration: 800,
         animationDelay: 100,
-        // URL do Cloudflare Worker - SUBSTITUA PELA SUA URL
-        counterApiUrl: 'https://download-counter.YOUR_SUBDOMAIN.workers.dev'
+        // URL do Cloudflare Worker
+        counterApiUrl: 'https://download-counter.felipi-fernandes.workers.dev'
     };
 
     // ================================================
