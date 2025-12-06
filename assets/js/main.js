@@ -36,7 +36,7 @@
         placeholderCount: 2,
         animationDuration: 800,
         animationDelay: 100,
-        countApiNamespace: 'felipifernandes-downloads'
+        counterApiNamespace: 'felipifernandes'
     };
 
     // ================================================
@@ -54,9 +54,9 @@
 
     async function getDownloadCount(projectId) {
         try {
-            const response = await fetch(`https://api.countapi.xyz/get/${CONFIG.countApiNamespace}/${projectId}`);
+            const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`);
             const data = await response.json();
-            return data.value || 0;
+            return data.count || 0;
         } catch (error) {
             console.warn('Could not fetch download count:', error);
             return 0;
