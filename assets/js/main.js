@@ -54,15 +54,18 @@
 
     async function getDownloadCount(projectId) {
         try {
-            const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`);
+            const url = `https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`;
+            console.log('[Downloads] Fetching:', url);
+            const response = await fetch(url);
             if (!response.ok) {
-                // Se não existe, retorna 0 (será criado no primeiro download)
+                console.log('[Downloads] Response not OK:', response.status);
                 return 0;
             }
             const data = await response.json();
+            console.log('[Downloads] Count for', projectId, ':', data.count);
             return data.count || 0;
         } catch (error) {
-            console.warn('Could not fetch download count:', error);
+            console.warn('[Downloads] Error:', error);
             return 0;
         }
     }
@@ -254,7 +257,10 @@
         const downloadsEl = card.querySelector('.project-downloads');
         const downloadsCountEl = card.querySelector('.downloads-count');
         if (downloadsEl && downloadsCountEl && project.id) {
+            console.log('[Downloads] Loading count for project:', project.id);
             loadProjectDownloadCount(project.id, downloadsCountEl);
+        } else {
+            console.log('[Downloads] Missing elements or project.id:', { downloadsEl: !!downloadsEl, downloadsCountEl: !!downloadsCountEl, projectId: project.id });
         }
 
         return card;
@@ -262,6 +268,7 @@
 
     async function loadProjectDownloadCount(projectId, element) {
         const count = await getDownloadCount(projectId);
+        console.log('[Downloads] Setting element text to:', formatDownloadCount(count));
         element.textContent = formatDownloadCount(count);
     }
 
