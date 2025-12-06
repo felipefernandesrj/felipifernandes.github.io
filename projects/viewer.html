@@ -899,6 +899,9 @@
         async function getDownloadCount(projectId) {
             try {
                 const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`);
+                if (!response.ok) {
+                    return 0;
+                }
                 const data = await response.json();
                 return data.count || 0;
             } catch (error) {
@@ -910,6 +913,10 @@
         async function incrementDownloadCount(projectId) {
             try {
                 const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}/up`);
+                if (!response.ok) {
+                    console.warn('Counter API error:', response.status);
+                    return downloadCount + 1;
+                }
                 const data = await response.json();
                 return data.count || 0;
             } catch (error) {

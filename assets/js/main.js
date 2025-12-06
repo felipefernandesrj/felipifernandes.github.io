@@ -55,6 +55,10 @@
     async function getDownloadCount(projectId) {
         try {
             const response = await fetch(`https://api.counterapi.dev/v1/${CONFIG.counterApiNamespace}/${projectId}`);
+            if (!response.ok) {
+                // Se não existe, retorna 0 (será criado no primeiro download)
+                return 0;
+            }
             const data = await response.json();
             return data.count || 0;
         } catch (error) {
