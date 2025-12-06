@@ -321,20 +321,23 @@
             line-height: 1.6;
         }
 
-        /* ========== SECURITY MODAL ========== */
+        /* ========== SECURITY MODAL (Light Theme) ========== */
         .modal-security .modal-content {
-            background: var(--warm-900);
-            border: 1px solid var(--warm-800);
+            background: var(--warm-50);
+            border: 1px solid var(--warm-200);
             border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
 
         .modal-security .modal-header {
-            border-bottom: 1px solid var(--warm-800);
+            border-bottom: 1px solid var(--warm-200);
             padding: 1.25rem 1.5rem;
+            background: var(--warm-100);
+            border-radius: 1rem 1rem 0 0;
         }
 
         .modal-security .modal-title {
-            color: var(--warm-100);
+            color: var(--warm-900);
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -342,11 +345,10 @@
         }
 
         .modal-security .modal-title i {
-            color: #4ade80;
+            color: #16a34a;
         }
 
         .modal-security .btn-close {
-            filter: invert(1);
             opacity: 0.5;
         }
         .modal-security .btn-close:hover {
@@ -360,31 +362,32 @@
         .security-status {
             text-align: center;
             padding: 1.5rem;
-            background: rgba(34, 197, 94, 0.1);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.2);
             border-radius: 0.75rem;
             margin-bottom: 1.5rem;
         }
 
         .security-status.clean i {
             font-size: 3rem;
-            color: #4ade80;
+            color: #16a34a;
             margin-bottom: 0.75rem;
         }
 
         .security-status h3 {
-            color: #4ade80;
+            color: #16a34a;
             font-weight: 700;
             margin: 0 0 0.5rem 0;
             font-size: 1.25rem;
         }
 
         .security-stats {
-            color: var(--warm-400);
+            color: var(--warm-700);
             font-size: 0.9rem;
         }
 
         .security-stats strong {
-            color: var(--warm-200);
+            color: var(--warm-900);
         }
 
         .security-date {
@@ -394,7 +397,7 @@
         }
 
         .scanners-section h4 {
-            color: var(--warm-300);
+            color: var(--warm-700);
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1rem;
@@ -402,50 +405,61 @@
 
         .scanners-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .scanner-item {
-            background: var(--warm-800);
+            background: white;
+            border: 1px solid var(--warm-200);
             border-radius: 0.5rem;
-            padding: 0.75rem;
+            padding: 1rem 0.5rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .scanner-item:hover {
+            border-color: var(--warm-300);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .scanner-item img {
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
             object-fit: contain;
-            filter: grayscale(20%);
         }
 
         .scanner-item span {
-            color: var(--warm-400);
+            color: var(--warm-700);
             font-size: 0.7rem;
             line-height: 1.2;
+            font-weight: 500;
         }
 
         .scanner-item .check {
-            color: #4ade80;
-            font-size: 0.75rem;
+            color: #16a34a;
+            font-size: 0.85rem;
         }
 
         .more-scanners {
-            background: var(--warm-800);
+            background: var(--warm-100);
+            border: 1px solid var(--warm-200);
             border-radius: 0.5rem;
             padding: 0.75rem;
             text-align: center;
-            color: var(--warm-500);
+            color: var(--warm-600);
             font-size: 0.8rem;
+            font-weight: 500;
         }
 
         .security-disclaimer {
-            background: var(--warm-800);
+            background: var(--warm-100);
+            border: 1px solid var(--warm-200);
             border-radius: 0.5rem;
             padding: 1rem;
             margin-top: 1.5rem;
@@ -462,7 +476,7 @@
         }
 
         .security-disclaimer p {
-            color: var(--warm-400);
+            color: var(--warm-600);
             font-size: 0.8rem;
             margin: 0;
             line-height: 1.5;
@@ -585,6 +599,15 @@
                 width: 100%;
                 justify-content: center;
                 margin-top: 0.5rem;
+            }
+
+            .scanners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .scanner-item img {
+                width: 40px;
+                height: 40px;
             }
         }
 
