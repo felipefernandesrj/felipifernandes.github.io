@@ -60,6 +60,7 @@
 
         .qr-placeholder { text-align: center; color: var(--warm-500); }
         .qr-placeholder i { font-size: 4rem; margin-bottom: 1rem; opacity: 0.5; }
+        .qr-data-text { word-break: break-all; max-width: 260px; }
 
         .btn-download-png { background: var(--warm-700); border: none; color: white; font-weight: 600; }
         .btn-download-png:hover { background: var(--warm-800); color: white; }
@@ -94,15 +95,15 @@
 
         <main class="card">
             <nav class="card-header-tabs">
-                <ul class="nav nav-pills justify-content-center flex-wrap" id="qrTabs" role="tablist">
-                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#form-url" type="button"><i class="bi bi-link-45deg me-1"></i><span>Link</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-text" type="button"><i class="bi bi-card-text me-1"></i><span>Texto</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-phone" type="button"><i class="bi bi-telephone me-1"></i><span>Telefone</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-email" type="button"><i class="bi bi-envelope me-1"></i><span>E-mail</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-sms" type="button"><i class="bi bi-chat-dots me-1"></i><span>SMS</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-whatsapp" type="button"><i class="bi bi-whatsapp me-1"></i><span>WhatsApp</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-wifi" type="button"><i class="bi bi-wifi me-1"></i><span>WiFi</span></button></li>
-                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-vcard" type="button"><i class="bi bi-person-vcard me-1"></i><span>vCard</span></button></li>
+                <ul class="nav nav-pills justify-content-center flex-wrap" id="qrTabs" role="list">
+                    <li class="nav-item" role="listitem"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#form-url" type="button"><i class="bi bi-link-45deg me-1"></i><span>Link</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-text" type="button"><i class="bi bi-card-text me-1"></i><span>Texto</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-phone" type="button"><i class="bi bi-telephone me-1"></i><span>Telefone</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-email" type="button"><i class="bi bi-envelope me-1"></i><span>E-mail</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-sms" type="button"><i class="bi bi-chat-dots me-1"></i><span>SMS</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-whatsapp" type="button"><i class="bi bi-whatsapp me-1"></i><span>WhatsApp</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-wifi" type="button"><i class="bi bi-wifi me-1"></i><span>WiFi</span></button></li>
+                    <li class="nav-item" role="listitem"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#form-vcard" type="button"><i class="bi bi-person-vcard me-1"></i><span>vCard</span></button></li>
                 </ul>
             </nav>
 
@@ -179,7 +180,7 @@
                                     <label for="wifi-password" class="form-label">Senha</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" id="wifi-password" placeholder="senha123">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('wifi-password', this)"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('wifi-password', this)" title="Mostrar/ocultar senha" aria-label="Mostrar ou ocultar senha"><i class="bi bi-eye"></i></button>
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -247,7 +248,7 @@
                             <div id="qrcode-container" class="d-none">
                                 <div id="qrcode-display"></div>
                             </div>
-                            <p id="qr-data" class="small text-muted text-center mt-3 mb-0 d-none" style="word-break: break-all; max-width: 260px;"></p>
+                            <p id="qr-data" class="small text-muted text-center mt-3 mb-0 d-none qr-data-text"></p>
                         </div>
                         <div id="btn-actions" class="d-none mt-3">
                             <div class="d-flex gap-2">

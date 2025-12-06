@@ -1,0 +1,44 @@
+{
+  "qrcode": {
+    "id": "qrcode",
+    "name": "Gerador de QR Code",
+    "description": "Crie QR Codes permanentes para links, contatos, WiFi e muito mais. Sem expiração, 100% gratuito, funciona offline.",
+    "stack": ["JavaScript", "Bootstrap 5", "HTML5", "CSS3"],
+    "standalone": true,
+    "category": "Utilidades",
+    "entryFile": "index.html",
+    "sourceFiles": ["index.html"],
+    "github": "https://github.com/felipefernandesrj/felipifernandes.github.io/tree/main/projects/qrcode",
+    "icon": "bi-qr-code",
+    "color": "#2a2825",
+    "features": [
+      "URLs e Links",
+      "Texto livre",
+      "Telefone",
+      "Email",
+      "SMS",
+      "WhatsApp",
+      "WiFi",
+      "vCard (Contato)"
+    ],
+    "security": {
+      "verified": true,
+      "lastCheck": "2024-12-05",
+      "totalScans": 98,
+      "threats": 0,
+      "status": "clean",
+      "scanners": [
+        { "name": "Google Safe Browsing", "logo": "googlesafebrowsing.png", "result": "clean" },
+        { "name": "Kaspersky", "logo": "kaspersky.png", "result": "clean" },
+        { "name": "Bitdefender", "logo": "bitdefender.png", "result": "clean" },
+        { "name": "ESET", "logo": "eset.png", "result": "clean" },
+        { "name": "Fortinet", "logo": "fortinet.png", "result": "clean" },
+        { "name": "Dr.Web", "logo": "dr.web.png", "result": "clean" },
+        { "name": "Emsisoft", "logo": "emsisoft.png", "result": "clean" },
+        { "name": "G-Data", "logo": "g-data.png", "result": "clean" }
+      ]
+    },
+    "createdAt": "2024-12-01",
+    "updatedAt": "2024-12-05"
+  }
+}

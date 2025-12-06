@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Viewer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --warm-50: #faf9f7;
+            --warm-100: #f7f6f4;
+            --warm-200: #eae8e4;
+            --warm-300: #dddad4;
+            --warm-400: #c8c5bc;
+            --warm-500: #b0aca2;
+            --warm-600: #8f8b81;
+            --warm-700: #6b6860;
+            --warm-800: #4a4843;
+            --warm-900: #2a2825;
+            --warm-950: #1a1917;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--warm-950);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== HEADER ========== */
+        .viewer-header {
+            background: var(--warm-900);
+            border-bottom: 1px solid var(--warm-800);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .btn-back {
+            background: var(--warm-800);
+            border: none;
+            color: var(--warm-300);
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+        .btn-back:hover {
+            background: var(--warm-700);
+            color: var(--warm-100);
+        }
+
+        .project-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .project-name {
+            color: var(--warm-100);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.25rem;
+        }
+
+        .badge-standalone {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 500;
+        }
+        .badge-server {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 500;
+        }
+
+        .stack-tags {
+            display: flex;
+            gap: 0.25rem;
+            flex-wrap: wrap;
+        }
+
+        .stack-tag {
+            background: var(--warm-800);
+            color: var(--warm-400);
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--warm-800);
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+        }
+
+        .btn-view-toggle {
+            background: transparent;
+            border: none;
+            color: var(--warm-500);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-view-toggle:hover {
+            color: var(--warm-300);
+        }
+        .btn-view-toggle.active {
+            background: var(--warm-700);
+            color: var(--warm-100);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            background: var(--warm-800);
+            border: none;
+            color: var(--warm-400);
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .btn-action:hover {
+            background: var(--warm-700);
+            color: var(--warm-100);
+        }
+        .btn-action.btn-security {
+            color: #4ade80;
+        }
+        .btn-action.btn-security:hover {
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .btn-download-main {
+            background: var(--warm-100);
+            border: none;
+            color: var(--warm-900);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .btn-download-main:hover {
+            background: white;
+            transform: translateY(-1px);
+        }
+
+        /* ========== CONTENT AREA ========== */
+        .viewer-content {
+            flex: 1;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .code-viewer {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: #1d1f21;
+            display: none;
+        }
+        .code-viewer.active {
+            display: block;
+        }
+
+        .preview-container {
+            width: 100%;
+            height: 100%;
+        }
+        .preview-container.hidden {
+            display: none;
+        }
+
+        .code-header {
+            background: var(--warm-900);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--warm-800);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .code-filename {
+            color: var(--warm-400);
+            font-size: 0.875rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-filename i {
+            color: var(--warm-500);
+        }
+
+        .btn-copy-code {
+            background: var(--warm-800);
+            border: none;
+            color: var(--warm-400);
+            padding: 0.4rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+        }
+        .btn-copy-code:hover {
+            background: var(--warm-700);
+            color: var(--warm-100);
+        }
+        .btn-copy-code.copied {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        .code-content {
+            padding: 1rem;
+            margin: 0;
+        }
+
+        .code-content pre {
+            margin: 0;
+            background: transparent !important;
+        }
+
+        .code-content code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* ========== SECURITY MODAL ========== */
+        .modal-security .modal-content {
+            background: var(--warm-900);
+            border: 1px solid var(--warm-800);
+            border-radius: 1rem;
+        }
+
+        .modal-security .modal-header {
+            border-bottom: 1px solid var(--warm-800);
+            padding: 1.25rem 1.5rem;
+        }
+
+        .modal-security .modal-title {
+            color: var(--warm-100);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-security .modal-title i {
+            color: #4ade80;
+        }
+
+        .modal-security .btn-close {
+            filter: invert(1);
+            opacity: 0.5;
+        }
+        .modal-security .btn-close:hover {
+            opacity: 1;
+        }
+
+        .modal-security .modal-body {
+            padding: 1.5rem;
+        }
+
+        .security-status {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .security-status.clean i {
+            font-size: 3rem;
+            color: #4ade80;
+            margin-bottom: 0.75rem;
+        }
+
+        .security-status h3 {
+            color: #4ade80;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        .security-stats {
+            color: var(--warm-400);
+            font-size: 0.9rem;
+        }
+
+        .security-stats strong {
+            color: var(--warm-200);
+        }
+
+        .security-date {
+            color: var(--warm-500);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .scanners-section h4 {
+            color: var(--warm-300);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scanners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .scanner-item {
+            background: var(--warm-800);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scanner-item img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            filter: grayscale(20%);
+        }
+
+        .scanner-item span {
+            color: var(--warm-400);
+            font-size: 0.7rem;
+            line-height: 1.2;
+        }
+
+        .scanner-item .check {
+            color: #4ade80;
+            font-size: 0.75rem;
+        }
+
+        .more-scanners {
+            background: var(--warm-800);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            text-align: center;
+            color: var(--warm-500);
+            font-size: 0.8rem;
+        }
+
+        .security-disclaimer {
+            background: var(--warm-800);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .security-disclaimer i {
+            color: var(--warm-500);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .security-disclaimer p {
+            color: var(--warm-400);
+            font-size: 0.8rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ========== LOADING STATE ========== */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--warm-950);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--warm-800);
+            border-top-color: var(--warm-400);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: var(--warm-500);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========== ERROR STATE ========== */
+        .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--warm-500);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .error-state h2 {
+            color: var(--warm-300);
+            margin-bottom: 0.5rem;
+        }
+
+        .error-state p {
+            max-width: 400px;
+        }
+
+        .hidden-initial {
+            display: none;
+        }
+
+        .btn-retry {
+            background: var(--warm-800);
+            border: none;
+            color: var(--warm-300);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+        .btn-retry:hover {
+            background: var(--warm-700);
+            color: var(--warm-100);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .viewer-header {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .project-name {
+                font-size: 0.95rem;
+            }
+
+            .stack-tags {
+                display: none;
+            }
+
+            .btn-view-toggle span {
+                display: none;
+            }
+
+            .btn-download-main span {
+                display: none;
+            }
+
+            .btn-download-main {
+                width: 40px;
+                padding: 0.5rem;
+                justify-content: center;
+            }
+
+            .header-center {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-meta {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Carregando projeto...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="viewer-header hidden-initial" id="viewerHeader">
+        <div class="header-left">
+            <a href="/" class="btn-back" title="Voltar ao portfólio">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <div class="project-info">
+                <h1 class="project-name" id="projectName">Nome do Projeto</h1>
+                <div class="project-meta">
+                    <span class="badge-standalone" id="badgeStandalone">
+                        <i class="bi bi-lightning-charge-fill me-1"></i>Standalone
+                    </span>
+                    <div class="stack-tags" id="stackTags">
+                        <!-- Tags geradas dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-center">
+            <button class="btn-view-toggle active" id="btnPreview" title="Visualizar aplicação">
+                <i class="bi bi-eye"></i>
+                <span>Preview</span>
+            </button>
+            <button class="btn-view-toggle" id="btnCode" title="Ver código fonte">
+                <i class="bi bi-code-slash"></i>
+                <span>Código</span>
+            </button>
+        </div>
+
+        <div class="header-right">
+            <button class="btn-action btn-security" id="btnSecurity" title="Verificação de segurança" data-bs-toggle="modal" data-bs-target="#securityModal">
+                <i class="bi bi-shield-check"></i>
+            </button>
+            <a href="#" class="btn-action" id="btnGithub" title="Ver no GitHub" target="_blank">
+                <i class="bi bi-github"></i>
+            </a>
+            <a href="#" class="btn-action btn-download-main" id="btnDownload" title="Download" download>
+                <i class="bi bi-download"></i>
+                <span>Download</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="viewer-content">
+        <!-- Preview (iframe) -->
+        <div class="preview-container" id="previewContainer">
+            <iframe class="preview-frame" id="previewFrame" title="Preview do projeto"></iframe>
+        </div>
+
+        <!-- Code Viewer -->
+        <div class="code-viewer" id="codeViewer">
+            <div class="code-header">
+                <span class="code-filename">
+                    <i class="bi bi-file-earmark-code"></i>
+                    <span id="codeFilename">index.html</span>
+                </span>
+                <button class="btn-copy-code" id="btnCopyCode">
+                    <i class="bi bi-clipboard"></i>
+                    <span>Copiar</span>
+                </button>
+            </div>
+            <div class="code-content">
+                <pre><code class="language-html" id="codeContent"></code></pre>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-state hidden-initial" id="errorState">
+            <i class="bi bi-exclamation-triangle"></i>
+            <h2>Projeto não encontrado</h2>
+            <p id="errorMessage">O projeto solicitado não existe ou não pôde ser carregado.</p>
+            <a href="/" class="btn-retry">Voltar ao portfólio</a>
+        </div>
+    </main>
+
+    <!-- Security Modal -->
+    <div class="modal fade modal-security" id="securityModal" tabindex="-1" aria-labelledby="securityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="securityModalLabel">
+                        <i class="bi bi-shield-check"></i>
+                        Verificação de Segurança
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="security-status clean" id="securityStatus">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <h3>ARQUIVO SEGURO</h3>
+                        <p class="security-stats">
+                            <strong id="securityScans">98</strong> verificações • 
+                            <strong id="securityThreats">0</strong> ameaças detectadas
+                        </p>
+                        <p class="security-date">
+                            Última verificação: <span id="securityDate">05/12/2024</span>
+                        </p>
+                    </div>
+
+                    <div class="scanners-section">
+                        <h4>Verificado por:</h4>
+                        <div class="scanners-grid" id="scannersGrid">
+                            <!-- Scanners gerados dinamicamente -->
+                        </div>
+                        <div class="more-scanners" id="moreScanners">
+                            + 90 outros scanners
+                        </div>
+                    </div>
+
+                    <div class="security-disclaimer">
+                        <i class="bi bi-info-circle"></i>
+                        <p>
+                            Este arquivo foi verificado por múltiplos serviços de segurança. 
+                            Mesmo assim, recomendamos sempre verificar arquivos baixados de fontes externas 
+                            com seu próprio antivírus.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        // ========== CONFIGURATION ==========
+        const CONFIG = {
+            metaUrl: 'projects-meta.json',
+            securityAssetsPath: '/assets/images/security/'
+        };
+
+        // ========== STATE ==========
+        let currentProject = null;
+        let projectCode = '';
+
+        // ========== DOM ELEMENTS ==========
+        const elements = {
+            loadingOverlay: document.getElementById('loadingOverlay'),
+            viewerHeader: document.getElementById('viewerHeader'),
+            errorState: document.getElementById('errorState'),
+            errorMessage: document.getElementById('errorMessage'),
+            projectName: document.getElementById('projectName'),
+            badgeStandalone: document.getElementById('badgeStandalone'),
+            stackTags: document.getElementById('stackTags'),
+            btnPreview: document.getElementById('btnPreview'),
+            btnCode: document.getElementById('btnCode'),
+            btnGithub: document.getElementById('btnGithub'),
+            btnDownload: document.getElementById('btnDownload'),
+            btnSecurity: document.getElementById('btnSecurity'),
+            previewContainer: document.getElementById('previewContainer'),
+            previewFrame: document.getElementById('previewFrame'),
+            codeViewer: document.getElementById('codeViewer'),
+            codeFilename: document.getElementById('codeFilename'),
+            codeContent: document.getElementById('codeContent'),
+            btnCopyCode: document.getElementById('btnCopyCode'),
+            securityScans: document.getElementById('securityScans'),
+            securityThreats: document.getElementById('securityThreats'),
+            securityDate: document.getElementById('securityDate'),
+            scannersGrid: document.getElementById('scannersGrid'),
+            moreScanners: document.getElementById('moreScanners')
+        };
+
+        // ========== FUNCTIONS ==========
+        function getProjectIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('project') || urlParams.get('p');
+        }
+
+        function showError(message) {
+            elements.loadingOverlay.style.display = 'none';
+            elements.viewerHeader.style.display = 'none';
+            elements.previewContainer.style.display = 'none';
+            elements.codeViewer.style.display = 'none';
+            elements.errorState.style.display = 'flex';
+            elements.errorMessage.textContent = message;
+        }
+
+        function showViewer() {
+            elements.loadingOverlay.style.display = 'none';
+            elements.viewerHeader.style.display = 'flex';
+            elements.errorState.style.display = 'none';
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function renderStackTags(stack) {
+            elements.stackTags.innerHTML = stack
+                .map(tech => `<span class="stack-tag">${tech}</span>`)
+                .join('');
+        }
+
+        function renderSecurityInfo(security) {
+            elements.securityScans.textContent = security.totalScans;
+            elements.securityThreats.textContent = security.threats;
+            elements.securityDate.textContent = formatDate(security.lastCheck);
+
+            // Render scanners
+            const scannersHtml = security.scanners
+                .slice(0, 8)
+                .map(scanner => `
+                    <div class="scanner-item">
+                        <img src="${CONFIG.securityAssetsPath}${scanner.logo}" alt="${scanner.name}" onerror="this.style.display='none'">
+                        <span>${scanner.name}</span>
+                        <span class="check"><i class="bi bi-check-circle-fill"></i></span>
+                    </div>
+                `)
+                .join('');
+
+            elements.scannersGrid.innerHTML = scannersHtml;
+
+            const remaining = security.totalScans - security.scanners.length;
+            elements.moreScanners.textContent = `+ ${remaining} outros scanners`;
+        }
+
+        function renderProject(project) {
+            currentProject = project;
+
+            // Update page title
+            document.title = `${project.name} | Project Viewer`;
+
+            // Update header info
+            elements.projectName.textContent = project.name;
+
+            // Update standalone badge
+            if (project.standalone) {
+                elements.badgeStandalone.innerHTML = '<i class="bi bi-lightning-charge-fill me-1"></i>Standalone';
+                elements.badgeStandalone.className = 'badge-standalone';
+            } else {
+                elements.badgeStandalone.innerHTML = '<i class="bi bi-hdd-network me-1"></i>Requer Servidor';
+                elements.badgeStandalone.className = 'badge-server';
+            }
+
+            // Render stack tags
+            renderStackTags(project.stack);
+
+            // Update action buttons
+            elements.btnGithub.href = project.github;
+            elements.btnDownload.href = `${project.id}/${project.entryFile}`;
+            elements.btnDownload.download = project.entryFile;
+
+            // Render security info
+            if (project.security) {
+                renderSecurityInfo(project.security);
+                elements.btnSecurity.style.display = 'flex';
+            } else {
+                elements.btnSecurity.style.display = 'none';
+            }
+
+            // Load preview
+            const previewUrl = `${project.id}/${project.entryFile}`;
+            elements.previewFrame.src = previewUrl;
+
+            // Load source code
+            loadSourceCode(project);
+
+            showViewer();
+        }
+
+        async function loadSourceCode(project) {
+            try {
+                const sourceUrl = `${project.id}/${project.sourceFiles[0]}`;
+                const response = await fetch(sourceUrl);
+                projectCode = await response.text();
+
+                elements.codeFilename.textContent = project.sourceFiles[0];
+                elements.codeContent.textContent = projectCode;
+
+                // Highlight code
+                Prism.highlightElement(elements.codeContent);
+            } catch (error) {
+                console.error('Error loading source code:', error);
+                elements.codeContent.textContent = '// Erro ao carregar código fonte';
+            }
+        }
+
+        async function loadProject() {
+            const projectId = getProjectIdFromUrl();
+
+            if (!projectId) {
+                showError('Nenhum projeto especificado. Use ?project=nome-do-projeto na URL.');
+                return;
+            }
+
+            try {
+                const response = await fetch(CONFIG.metaUrl);
+                if (!response.ok) throw new Error('Failed to load projects metadata');
+
+                const projects = await response.json();
+                const project = projects[projectId];
+
+                if (!project) {
+                    showError(`Projeto "${projectId}" não encontrado.`);
+                    return;
+                }
+
+                renderProject(project);
+            } catch (error) {
+                console.error('Error loading project:', error);
+                showError('Erro ao carregar informações do projeto.');
+            }
+        }
+
+        function toggleView(showCode) {
+            if (showCode) {
+                elements.previewContainer.classList.add('hidden');
+                elements.codeViewer.classList.add('active');
+                elements.btnCode.classList.add('active');
+                elements.btnPreview.classList.remove('active');
+            } else {
+                elements.previewContainer.classList.remove('hidden');
+                elements.codeViewer.classList.remove('active');
+                elements.btnPreview.classList.add('active');
+                elements.btnCode.classList.remove('active');
+            }
+        }
+
+        async function copyCode() {
+            try {
+                await navigator.clipboard.writeText(projectCode);
+                elements.btnCopyCode.classList.add('copied');
+                elements.btnCopyCode.innerHTML = '<i class="bi bi-check-lg"></i><span>Copiado!</span>';
+
+                setTimeout(() => {
+                    elements.btnCopyCode.classList.remove('copied');
+                    elements.btnCopyCode.innerHTML = '<i class="bi bi-clipboard"></i><span>Copiar</span>';
+                }, 2000);
+            } catch (error) {
+                console.error('Failed to copy:', error);
+            }
+        }
+
+        // ========== EVENT LISTENERS ==========
+        elements.btnPreview.addEventListener('click', () => toggleView(false));
+        elements.btnCode.addEventListener('click', () => toggleView(true));
+        elements.btnCopyCode.addEventListener('click', copyCode);
+
+        // ========== INIT ==========
+        document.addEventListener('DOMContentLoaded', loadProject);
+    </script>
+</body>
+</html>
