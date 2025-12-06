@@ -35,8 +35,33 @@
         projectsMetaPath: './projects/projects-meta.json',
         placeholderCount: 2,
         animationDuration: 800,
-        animationDelay: 100
+        animationDelay: 100,
+        countApiNamespace: 'felipifernandes-downloads'
     };
+
+    // ================================================
+    // Download Counter Functions
+    // ================================================
+
+    function formatDownloadCount(count) {
+        if (count >= 1000000) {
+            return (count / 1000000).toFixed(1) + 'M';
+        } else if (count >= 1000) {
+            return (count / 1000).toFixed(1) + 'K';
+        }
+        return count.toString();
+    }
+
+    async function getDownloadCount(projectId) {
+        try {
+            const response = await fetch(`https://api.countapi.xyz/get/${CONFIG.countApiNamespace}/${projectId}`);
+            const data = await response.json();
+            return data.value || 0;
+        } catch (error) {
+            console.warn('Could not fetch download count:', error);
+            return 0;
+        }
+    }
 
     // ================================================
     // DOM Elements
@@ -221,7 +246,19 @@
             iconEl.setAttribute('data-lucide', project.icon);
         }
 
+        // Load and display download count
+        const downloadsEl = card.querySelector('.project-downloads');
+        const downloadsCountEl = card.querySelector('.downloads-count');
+        if (downloadsEl && downloadsCountEl && project.id) {
+            loadProjectDownloadCount(project.id, downloadsCountEl);
+        }
+
         return card;
+    }
+
+    async function loadProjectDownloadCount(projectId, element) {
+        const count = await getDownloadCount(projectId);
+        element.textContent = formatDownloadCount(count);
     }
 
     // ================================================
