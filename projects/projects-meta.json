@@ -7,6 +7,7 @@
     "standalone": true,
     "category": "Utilidades",
     "entryFile": "index.html",
+    "downloadFilename": "qrcode-generator.html",
     "sourceFiles": ["index.html"],
     "github": "https://github.com/felipefernandesrj/felipifernandes.github.io/blob/main/projects/qrcode/index.html",
     "icon": "qr-code",

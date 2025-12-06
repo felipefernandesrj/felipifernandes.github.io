@@ -983,7 +983,7 @@
             // Update action buttons
             elements.btnGithub.href = project.github;
             elements.btnDownload.href = `${project.id}/${project.entryFile}`;
-            elements.btnDownload.download = project.entryFile;
+            elements.btnDownload.download = project.downloadFilename || project.entryFile;
 
             // Render security info
             if (project.security) {
