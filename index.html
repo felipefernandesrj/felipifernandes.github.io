@@ -484,33 +484,37 @@
                 <div class="w-12 h-12 bg-warm-200 rounded-xl flex items-center justify-center group-hover:bg-warm-900 transition-colors">
                     <i data-lucide="box" class="w-6 h-6 text-warm-600 group-hover:text-warm-100 transition-colors project-icon"></i>
                 </div>
-                <div class="flex gap-1">
-                    <!-- Tags will be inserted here -->
-                </div>
+                <span class="project-standalone-badge hidden inline-flex items-center gap-1 px-2.5 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+                    <i data-lucide="package" class="w-3 h-3"></i>
+                    Standalone
+                </span>
             </div>
             
             <!-- Content -->
             <h3 class="text-lg font-semibold text-warm-900 mb-2 project-name"></h3>
-            <p class="text-warm-600 text-sm mb-6 project-description"></p>
+            <p class="text-warm-600 text-sm mb-4 project-description"></p>
             
             <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-6 project-tags"></div>
+            <div class="flex flex-wrap gap-1.5 mb-6 project-tags"></div>
             
             <!-- Actions -->
-            <div class="flex flex-wrap gap-2">
-                <a href="#" class="inline-flex items-center gap-1.5 px-4 py-2 bg-warm-900 text-warm-50 text-sm font-medium rounded-lg hover:bg-warm-800 transition-colors project-demo">
+            <div class="flex">
+                <a href="#" class="inline-flex items-center gap-1.5 px-5 py-2.5 bg-warm-900 text-warm-50 text-sm font-medium rounded-lg hover:bg-warm-800 transition-colors project-demo">
                     <i data-lucide="external-link" class="w-4 h-4"></i>
                     Abrir
                 </a>
-                <a href="#" class="inline-flex items-center gap-1.5 px-4 py-2 bg-warm-200 text-warm-700 text-sm font-medium rounded-lg hover:bg-warm-300 transition-colors project-download">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    Standalone
-                </a>
-                <a href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-4 py-2 bg-warm-200 text-warm-700 text-sm font-medium rounded-lg hover:bg-warm-300 transition-colors project-source">
-                    <i data-lucide="code" class="w-4 h-4"></i>
-                    Código
-                </a>
             </div>
+        </div>
+    </template>
+    
+    <!-- Placeholder Card Template (hidden) -->
+    <template id="placeholder-card-template">
+        <div class="placeholder-card bg-warm-100/50 rounded-2xl border-2 border-dashed border-warm-300 p-6 flex flex-col items-center justify-center min-h-[280px]" data-aos="fade-up">
+            <div class="w-12 h-12 bg-warm-200/50 rounded-xl flex items-center justify-center mb-4">
+                <i data-lucide="wrench" class="w-6 h-6 text-warm-400"></i>
+            </div>
+            <p class="text-warm-500 font-medium text-sm mb-1">Em breve...</p>
+            <p class="text-warm-400 text-xs text-center">Novo projeto em desenvolvimento</p>
         </div>
     </template>
     

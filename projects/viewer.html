@@ -405,7 +405,7 @@
 
         .scanners-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 0.75rem;
             margin-bottom: 1rem;
         }
@@ -413,37 +413,38 @@
         .scanner-item {
             background: white;
             border: 1px solid var(--warm-200);
-            border-radius: 0.5rem;
-            padding: 1rem 0.5rem;
+            border-radius: 0.75rem;
+            padding: 1.25rem 1rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             transition: all 0.2s ease;
         }
 
         .scanner-item:hover {
             border-color: var(--warm-300);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .scanner-item img {
-            width: 48px;
-            height: 48px;
+            width: 100px;
+            height: auto;
+            max-height: 40px;
             object-fit: contain;
         }
 
         .scanner-item span {
             color: var(--warm-700);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             line-height: 1.2;
             font-weight: 500;
         }
 
         .scanner-item .check {
             color: #16a34a;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .more-scanners {
@@ -457,12 +458,38 @@
             font-weight: 500;
         }
 
+        .powered-by {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--warm-200);
+        }
+
+        .powered-by span {
+            color: var(--warm-500);
+            font-size: 0.75rem;
+        }
+
+        .powered-by img {
+            height: 20px;
+            width: auto;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .powered-by a:hover img {
+            opacity: 1;
+        }
+
         .security-disclaimer {
             background: var(--warm-100);
             border: 1px solid var(--warm-200);
             border-radius: 0.5rem;
             padding: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
             display: flex;
             gap: 0.75rem;
             align-items: flex-start;
@@ -733,6 +760,12 @@
                         </div>
                         <div class="more-scanners" id="moreScanners">
                             + 90 outros scanners
+                        </div>
+                        <div class="powered-by">
+                            <span>Powered by</span>
+                            <a href="https://www.ssltrust.com.au/ssl-tools/website-security-check?domain=felipifernandes.com.br&ssl=true" target="_blank" rel="noopener" title="SSLTrust Security Check">
+                                <img src="https://www.ssltrust.com.au/assets/img/ssltrust-logo.svg" alt="SSLTrust">
+                            </a>
                         </div>
                     </div>
 

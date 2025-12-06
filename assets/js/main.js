@@ -3,8 +3,9 @@
  * Main JavaScript File
  * 
  * Handles:
- * - Dynamic project loading from JSON
- * - Card rendering
+ * - Dynamic project loading from projects-meta.json
+ * - Card rendering with unified metadata
+ * - Placeholder cards for "coming soon"
  * - Animations initialization
  * - Navbar scroll behavior
  */
@@ -17,7 +18,8 @@
     // ================================================
     
     const CONFIG = {
-        projectsJsonPath: './projects.json',
+        projectsMetaPath: './projects/projects-meta.json',
+        placeholderCount: 2,
         animationDuration: 800,
         animationDelay: 100
     };
@@ -31,28 +33,9 @@
         loadingState: document.getElementById('loading-state'),
         emptyState: document.getElementById('empty-state'),
         cardTemplate: document.getElementById('project-card-template'),
+        placeholderTemplate: document.getElementById('placeholder-card-template'),
         navbar: document.querySelector('nav'),
         currentYear: document.getElementById('current-year')
-    };
-
-    // ================================================
-    // Tag Configuration
-    // ================================================
-    
-    const tagConfig = {
-        'javascript': { class: 'tag-javascript', icon: 'file-code' },
-        'js': { class: 'tag-javascript', icon: 'file-code' },
-        'html': { class: 'tag-html', icon: 'file-code-2' },
-        'css': { class: 'tag-css', icon: 'palette' },
-        'frontend': { class: 'tag-frontend', icon: 'layout' },
-        'backend': { class: 'tag-backend', icon: 'server' },
-        'bootstrap': { class: 'tag-bootstrap', icon: 'layout' },
-        'standalone': { class: 'tag-standalone', icon: 'package' },
-        'ia': { class: 'tag-ia', icon: 'brain' },
-        'ai': { class: 'tag-ai', icon: 'brain' },
-        'api': { class: 'tag-api', icon: 'plug' },
-        'tool': { class: 'tag-tool', icon: 'wrench' },
-        'ferramenta': { class: 'tag-ferramenta', icon: 'wrench' }
     };
 
     // ================================================
@@ -104,44 +87,38 @@
     }
 
     // ================================================
-    // Load Projects from JSON
+    // Load Projects from Meta JSON
     // ================================================
     
-    // Fallback projects data
-    const FALLBACK_PROJECTS = [
-        {
-            "id": "qrcode",
-            "name": "Gerador de QR Code",
-            "description": "Gerador completo de QR Codes permanentes: URLs, Texto, Telefone, E-mail, SMS, WhatsApp, WiFi e vCard. Sem expiração, sem cadastro.",
-            "demo": "/projects/viewer.html?project=qrcode",
-            "download": "/projects/qrcode/index.html",
-            "source": "https://github.com/felipefernandesrj/felipifernandes.github.io/tree/main/projects/qrcode",
-            "icon": "qr-code",
-            "tags": ["JavaScript", "Bootstrap", "Ferramenta", "Standalone"]
-        }
-    ];
+    // Fallback project data
+    const FALLBACK_PROJECT = {
+        id: "qrcode",
+        name: "Gerador de QR Code",
+        description: "Crie QR Codes permanentes para links, contatos, WiFi e muito mais. Sem expiração, 100% gratuito.",
+        stack: ["JavaScript", "Bootstrap 5", "HTML5", "CSS3"],
+        standalone: true,
+        icon: "qr-code"
+    };
     
     async function loadProjects() {
         try {
-            const response = await fetch(CONFIG.projectsJsonPath);
+            const response = await fetch(CONFIG.projectsMetaPath);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            const data = await response.json();
-            const projects = data.projects || data;
+            const projectsMeta = await response.json();
+            const projects = Object.values(projectsMeta);
             
-            if (Array.isArray(projects) && projects.length > 0) {
+            if (projects.length > 0) {
                 renderProjects(projects);
             } else {
-                // Use fallback if JSON is empty
-                renderProjects(FALLBACK_PROJECTS);
+                renderProjects([FALLBACK_PROJECT]);
             }
         } catch (error) {
             console.error('Error loading projects, using fallback:', error);
-            // Use fallback projects on error
-            renderProjects(FALLBACK_PROJECTS);
+            renderProjects([FALLBACK_PROJECT]);
         }
     }
 
@@ -160,6 +137,12 @@
             const card = createProjectCard(project, index);
             elements.projectsGrid?.appendChild(card);
         });
+
+        // Add placeholder cards
+        for (let i = 0; i < CONFIG.placeholderCount; i++) {
+            const placeholder = createPlaceholderCard(projects.length + i);
+            elements.projectsGrid?.appendChild(placeholder);
+        }
 
         // Reinitialize Lucide icons for new elements
         if (typeof lucide !== 'undefined') {
@@ -197,44 +180,25 @@
         const descEl = card.querySelector('.project-description');
         if (descEl) descEl.textContent = project.description || '';
 
-        // Set tags
+        // Set standalone badge
+        const standaloneBadge = card.querySelector('.project-standalone-badge');
+        if (standaloneBadge && project.standalone) {
+            standaloneBadge.classList.remove('hidden');
+        }
+
+        // Set tags from stack array
         const tagsContainer = card.querySelector('.project-tags');
-        if (tagsContainer && project.tags) {
-            project.tags.forEach(tag => {
-                const tagEl = createTagElement(tag);
+        if (tagsContainer && project.stack) {
+            project.stack.forEach(tech => {
+                const tagEl = createTagElement(tech);
                 tagsContainer.appendChild(tagEl);
             });
         }
 
-        // Set demo link
+        // Set demo link (opens viewer)
         const demoLink = card.querySelector('.project-demo');
         if (demoLink) {
-            if (project.demo) {
-                demoLink.href = project.demo;
-            } else {
-                demoLink.style.display = 'none';
-            }
-        }
-
-        // Set download link
-        const downloadLink = card.querySelector('.project-download');
-        if (downloadLink) {
-            if (project.download) {
-                downloadLink.href = project.download;
-                downloadLink.setAttribute('download', '');
-            } else {
-                downloadLink.style.display = 'none';
-            }
-        }
-
-        // Set source link
-        const sourceLink = card.querySelector('.project-source');
-        if (sourceLink) {
-            if (project.source) {
-                sourceLink.href = project.source;
-            } else {
-                sourceLink.style.display = 'none';
-            }
+            demoLink.href = `/projects/viewer.html?project=${project.id}`;
         }
 
         // Set icon if specified
@@ -247,17 +211,43 @@
     }
 
     // ================================================
+    // Create Placeholder Card
+    // ================================================
+    
+    function createPlaceholderCard(index) {
+        const template = elements.placeholderTemplate?.content.cloneNode(true);
+        const card = template.querySelector('.placeholder-card');
+
+        if (!card) {
+            // Fallback if template not found
+            const div = document.createElement('div');
+            div.className = 'placeholder-card bg-warm-100/50 rounded-2xl border-2 border-dashed border-warm-300 p-6 flex flex-col items-center justify-center min-h-[280px]';
+            div.setAttribute('data-aos', 'fade-up');
+            div.setAttribute('data-aos-delay', (index * CONFIG.animationDelay).toString());
+            div.innerHTML = `
+                <div class="w-12 h-12 bg-warm-200/50 rounded-xl flex items-center justify-center mb-4">
+                    <i data-lucide="wrench" class="w-6 h-6 text-warm-400"></i>
+                </div>
+                <p class="text-warm-500 font-medium text-sm mb-1">Em breve...</p>
+                <p class="text-warm-400 text-xs text-center">Novo projeto em desenvolvimento</p>
+            `;
+            return div;
+        }
+
+        // Set animation delay
+        card.setAttribute('data-aos-delay', (index * CONFIG.animationDelay).toString());
+
+        return card;
+    }
+
+    // ================================================
     // Create Tag Element
     // ================================================
     
-    function createTagElement(tag) {
+    function createTagElement(tech) {
         const tagEl = document.createElement('span');
-        const tagLower = tag.toLowerCase();
-        const config = tagConfig[tagLower] || { class: 'tag-default', icon: null };
-        
-        tagEl.className = `project-tag ${config.class}`;
-        tagEl.textContent = tag;
-        
+        tagEl.className = 'inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full bg-warm-200 text-warm-700';
+        tagEl.textContent = tech;
         return tagEl;
     }
 
@@ -266,17 +256,14 @@
     // ================================================
     
     function showEmptyState() {
-        // Hide loading state
         if (elements.loadingState) {
             elements.loadingState.remove();
         }
 
-        // Show empty state
         if (elements.emptyState) {
             elements.emptyState.classList.remove('hidden');
         }
 
-        // Reinitialize Lucide icons
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
