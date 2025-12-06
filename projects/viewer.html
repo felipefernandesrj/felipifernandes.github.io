@@ -25,20 +25,24 @@
 
         * { box-sizing: border-box; }
 
-        body {
+        html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
+        }
+
+        body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--warm-950);
+            background: var(--warm-100);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* ========== HEADER ========== */
+        /* ========== HEADER (Light Theme) ========== */
         .viewer-header {
-            background: var(--warm-900);
-            border-bottom: 1px solid var(--warm-800);
+            background: var(--warm-50);
+            border-bottom: 1px solid var(--warm-200);
             padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
@@ -46,6 +50,7 @@
             gap: 1rem;
             flex-wrap: wrap;
             z-index: 100;
+            flex-shrink: 0;
         }
 
         .header-left {
@@ -57,9 +62,9 @@
         }
 
         .btn-back {
-            background: var(--warm-800);
+            background: var(--warm-200);
             border: none;
-            color: var(--warm-300);
+            color: var(--warm-700);
             width: 40px;
             height: 40px;
             border-radius: 0.5rem;
@@ -68,10 +73,11 @@
             justify-content: center;
             transition: all 0.2s ease;
             flex-shrink: 0;
+            text-decoration: none;
         }
         .btn-back:hover {
-            background: var(--warm-700);
-            color: var(--warm-100);
+            background: var(--warm-300);
+            color: var(--warm-900);
         }
 
         .project-info {
@@ -80,7 +86,7 @@
         }
 
         .project-name {
-            color: var(--warm-100);
+            color: var(--warm-900);
             font-size: 1.1rem;
             font-weight: 600;
             margin: 0;
@@ -98,8 +104,8 @@
         }
 
         .badge-standalone {
-            background: rgba(34, 197, 94, 0.2);
-            color: #4ade80;
+            background: rgba(34, 197, 94, 0.15);
+            color: #16a34a;
             font-size: 0.7rem;
             padding: 0.2rem 0.5rem;
             border-radius: 1rem;
@@ -107,7 +113,7 @@
         }
         .badge-server {
             background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
+            color: #d97706;
             font-size: 0.7rem;
             padding: 0.2rem 0.5rem;
             border-radius: 1rem;
@@ -121,8 +127,8 @@
         }
 
         .stack-tag {
-            background: var(--warm-800);
-            color: var(--warm-400);
+            background: var(--warm-200);
+            color: var(--warm-700);
             font-size: 0.65rem;
             padding: 0.15rem 0.4rem;
             border-radius: 0.25rem;
@@ -133,7 +139,7 @@
             display: flex;
             align-items: center;
             gap: 0.25rem;
-            background: var(--warm-800);
+            background: var(--warm-200);
             border-radius: 0.5rem;
             padding: 0.25rem;
         }
@@ -141,7 +147,7 @@
         .btn-view-toggle {
             background: transparent;
             border: none;
-            color: var(--warm-500);
+            color: var(--warm-600);
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             font-size: 0.875rem;
@@ -150,13 +156,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
         }
         .btn-view-toggle:hover {
-            color: var(--warm-300);
+            color: var(--warm-800);
         }
         .btn-view-toggle.active {
-            background: var(--warm-700);
-            color: var(--warm-100);
+            background: var(--warm-900);
+            color: var(--warm-50);
         }
 
         .header-right {
@@ -166,44 +173,50 @@
         }
 
         .btn-action {
-            background: var(--warm-800);
+            background: var(--warm-200);
             border: none;
-            color: var(--warm-400);
+            color: var(--warm-600);
             width: 40px;
             height: 40px;
+            min-width: 40px;
             border-radius: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
             position: relative;
+            text-decoration: none;
         }
         .btn-action:hover {
-            background: var(--warm-700);
-            color: var(--warm-100);
+            background: var(--warm-300);
+            color: var(--warm-900);
         }
         .btn-action.btn-security {
-            color: #4ade80;
+            color: #16a34a;
         }
         .btn-action.btn-security:hover {
-            background: rgba(34, 197, 94, 0.2);
+            background: rgba(34, 197, 94, 0.15);
         }
 
         .btn-download-main {
-            background: var(--warm-100);
+            background: var(--warm-900);
             border: none;
-            color: var(--warm-900);
+            color: var(--warm-50);
             padding: 0.5rem 1rem;
+            height: 40px;
             border-radius: 0.5rem;
             font-weight: 600;
             font-size: 0.875rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             transition: all 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
         }
         .btn-download-main:hover {
-            background: white;
+            background: var(--warm-800);
+            color: var(--warm-50);
             transform: translateY(-1px);
         }
 
@@ -213,13 +226,24 @@
             display: flex;
             position: relative;
             overflow: hidden;
+            min-height: 0;
+        }
+
+        .preview-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .preview-container.hidden {
+            display: none;
         }
 
         .preview-frame {
             width: 100%;
-            height: 100%;
+            flex: 1;
             border: none;
-            background: white;
+            background: var(--warm-50);
         }
 
         .code-viewer {
@@ -231,14 +255,6 @@
         }
         .code-viewer.active {
             display: block;
-        }
-
-        .preview-container {
-            width: 100%;
-            height: 100%;
-        }
-        .preview-container.hidden {
-            display: none;
         }
 
         .code-header {
@@ -457,7 +473,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: var(--warm-950);
+            background: var(--warm-100);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -468,14 +484,14 @@
         .loading-spinner {
             width: 48px;
             height: 48px;
-            border: 3px solid var(--warm-800);
-            border-top-color: var(--warm-400);
+            border: 3px solid var(--warm-300);
+            border-top-color: var(--warm-700);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
         .loading-text {
-            color: var(--warm-500);
+            color: var(--warm-600);
             margin-top: 1rem;
             font-size: 0.9rem;
         }
@@ -491,7 +507,8 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: var(--warm-500);
+            background: var(--warm-100);
+            color: var(--warm-600);
             text-align: center;
             padding: 2rem;
         }
@@ -500,10 +517,11 @@
             font-size: 4rem;
             margin-bottom: 1rem;
             opacity: 0.5;
+            color: var(--warm-500);
         }
 
         .error-state h2 {
-            color: var(--warm-300);
+            color: var(--warm-800);
             margin-bottom: 0.5rem;
         }
 
@@ -516,18 +534,19 @@
         }
 
         .btn-retry {
-            background: var(--warm-800);
+            background: var(--warm-900);
             border: none;
-            color: var(--warm-300);
+            color: var(--warm-50);
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 500;
             margin-top: 1rem;
             transition: all 0.2s ease;
+            text-decoration: none;
         }
         .btn-retry:hover {
-            background: var(--warm-700);
-            color: var(--warm-100);
+            background: var(--warm-800);
+            color: var(--warm-50);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -548,20 +567,22 @@
                 display: none;
             }
 
-            .btn-download-main span {
-                display: none;
-            }
-
             .btn-download-main {
                 width: 40px;
-                padding: 0.5rem;
+                min-width: 40px;
+                padding: 0;
                 justify-content: center;
+            }
+
+            .btn-download-main span {
+                display: none;
             }
 
             .header-center {
                 order: 3;
                 width: 100%;
                 justify-content: center;
+                margin-top: 0.5rem;
             }
         }
 
