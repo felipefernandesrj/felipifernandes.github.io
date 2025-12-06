@@ -20,7 +20,7 @@
     console.log(`
 ╔═══════════════════════════════════════╗
 ║                                       ║
-║       Silence is Golden ✨            ║
+║         Silence is Golden ✨          ║
 ║                                       ║
 ║       felipifernandes.com.br          ║
 ║                                       ║
