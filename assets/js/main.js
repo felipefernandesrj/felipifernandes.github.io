@@ -36,11 +36,12 @@
         placeholderCount: 2,
         animationDuration: 800,
         animationDelay: 100,
-        downloadsStorageKey: 'ff_downloads'
+        // URL do Cloudflare Worker - SUBSTITUA PELA SUA URL
+        counterApiUrl: 'https://download-counter.YOUR_SUBDOMAIN.workers.dev'
     };
 
     // ================================================
-    // Download Counter Functions (localStorage based)
+    // Download Counter Functions (Cloudflare Worker)
     // ================================================
 
     function formatDownloadCount(count) {
@@ -52,33 +53,30 @@
         return count.toString();
     }
 
-    function getDownloadsData() {
+    async function getDownloadCount(projectId) {
         try {
-            const data = localStorage.getItem(CONFIG.downloadsStorageKey);
-            return data ? JSON.parse(data) : {};
-        } catch {
-            return {};
+            const response = await fetch(`${CONFIG.counterApiUrl}/count/${projectId}`);
+            if (!response.ok) return 0;
+            const data = await response.json();
+            return data.count || 0;
+        } catch (error) {
+            console.warn('[Counter] Error getting count:', error);
+            return 0;
         }
     }
 
-    function saveDownloadsData(data) {
+    async function incrementDownloadCount(projectId) {
         try {
-            localStorage.setItem(CONFIG.downloadsStorageKey, JSON.stringify(data));
-        } catch {
-            // localStorage não disponível
+            const response = await fetch(`${CONFIG.counterApiUrl}/count/${projectId}/up`, {
+                method: 'POST'
+            });
+            if (!response.ok) return 0;
+            const data = await response.json();
+            return data.count || 0;
+        } catch (error) {
+            console.warn('[Counter] Error incrementing count:', error);
+            return 0;
         }
-    }
-
-    function getDownloadCount(projectId) {
-        const data = getDownloadsData();
-        return data[projectId] || 0;
-    }
-
-    function incrementDownloadCount(projectId) {
-        const data = getDownloadsData();
-        data[projectId] = (data[projectId] || 0) + 1;
-        saveDownloadsData(data);
-        return data[projectId];
     }
 
     // ================================================
@@ -264,15 +262,18 @@
             iconEl.setAttribute('data-lucide', project.icon);
         }
 
-        // Load and display download count
-        const downloadsEl = card.querySelector('.project-downloads');
+        // Load and display download count (async)
         const downloadsCountEl = card.querySelector('.downloads-count');
-        if (downloadsEl && downloadsCountEl && project.id) {
-            const count = getDownloadCount(project.id);
-            downloadsCountEl.textContent = formatDownloadCount(count);
+        if (downloadsCountEl && project.id) {
+            loadProjectDownloadCount(project.id, downloadsCountEl);
         }
 
         return card;
+    }
+
+    async function loadProjectDownloadCount(projectId, element) {
+        const count = await getDownloadCount(projectId);
+        element.textContent = formatDownloadCount(count);
     }
 
     // ================================================

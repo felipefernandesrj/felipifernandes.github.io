@@ -824,7 +824,8 @@
         const CONFIG = {
             metaUrl: 'projects-meta.json',
             securityAssetsPath: '/assets/images/security/',
-            downloadsStorageKey: 'ff_downloads'
+            // URL do Cloudflare Worker - SUBSTITUA PELA SUA URL
+            counterApiUrl: 'https://download-counter.YOUR_SUBDOMAIN.workers.dev'
         };
 
         // ========== STATE ==========
@@ -896,34 +897,31 @@
             return count.toString();
         }
 
-        // ========== DOWNLOAD COUNTER (localStorage) ==========
-        function getDownloadsData() {
+        // ========== DOWNLOAD COUNTER (Cloudflare Worker) ==========
+        async function getDownloadCount(projectId) {
             try {
-                const data = localStorage.getItem(CONFIG.downloadsStorageKey);
-                return data ? JSON.parse(data) : {};
-            } catch {
-                return {};
+                const response = await fetch(`${CONFIG.counterApiUrl}/count/${projectId}`);
+                if (!response.ok) return 0;
+                const data = await response.json();
+                return data.count || 0;
+            } catch (error) {
+                console.warn('[Counter] Error getting count:', error);
+                return 0;
             }
         }
 
-        function saveDownloadsData(data) {
+        async function incrementDownloadCount(projectId) {
             try {
-                localStorage.setItem(CONFIG.downloadsStorageKey, JSON.stringify(data));
-            } catch {
-                // localStorage não disponível
+                const response = await fetch(`${CONFIG.counterApiUrl}/count/${projectId}/up`, {
+                    method: 'POST'
+                });
+                if (!response.ok) return downloadCount + 1;
+                const data = await response.json();
+                return data.count || 0;
+            } catch (error) {
+                console.warn('[Counter] Error incrementing count:', error);
+                return downloadCount + 1;
             }
-        }
-
-        function getDownloadCount(projectId) {
-            const data = getDownloadsData();
-            return data[projectId] || 0;
-        }
-
-        function incrementDownloadCount(projectId) {
-            const data = getDownloadsData();
-            data[projectId] = (data[projectId] || 0) + 1;
-            saveDownloadsData(data);
-            return data[projectId];
         }
 
         function updateDownloadCountDisplay(count) {
@@ -1001,11 +999,15 @@
             // Load source code
             loadSourceCode(project);
 
-            // Load download count
-            const count = getDownloadCount(project.id);
-            updateDownloadCountDisplay(count);
+            // Load download count (async)
+            loadDownloadCount(project.id);
 
             showViewer();
+        }
+
+        async function loadDownloadCount(projectId) {
+            const count = await getDownloadCount(projectId);
+            updateDownloadCountDisplay(count);
         }
 
         async function loadSourceCode(project) {
@@ -1081,9 +1083,9 @@
             }
         }
 
-        function handleDownload(e) {
+        async function handleDownload(e) {
             if (currentProject) {
-                const newCount = incrementDownloadCount(currentProject.id);
+                const newCount = await incrementDownloadCount(currentProject.id);
                 updateDownloadCountDisplay(newCount);
             }
         }
