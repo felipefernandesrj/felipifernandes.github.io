@@ -61,8 +61,53 @@
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Corner Ribbon */
+        .corner-ribbon {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 100;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            pointer-events: none;
+        }
+        .corner-ribbon a {
+            pointer-events: auto;
+            position: absolute;
+            display: block;
+            width: 225px;
+            padding: 10px 0;
+            background: linear-gradient(135deg, #00A651 0%, #007a3d 100%);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            top: 30px;
+            right: -60px;
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        .corner-ribbon a:hover {
+            background: linear-gradient(135deg, #007a3d 0%, #005c2e 100%);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
 <body class="bg-warm-50 text-warm-900 font-sans antialiased">
+    
+    <!-- Corner Ribbon -->
+    <div class="corner-ribbon">
+        <a href="retrospectiva/profarma.html" title="Ver Retrospectiva 3 Anos">
+            🎉 3 Anos d1000
+        </a>
+    </div>
     
     <!-- Navbar -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-50/80 backdrop-blur-xl border-b border-warm-200">
@@ -105,8 +150,12 @@
             
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-warm-200 text-warm-800 rounded-full text-sm font-medium mb-6">
-                <i data-lucide="award" class="w-4 h-4"></i>
-                Top #80 Google Experts 2024
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#009739"/>
+                    <path d="M12 4.5L5 8.5v4.5c0 4.14 2.88 8.02 7 9 4.12-.98 7-4.86 7-9V8.5l-7-4z" fill="#FEDD00"/>
+                    <circle cx="12" cy="12" r="3.5" fill="#012169"/>
+                </svg>
+                Top #80 Google Experts Brasil 2024
             </div>
             
             <!-- Name -->
@@ -138,7 +187,7 @@
             </div>
             
             <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
                 <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" 
                    class="inline-flex items-center gap-2 px-6 py-3 bg-warm-900 text-warm-100 rounded-xl font-medium hover:bg-warm-800 transition-all hover:scale-105 shadow-lg shadow-warm-900/25">
                     <i data-lucide="linkedin" class="w-5 h-5"></i>
@@ -218,10 +267,14 @@
                 <!-- Google Experts 2024 -->
                 <div class="group bg-warm-100 rounded-2xl p-6 hover:bg-warm-200 transition-colors text-center">
                     <div class="w-12 h-12 mx-auto mb-4 bg-warm-50 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
-                        <i data-lucide="award" class="w-6 h-6 text-warm-700"></i>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#009739"/>
+                            <path d="M12 4.5L5 8.5v4.5c0 4.14 2.88 8.02 7 9 4.12-.98 7-4.86 7-9V8.5l-7-4z" fill="#FEDD00"/>
+                            <circle cx="12" cy="12" r="3.5" fill="#012169"/>
+                        </svg>
                     </div>
                     <h3 class="font-semibold text-warm-900 text-sm mb-1">Google Experts 2024</h3>
-                    <p class="text-xs text-warm-600">Top #80 Global</p>
+                    <p class="text-xs text-warm-600">Top #80 Brasil</p>
                 </div>
                 
                 <!-- DMPC -->

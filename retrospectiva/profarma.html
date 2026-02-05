@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Felipi Fernandes - 3 Anos de Transformação Digital na Rede d1000 / Profarma">
+    <meta name="author" content="Felipi Fernandes">
+    <meta name="robots" content="noindex, nofollow">
+    <title>3 Anos de Transformação Digital | Rede d1000 - Felipi Fernandes</title>
+    
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        'warm': {
+                            50:  '#faf9f7',
+                            100: '#f7f6f4',
+                            200: '#eae8e4',
+                            300: '#dddad4',
+                            400: '#c8c5bc',
+                            500: '#b0aca2',
+                            600: '#8f8b81',
+                            700: '#6b6860',
+                            800: '#4a4843',
+                            900: '#2a2825',
+                            950: '#1a1917',
+                        },
+                        'd1000': {
+                            primary: '#00A651',
+                            dark: '#007a3d',
+                            light: '#4dc47d',
+                        },
+                        'brand': {
+                            drogasmil: '#D4A017',
+                            tamoio: '#00A651',
+                            rosario: '#0066B3',
+                            farmalife: '#F7941D',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f7f6f4; }
+        ::-webkit-scrollbar-thumb { background: #c8c5bc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b0aca2; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00A651 0%, #4dc47d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-bar {
+            background: linear-gradient(90deg, 
+                #D4A017 0%, #D4A017 25%, 
+                #0066B3 25%, #0066B3 50%, 
+                #00A651 50%, #00A651 75%, 
+                #F7941D 75%, #F7941D 100%
+            );
+        }
+
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #00A651, #4dc47d, #00A651);
+            padding: 3px;
+            border-radius: 1rem;
+        }
+        .gradient-border-inner {
+            background: #faf9f7;
+            border-radius: calc(1rem - 3px);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 166, 81, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 166, 81, 0.6); }
+        }
+        .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+        .timeline-connector {
+            position: absolute;
+            left: 23px;
+            top: 48px;
+            bottom: -24px;
+            width: 2px;
+            background: linear-gradient(to bottom, #00A651, #00A651 50%, transparent);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-animation { animation: float 3s ease-in-out infinite; }
+        .float-animation-delayed { animation: float 3s ease-in-out infinite; animation-delay: 1s; }
+        .chart-h-200 { height: 200px; }
+        .chart-h-180 { height: 180px; }
+        .chart-h-280 { height: 280px; }
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-900 font-sans antialiased">
+    
+    <!-- Brand Bar Top -->
+    <div class="brand-bar h-1.5 fixed top-0 left-0 right-0 z-50"></div>
+    
+    <!-- Navbar -->
+    <nav class="fixed top-1.5 left-0 right-0 z-40 bg-warm-50/90 backdrop-blur-xl border-b border-warm-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <a href="../index.html" class="flex items-center gap-2 text-warm-600 hover:text-warm-900 transition-colors">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span class="text-sm font-medium">Voltar ao Portfólio</span>
+                </a>
+                
+                <div class="flex items-center gap-3">
+                    <img src="../assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_01_rgb.png" alt="d1000" class="h-8 w-auto">
+                    <span class="hidden sm:inline text-sm font-semibold text-warm-900">Retrospectiva 3 Anos</span>
+                </div>
+                
+                <button onclick="shareRetro()" class="flex items-center gap-2 text-warm-600 hover:text-warm-900 transition-colors">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                    <span class="text-sm font-medium hidden sm:inline">Compartilhar</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- ============================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================ -->
+    <section class="min-h-screen flex items-center justify-center pt-24 pb-16 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-[0.03]">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%2300A651\" fill-opacity=\"1\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-32 left-10 w-20 h-20 bg-d1000-primary rounded-full blur-2xl float-animation opacity-10"></div>
+        <div class="absolute bottom-32 right-10 w-32 h-32 bg-purple-500 rounded-full blur-3xl float-animation-delayed opacity-10"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative" data-aos="fade-up" data-aos-duration="800">
+            
+            <!-- Badges das Bandeiras -->
+            <div class="flex items-center justify-center gap-2 md:gap-3 mb-8 flex-wrap">
+                <span class="px-3 py-1.5 bg-brand-drogasmil/10 text-brand-drogasmil rounded-full text-xs font-semibold border border-brand-drogasmil/20">Drogasmil</span>
+                <span class="px-3 py-1.5 bg-brand-tamoio/10 text-brand-tamoio rounded-full text-xs font-semibold border border-brand-tamoio/20">Tamoio</span>
+                <span class="px-3 py-1.5 bg-brand-rosario/10 text-brand-rosario rounded-full text-xs font-semibold border border-brand-rosario/20">Rosário</span>
+                <span class="px-3 py-1.5 bg-brand-farmalife/10 text-brand-farmalife rounded-full text-xs font-semibold border border-brand-farmalife/20">Farmalife</span>
+            </div>
+            
+            <!-- Period Badge -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-warm-900 text-warm-100 rounded-full text-sm font-semibold shadow-lg">
+                    <i data-lucide="calendar-range" class="w-4 h-4"></i>
+                    <span>Fevereiro 2023 → Fevereiro 2026</span>
+                    <span class="w-2 h-2 bg-d1000-light rounded-full animate-pulse"></span>
+                </div>
+            </div>
+            
+            <!-- Main Title -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-center text-warm-900 mb-6 leading-tight">
+                <span class="gradient-text">3 Anos</span> de<br>
+                Transformação Digital
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-xl md:text-2xl text-center text-warm-600 font-medium mb-6 max-w-3xl mx-auto">
+                Performance & Inteligência Artificial
+            </p>
+            
+            <p class="text-lg text-center text-warm-500 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Consolidando o crescimento da Rede d1000 através de dados, mídia paga e inovação em I.A.
+            </p>
+            
+            <!-- Hero KPIs - Big Numbers -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+                
+                <!-- KPI 1: E-commerce Growth -->
+                <div class="gradient-border pulse-glow" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gradient-border-inner p-6 text-center">
+                        <div class="text-4xl md:text-5xl font-black text-d1000-primary mb-2 counter-value">
+                            +2.000<span class="text-3xl">%</span>
+                        </div>
+                        <div class="text-sm text-warm-600 font-medium">Crescimento E-commerce</div>
+                        <div class="text-xs text-warm-500 mt-1">(20x desde baseline)</div>
+                    </div>
+                </div>
+                
+                <!-- KPI 2: ROAS -->
+                <div class="bg-warm-900 rounded-2xl p-6 text-center shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl md:text-5xl font-black text-d1000-light mb-2 counter-value">
+                        964<span class="text-3xl">,29%</span>
+                    </div>
+                    <div class="text-sm text-warm-400 font-medium">ROAS Real Consolidado</div>
+                    <div class="text-xs text-warm-500 mt-1">Retorno sobre investimento</div>
+                </div>
+                
+                <!-- KPI 3: Google Experts -->
+                <div class="bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200 rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center justify-center gap-2 mb-2">
+                        <i data-lucide="trophy" class="w-8 h-8 text-amber-500"></i>
+                        <span class="text-4xl md:text-5xl font-black gradient-text-gold">Top 80</span>
+                    </div>
+                    <div class="text-sm text-amber-700 font-medium">Google Ads Expert Brasil</div>
+                    <div class="text-xs text-amber-600 mt-1">Reconhecimento 2024</div>
+                </div>
+                
+            </div>
+            
+            <!-- Author Card -->
+            <div class="flex items-center justify-center gap-4 mb-8">
+                <img src="../assets/images/linkedin-profile.png" alt="Felipi Fernandes" 
+                     class="w-14 h-14 rounded-xl object-cover shadow-lg border-2 border-warm-200">
+                <div class="text-left">
+                    <h3 class="font-bold text-warm-900">Felipi Fernandes</h3>
+                    <p class="text-sm text-warm-600">Performance Specialist & Líder de I.A. em Operações</p>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="text-center animate-bounce">
+                <a href="#performance" class="inline-flex flex-col items-center text-warm-400 hover:text-d1000-primary transition-colors">
+                    <span class="text-xs font-medium mb-2">Explore a jornada</span>
+                    <i data-lucide="chevrons-down" class="w-6 h-6"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- PERFORMANCE SECTION - MÍDIA PAGA -->
+    <!-- ============================================ -->
+    <section id="performance" class="py-24 bg-warm-100">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                    <i data-lucide="target" class="w-4 h-4"></i>
+                    Especialista de Performance
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">
+                    Excelência em Mídia Paga
+                </h2>
+                <p class="text-lg text-warm-600 max-w-2xl mx-auto">
+                    Gestão estratégica para as quatro bandeiras, transformando budget em receita sustentável.
+                </p>
+            </div>
+            
+            <!-- Efficiency Chart: CPM vs Impressions -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-warm-200 mb-8" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-warm-900">Eficiência Operacional (J-Curve)</h3>
+                        <p class="text-sm text-warm-600">Fazer muito mais com menos: CPM reduzido enquanto impressões cresceram</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                            <span class="text-xs text-warm-600">Impressões</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <span class="text-xs text-warm-600">CPM (Custo)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="efficiencyChart"></canvas>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-warm-200">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">+933%</div>
+                        <div class="text-sm text-warm-600">Aumento em Impressões</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-red-500">-501%</div>
+                        <div class="text-sm text-warm-600">Redução no CPM</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Funnel Growth Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg border border-warm-200">
+                    <div class="w-14 h-14 mx-auto mb-4 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i data-lucide="mouse-pointer-click" class="w-7 h-7 text-blue-600"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-warm-900 mb-1">+13,6Mi</div>
+                    <div class="text-sm text-warm-600">Cliques adicionais</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg border border-warm-200">
+                    <div class="w-14 h-14 mx-auto mb-4 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i data-lucide="eye" class="w-7 h-7 text-purple-600"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-warm-900 mb-1">+504Mi</div>
+                    <div class="text-sm text-warm-600">Impressões adicionais</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg border border-warm-200">
+                    <div class="w-14 h-14 mx-auto mb-4 bg-green-100 rounded-xl flex items-center justify-center">
+                        <i data-lucide="shopping-cart" class="w-7 h-7 text-green-600"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-warm-900 mb-1">+741mil</div>
+                    <div class="text-sm text-warm-600">Conversões adicionais</div>
+                </div>
+            </div>
+            
+            <!-- Brands Market Share -->
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-warm-200" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex flex-col md:flex-row md:items-start gap-8">
+                    <div class="md:w-1/3">
+                        <h3 class="text-xl font-bold text-warm-900 mb-2">Distribuição por Bandeira</h3>
+                        <p class="text-sm text-warm-600 mb-6">Participação relativa de cada marca no ecossistema da Rede d1000.</p>
+                        <div class="chart-container chart-h-200">
+                            <canvas id="marketShareChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Rosário -->
+                        <div class="bg-brand-rosario/5 border border-brand-rosario/20 rounded-xl p-5 hover:shadow-lg transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 bg-brand-rosario/10 rounded-lg flex items-center justify-center">
+                                    <span class="text-brand-rosario font-bold">R</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-warm-900">Drogaria Rosário</h4>
+                                    <p class="text-xs text-warm-600">~40% do volume</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-warm-600">Liderança em volume de conversão.</p>
+                        </div>
+                        
+                        <!-- Drogasmil -->
+                        <div class="bg-brand-drogasmil/5 border border-brand-drogasmil/20 rounded-xl p-5 hover:shadow-lg transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 bg-brand-drogasmil/10 rounded-lg flex items-center justify-center">
+                                    <span class="text-brand-drogasmil font-bold">D</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-warm-900">Drogasmil</h4>
+                                    <p class="text-xs text-warm-600">~33% do volume</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-warm-600">Recorde de novos compradores e suporte direto.</p>
+                        </div>
+                        
+                        <!-- Tamoio -->
+                        <div class="bg-brand-tamoio/5 border border-brand-tamoio/20 rounded-xl p-5 hover:shadow-lg transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 bg-brand-tamoio/10 rounded-lg flex items-center justify-center">
+                                    <span class="text-brand-tamoio font-bold">T</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-warm-900">Drogarias Tamoio</h4>
+                                    <p class="text-xs text-warm-600">~24% do volume</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-warm-600">Crescimento acelerado em usuários ativos.</p>
+                        </div>
+                        
+                        <!-- Farmalife -->
+                        <div class="bg-brand-farmalife/5 border border-brand-farmalife/20 rounded-xl p-5 hover:shadow-lg transition-all">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 bg-brand-farmalife/10 rounded-lg flex items-center justify-center">
+                                    <span class="text-brand-farmalife font-bold">F</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-warm-900">Farmalife</h4>
+                                    <p class="text-xs text-warm-600">~3% do volume</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-warm-600">Otimização de nicho e performance premium.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- TECHNICAL FOUNDATION SECTION -->
+    <!-- ============================================ -->
+    <section id="tracking" class="py-24 bg-warm-50">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-medium mb-4">
+                    <i data-lucide="database" class="w-4 h-4"></i>
+                    Data & Tracking
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">
+                    O Alicerce Técnico
+                </h2>
+                <p class="text-lg text-warm-600 max-w-2xl mx-auto">
+                    A base de dados estruturada que permitiu o crescimento sustentável.
+                </p>
+            </div>
+            
+            <!-- Timeline Process -->
+            <div class="max-w-3xl mx-auto space-y-8">
+                
+                <!-- Step 1 -->
+                <div class="relative pl-12" data-aos="fade-up">
+                    <div class="timeline-connector"></div>
+                    <div class="absolute left-0 top-0 w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">1</span>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-warm-200 ml-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i data-lucide="search-check" class="w-6 h-6 text-amber-600"></i>
+                            <h3 class="text-lg font-bold text-warm-900">Auditoria & Setup</h3>
+                        </div>
+                        <p class="text-warm-600 mb-4">
+                            Revisão completa da estrutura de tracking para garantir a integridade absoluta dos dados em todas as bandeiras.
+                        </p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold">
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                            18+ Auditorias no GTM
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="relative pl-12" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-connector"></div>
+                    <div class="absolute left-0 top-0 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">2</span>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-warm-200 ml-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i data-lucide="rocket" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="text-lg font-bold text-warm-900">Deploy Contínuo</h3>
+                        </div>
+                        <p class="text-warm-600 mb-4">
+                            Implementações técnicas de tracking, conversões, eventos e integrações com frequência e consistência.
+                        </p>
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+                            <i data-lucide="git-commit" class="w-4 h-4"></i>
+                            400+ Deploys Executados
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="relative pl-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-connector"></div>
+                    <div class="absolute left-0 top-0 w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">3</span>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-warm-200 ml-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-green-600"></i>
+                            <h3 class="text-lg font-bold text-warm-900">Otimização GA4</h3>
+                        </div>
+                        <p class="text-warm-600">
+                            Estruturação de eventos e conversões para rastreamento de ponta a ponta. Configuração avançada de audiências, funis e atribuição.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="relative pl-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute left-0 top-0 w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white font-bold text-lg">4</span>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-warm-200 ml-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i data-lucide="plug" class="w-6 h-6 text-purple-600"></i>
+                            <h3 class="text-lg font-bold text-warm-900">Homologação PBM Interplayers</h3>
+                        </div>
+                        <p class="text-warm-600">
+                            Liderança técnica na integração do PBM Interplayers, garantindo a funcionalidade de descontos farmacêuticos no checkout.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Technical Maturity Chart -->
+            <div class="mt-16 bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-warm-200 max-w-3xl mx-auto" data-aos="fade-up">
+                <h3 class="text-lg font-bold text-warm-900 mb-4">Velocidade de Entrega Técnica</h3>
+                <p class="text-sm text-warm-600 mb-4">Deploys nos containers GTM dos e-commerces das 4 bandeiras.</p>
+                <div class="chart-container chart-h-200">
+                    <canvas id="maturityChart"></canvas>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- AI PROJECTS SECTION -->
+    <!-- ============================================ -->
+    <section id="ia" class="py-24 bg-gradient-to-b from-warm-900 via-purple-950 to-warm-950 text-white overflow-hidden relative">
+        
+        <!-- Background Glow -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-d1000-primary/20 rounded-full blur-[100px]"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative">
+            
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium mb-4 border border-purple-500/30">
+                    <i data-lucide="brain" class="w-4 h-4"></i>
+                    Líder de I.A. em Operações
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    A Fábrica de Savings
+                </h2>
+                <p class="text-lg text-warm-400 max-w-2xl mx-auto">
+                    Internalização de soluções de Inteligência Artificial para gerar economia direta e sustentabilidade para o orçamento.
+                </p>
+            </div>
+            
+            <!-- Total Saving with Breakdown -->
+            <div class="bg-gradient-to-r from-emerald-500/10 to-emerald-600/5 border border-emerald-500/30 rounded-2xl p-8 mb-12" data-aos="fade-up">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center md:text-left">
+                        <p class="text-emerald-300 text-sm font-medium mb-2">SAVING TOTAL ANUAL (POTENCIAL)</p>
+                        <div class="text-5xl md:text-6xl font-black text-emerald-400 mb-2">R$ 1.812.800</div>
+                        <p class="text-warm-400 text-sm">Projetos em produção + potencial dos projetos em desenvolvimento</p>
+                    </div>
+                    <div class="chart-container chart-h-200">
+                        <canvas id="savingsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Profarma Captain - Flagship -->
+                <div class="md:col-span-2 bg-gradient-to-br from-purple-900/60 to-purple-800/40 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/30 relative overflow-hidden" data-aos="fade-up">
+                    <div class="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl">
+                        🚀 FLAGSHIP PROJECT
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-14 h-14 bg-purple-500/30 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="compass" class="w-7 h-7 text-purple-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white">Profarma Captain</h3>
+                                    <p class="text-purple-300 text-sm">Time de Expansão</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-warm-300 mb-6">
+                                Inteligência geoespacial com agente de navegação integrado ao Google Maps. 
+                                Prospecção de lojas e extração de CEPs para os 300+ PDVs.
+                            </p>
+                            
+                            <!-- Evolution Timeline -->
+                            <div class="flex items-center gap-2 flex-wrap mb-6">
+                                <span class="px-3 py-1.5 bg-warm-800/80 text-warm-300 rounded-lg text-sm">TESS/GEO</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-warm-500"></i>
+                                <span class="px-3 py-1.5 bg-warm-800/80 text-warm-300 rounded-lg text-sm">Cepex (R$ 200k)</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-warm-500"></i>
+                                <span class="px-3 py-1.5 bg-purple-600 text-white rounded-lg text-sm font-semibold">Captain</span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center md:text-right">
+                            <p class="text-purple-300 text-sm mb-1">POTENCIAL ANUAL</p>
+                            <div class="text-4xl md:text-5xl font-black text-purple-400">&gt; R$ 1.100.000</div>
+                            <div class="mt-4">
+                                <span class="px-3 py-1.5 bg-purple-500/30 text-purple-300 text-xs font-medium rounded-full border border-purple-500/50">
+                                    🔨 Em Desenvolvimento
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profarma Ciclos -->
+                <div class="bg-warm-800/50 backdrop-blur-sm rounded-2xl p-6 border border-warm-700/50" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="recycle" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Profarma Ciclos</h3>
+                                <p class="text-sm text-warm-400">ESG & Compliance</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-medium rounded-full border border-emerald-500/30">✅ Produção</span>
+                    </div>
+                    <p class="text-warm-300 text-sm mb-4">
+                        Plataforma operacional para gestão de auditoria e compliance. Dashboard completo e automação de processos.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-warm-700/50">
+                        <span class="text-warm-500 text-sm">Saving Anual</span>
+                        <span class="text-emerald-400 font-bold text-xl">R$ 200.000</span>
+                    </div>
+                </div>
+                
+                <!-- Profarma Optimizer -->
+                <div class="bg-warm-800/50 backdrop-blur-sm rounded-2xl p-6 border border-warm-700/50" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Profarma Optimizer</h3>
+                                <p class="text-sm text-warm-400">I.A. Vision</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs font-medium rounded-full border border-amber-500/30">🔨 Construção</span>
+                    </div>
+                    <p class="text-warm-300 text-sm mb-4">
+                        Enriquecimento automático de catálogo com I.A. Vision. Análise de 28.397 produtos para otimização.
+                    </p>
+                    
+                    <!-- Catalog Health Preview -->
+                    <div class="mb-4 space-y-2">
+                        <div class="flex justify-between text-xs text-warm-400">
+                            <span>Saúde do Catálogo</span>
+                            <span>28.397 SKUs</span>
+                        </div>
+                        <div class="flex h-3 rounded-full overflow-hidden bg-warm-700">
+                            <div class="w-[3%] bg-red-500" title="Crítico: 3%"></div>
+                            <div class="w-[30%] bg-orange-500" title="Ruim: 30%"></div>
+                            <div class="w-[33%] bg-yellow-500" title="Regular: 33%"></div>
+                            <div class="w-[29%] bg-green-400" title="Bom: 29%"></div>
+                            <div class="w-[5%] bg-emerald-500" title="Excelente: 5%"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-warm-500">
+                            <span>Crítico 3%</span>
+                            <span>Ruim 30%</span>
+                            <span>Regular 33%</span>
+                            <span>Bom 29%</span>
+                            <span>Excelente 5%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between pt-4 border-t border-warm-700/50">
+                        <span class="text-warm-500 text-sm">Potencial Anual</span>
+                        <span class="text-amber-400 font-bold text-xl">R$ 300.000</span>
+                    </div>
+                </div>
+                
+                <!-- QR Code Generator -->
+                <div class="bg-warm-800/50 backdrop-blur-sm rounded-2xl p-6 border border-warm-700/50 md:col-span-2 md:max-w-md md:mx-auto" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-d1000-primary/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="qr-code" class="w-6 h-6 text-d1000-light"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Gerador de QRCode</h3>
+                                <p class="text-sm text-warm-400">Marketing & E-commerce</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-medium rounded-full border border-emerald-500/30">✅ Produção</span>
+                    </div>
+                    <p class="text-warm-300 text-sm mb-4">
+                        Solução standalone para geração de QR Codes personalizados, eliminando dependência de serviços externos.
+                    </p>
+                    <div class="flex items-center justify-between pt-4 border-t border-warm-700/50">
+                        <span class="text-warm-500 text-sm">Saving Anual</span>
+                        <span class="text-emerald-400 font-bold text-lg">R$ 12.800</span>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- DIRECT SUPPORT SECTION -->
+    <!-- ============================================ -->
+    <section id="suporte" class="py-24 bg-warm-100">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-drogasmil/10 text-brand-drogasmil rounded-full text-sm font-medium mb-4 border border-brand-drogasmil/20">
+                    <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                    Impacto além da Estratégia
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">
+                    Suporte Direto às Vendas
+                </h2>
+                <p class="text-lg text-warm-600 max-w-2xl mx-auto">
+                    Além da gestão de performance, o engajamento pessoal direto gerou impacto incremental significativo.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl p-8 shadow-xl border border-warm-200" data-aos="fade-up">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-14 h-14 bg-brand-drogasmil/10 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="shopping-bag" class="w-7 h-7 text-brand-drogasmil"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-warm-900">Drogasmil</h3>
+                                    <p class="text-sm text-warm-600">Suporte pessoal às vendas</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-warm-600 mb-6">
+                                Contribuição direta ao faturamento através de suporte às vendas e atendimento personalizado, gerando um impacto incremental durante o período.
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p class="text-brand-drogasmil text-sm font-medium mb-2">FATURAMENTO INCREMENTAL</p>
+                            <div class="text-4xl md:text-5xl font-black text-warm-900 mb-2">
+                                R$ 2,35<span class="text-3xl">Mi+</span>
+                            </div>
+                            <p class="text-sm text-warm-500">Impacto direto no período 2023-2026</p>
+                            
+                            <div class="mt-6 chart-container chart-h-180">
+                                <canvas id="supportChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- THE THESIS SECTION -->
+    <!-- ============================================ -->
+    <section id="tese" class="py-24 bg-warm-50">
+        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+            
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-d1000-primary/10 text-d1000-primary rounded-full text-sm font-medium mb-8">
+                <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                A Tese
+            </div>
+            
+            <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-8">
+                ROI Sustentável
+            </h2>
+            
+            <blockquote class="text-xl md:text-2xl text-warm-700 leading-relaxed mb-12 italic max-w-3xl mx-auto">
+                "Esta trajetória demonstra um ciclo de entrega de <strong class="text-d1000-primary not-italic">alto ROI em mídia paga</strong>, 
+                aliado à criação de uma infraestrutura tecnológica interna que converte custos operacionais em 
+                <strong class="text-d1000-primary not-italic">investimento sustentável</strong> por meio da Inteligência Artificial."
+            </blockquote>
+            
+            <!-- ROI Evolution Chart -->
+            <div class="bg-white rounded-2xl p-8 shadow-xl border border-warm-200 mb-8">
+                <h3 class="text-lg font-bold text-warm-900 mb-6">Evolução: Performance + I.A. Savings</h3>
+                <div class="chart-container chart-h-280">
+                    <canvas id="roiEvolutionChart"></canvas>
+                </div>
+                <div class="flex justify-center gap-6 mt-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-blue-500 rounded"></div>
+                        <span class="text-sm text-warm-600">Receita Gerada (Mídia)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-purple-500 rounded"></div>
+                        <span class="text-sm text-warm-600">Savings I.A.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sustainability Cycle -->
+            <div class="flex items-center justify-center gap-2 md:gap-3 text-xs md:text-sm overflow-x-auto pb-2">
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-blue-100 text-blue-700 rounded-full font-medium shadow-sm whitespace-nowrap">
+                    <i data-lucide="megaphone" class="w-3.5 h-3.5"></i>
+                    <span>Budget Mídia</span>
+                </div>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-warm-400 flex-shrink-0"></i>
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-green-100 text-green-700 rounded-full font-medium shadow-sm whitespace-nowrap">
+                    <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                    <span>ROAS 964%</span>
+                </div>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-warm-400 flex-shrink-0"></i>
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-purple-100 text-purple-700 rounded-full font-medium shadow-sm whitespace-nowrap">
+                    <i data-lucide="brain" class="w-3.5 h-3.5"></i>
+                    <span>Projetos I.A.</span>
+                </div>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-warm-400 flex-shrink-0"></i>
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-emerald-100 text-emerald-700 rounded-full font-medium shadow-sm whitespace-nowrap">
+                    <i data-lucide="piggy-bank" class="w-3.5 h-3.5"></i>
+                    <span>R$ 1.8Mi Saving</span>
+                </div>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-warm-400 flex-shrink-0"></i>
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-d1000-primary text-white rounded-full font-medium shadow-sm whitespace-nowrap">
+                    <i data-lucide="infinity" class="w-3.5 h-3.5"></i>
+                    <span>Sustentável</span>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- ============================================ -->
+    <!-- STACK & RECOGNITION FOOTER -->
+    <!-- ============================================ -->
+    <footer class="py-16 bg-warm-900 text-warm-300">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <!-- Google Experts Badge -->
+            <div class="text-center mb-12" data-aos="fade-up">
+                <div class="inline-flex items-center gap-4 px-6 py-4 bg-gradient-to-r from-amber-500/20 to-amber-600/10 border border-amber-500/30 rounded-2xl">
+                    <div class="w-14 h-14 bg-amber-500 rounded-xl flex items-center justify-center shadow-lg">
+                        <i data-lucide="trophy" class="w-7 h-7 text-amber-900"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-xl font-bold text-amber-400">Google Ads Expert 2024</div>
+                        <div class="text-sm text-amber-300/80">Top #80 Brasil — conquistado em nome da Rede d1000</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stack -->
+            <div class="text-center mb-12" data-aos="fade-up" data-aos-delay="100">
+                <p class="text-sm text-warm-500 mb-4">STACK TECNOLÓGICA</p>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">Google Ads</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">Meta Ads</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">GA4</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">GTM</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">Looker Studio</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">React</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">Tailwind</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">Python</span>
+                    <span class="px-3 py-1.5 bg-warm-800 rounded-lg text-sm">Cloudflare</span>
+                </div>
+            </div>
+            
+            <div class="border-t border-warm-800 pt-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    
+                    <!-- Author -->
+                    <div class="flex items-center gap-4">
+                        <img src="../assets/images/linkedin-profile.png" alt="Felipi Fernandes" 
+                             class="w-12 h-12 rounded-xl object-cover border-2 border-warm-700">
+                        <div>
+                            <h4 class="font-semibold text-white">Felipi Fernandes</h4>
+                            <p class="text-sm text-warm-400">Performance Specialist & AI Leader</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Links -->
+                    <div class="flex items-center gap-4">
+                        <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" 
+                           class="w-10 h-10 bg-warm-800 hover:bg-warm-700 rounded-xl flex items-center justify-center transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://github.com/felipefernandesrj" target="_blank" rel="noopener" 
+                           class="w-10 h-10 bg-warm-800 hover:bg-warm-700 rounded-xl flex items-center justify-center transition-colors">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="../index.html" 
+                           class="w-10 h-10 bg-warm-800 hover:bg-warm-700 rounded-xl flex items-center justify-center transition-colors">
+                            <i data-lucide="home" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Copyright -->
+                    <div class="text-sm text-warm-500">
+                        © 2026 Felipi Fernandes
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+    
+    <!-- Brand Bar Bottom -->
+    <div class="brand-bar h-1.5"></div>
+    
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+        
+        // Chart.js Global Config
+        Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+        Chart.defaults.color = '#6b6860';
+        
+        // ============================================
+        // CHART 1: Efficiency (CPM vs Impressions)
+        // ============================================
+        const efficiencyCtx = document.getElementById('efficiencyChart').getContext('2d');
+        new Chart(efficiencyCtx, {
+            type: 'line',
+            data: {
+                labels: ['2023', '2024', '2025', '2026'],
+                datasets: [
+                    {
+                        label: 'Impressões (Índice)',
+                        data: [100, 350, 700, 1033],
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'CPM (Índice)',
+                        data: [100, 60, 30, 17],
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: { display: true, text: 'Impressões' },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: { display: true, text: 'CPM' },
+                        grid: { drawOnChartArea: false }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        
+        // ============================================
+        // CHART 2: Market Share (Donut)
+        // ============================================
+        const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+        new Chart(marketShareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Rosário', 'Drogasmil', 'Tamoio', 'Farmalife'],
+                datasets: [{
+                    data: [40, 33, 24, 3],
+                    backgroundColor: ['#0066B3', '#D4A017', '#00A651', '#F7941D'],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // ============================================
+        // CHART 3: Technical Maturity
+        // ============================================
+        const maturityCtx = document.getElementById('maturityChart').getContext('2d');
+        new Chart(maturityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025', '2026'],
+                datasets: [{
+                    label: 'Deploys Acumulados',
+                    data: [80, 220, 350, 400],
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        
+        // ============================================
+        // CHART 4: AI Savings (Waterfall-like)
+        // ============================================
+        const savingsCtx = document.getElementById('savingsChart').getContext('2d');
+        new Chart(savingsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['QRCode', 'Ciclos', 'Cepex*', 'Optimizer', 'Captain'],
+                datasets: [{
+                    label: 'Saving (R$ mil)',
+                    data: [12.8, 200, 200, 300, 1100],
+                    backgroundColor: [
+                        'rgba(16, 185, 129, 0.9)',
+                        'rgba(16, 185, 129, 0.9)',
+                        'rgba(16, 185, 129, 0.6)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(168, 85, 247, 0.8)'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'R$ ' + context.raw.toLocaleString('pt-BR') + ' mil/ano';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#9CA3AF' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#9CA3AF' }
+                    }
+                }
+            }
+        });
+        
+        // ============================================
+        // CHART 5: Support Sales (Monthly)
+        // ============================================
+        const supportCtx = document.getElementById('supportChart').getContext('2d');
+        new Chart(supportCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Faturamento (R$ mil)',
+                    data: [450, 850, 1050],
+                    backgroundColor: 'rgba(227, 24, 55, 0.8)',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+        
+        // ============================================
+        // CHART 6: ROI Evolution (Stacked Bar)
+        // ============================================
+        const roiCtx = document.getElementById('roiEvolutionChart').getContext('2d');
+        new Chart(roiCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025', '2026'],
+                datasets: [
+                    {
+                        label: 'Receita Gerada (Mídia)',
+                        data: [100, 400, 1200, 2000],
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderRadius: { topLeft: 0, topRight: 0, bottomLeft: 8, bottomRight: 8 }
+                    },
+                    {
+                        label: 'Savings I.A.',
+                        data: [0, 0, 412.8, 1812.8],
+                        backgroundColor: 'rgba(168, 85, 247, 0.8)',
+                        borderRadius: { topLeft: 8, topRight: 8, bottomLeft: 0, bottomRight: 0 }
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                if (context.dataset.label.includes('Savings')) {
+                                    return context.dataset.label + ': R$ ' + context.raw.toLocaleString('pt-BR') + ' mil';
+                                }
+                                return context.dataset.label + ': Índice ' + context.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        grid: { display: false }
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    }
+                }
+            }
+        });
+        
+        // ============================================
+        // SHARE FUNCTION
+        // ============================================
+        function shareRetro() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '3 Anos de Transformação Digital | Rede d1000',
+                    text: 'Retrospectiva de 3 anos de performance e inovação em I.A. na Rede d1000 / Profarma',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copiado para a área de transferência!');
+                });
+            }
+        }
+        
+        // Console signature
+        console.log(
+          "\n" +
+          "==========================================================\n" +
+          "  3 Anos de Transformacao Digital\n" +
+          "  Rede d1000 / Profarma\n" +
+          "  Felipi Fernandes\n" +
+          "  Performance Specialist & Lider de I.A. em Operacoes\n" +
+          "  +2.000% E-commerce | 964% ROAS | R$1.8Mi Saving\n" +
+          "==========================================================\n"
+        );
+    </script>
+</body>
+</html>
