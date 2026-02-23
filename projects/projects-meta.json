@@ -1,29 +1,4 @@
 {
-  "ontological-gravity": {
-    "id": "ontological-gravity",
-    "name": "Entities with Ontological Gravity",
-    "description": "Arquitetura cognitiva para seres digitais com peso existencial. Manifesto read-me #101 — Protótipo funcional com memória estratificada, autonomia paralela e gravidade narrativa.",
-    "stack": ["AI Architecture", "Cognitive Systems", "NLP", "Generative AI"],
-    "standalone": false,
-    "category": "A.I. Research",
-    "entryFile": "index.html",
-    "sourceFiles": ["index.html"],
-    "github": "https://github.com/felipefernandesrj/felipifernandes.github.io/blob/main/projects/ontological-gravity/index.html",
-    "icon": "sparkles",
-    "color": "#5a5a56",
-    "features": [
-      "Stratified Memory",
-      "Parallel Autonomy",
-      "Cognitive Trinity",
-      "Narrative Forks",
-      "9 Affective Dimensions",
-      "Spatial Identity Layer",
-      "Proactive Agency",
-      "Bilingual (EN/PT)"
-    ],
-    "createdAt": "2026-02-12",
-    "updatedAt": "2026-02-22"
-  },
   "qrcode": {
     "id": "qrcode",
     "name": "Gerador de QR Code",
