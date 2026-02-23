@@ -124,11 +124,11 @@
             background: #2a2825;
             color: #faf9f7;
         }
-        [data-lang="en"] { display: none; }
-        [data-lang="pt"] { display: inline; }
+        body.lang-pt [data-lang="en"] { display: none !important; }
+        body.lang-en [data-lang="pt"] { display: none !important; }
     </style>
 </head>
-<body class="bg-warm-50 text-warm-900 font-sans antialiased">
+<body class="bg-warm-50 text-warm-900 font-sans antialiased lang-pt">
     
     <!-- Corner Ribbon -->
     <div class="corner-ribbon">
@@ -687,16 +687,11 @@
     <script>
         function setLang(lang) {
             document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-            document.querySelectorAll('[data-lang="pt"]').forEach(function(el) {
-                el.style.display = lang === 'pt' ? '' : 'none';
-            });
-            document.querySelectorAll('[data-lang="en"]').forEach(function(el) {
-                el.style.display = lang === 'en' ? '' : 'none';
-            });
+            document.body.classList.remove('lang-pt', 'lang-en');
+            document.body.classList.add('lang-' + lang);
             document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
             try { localStorage.setItem('site-lang', lang); } catch(e) {}
-            // Dispatch event for main.js to react
             window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
         }
         // Restore saved preference

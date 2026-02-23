@@ -220,14 +220,12 @@
     // ================================================
     
     function applyCurrentLang() {
+        // Body class approach handles everything via CSS,
+        // just ensure the class is set after dynamic rendering
         try {
             var lang = localStorage.getItem('site-lang') || 'pt';
-            document.querySelectorAll('[data-lang="pt"]').forEach(function(el) {
-                el.style.display = lang === 'pt' ? '' : 'none';
-            });
-            document.querySelectorAll('[data-lang="en"]').forEach(function(el) {
-                el.style.display = lang === 'en' ? '' : 'none';
-            });
+            document.body.classList.remove('lang-pt', 'lang-en');
+            document.body.classList.add('lang-' + lang);
         } catch(e) {}
     }
 
