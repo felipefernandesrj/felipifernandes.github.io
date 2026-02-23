@@ -2,7 +2,9 @@
   "qrcode": {
     "id": "qrcode",
     "name": "Gerador de QR Code",
+    "name_en": "QR Code Generator",
     "description": "Crie QR Codes permanentes para links, contatos, WiFi e muito mais. Sem expiração, 100% gratuito, funciona offline.",
+    "description_en": "Create permanent QR Codes for links, contacts, WiFi and more. No expiration, 100% free, works offline.",
     "stack": ["JavaScript", "Bootstrap 5", "HTML5", "CSS3"],
     "standalone": true,
     "category": "Utilidades",

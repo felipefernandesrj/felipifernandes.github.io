@@ -98,14 +98,43 @@
             background: linear-gradient(135deg, #007a3d 0%, #005c2e 100%);
             box-shadow: 0 8px 15px rgba(0,0,0,0.3);
         }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            background: #eae8e4;
+            border-radius: 8px;
+            padding: 2px;
+        }
+        .lang-toggle button {
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+            color: #8f8b81;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+        .lang-toggle button.active {
+            background: #2a2825;
+            color: #faf9f7;
+        }
+        [data-lang="en"] { display: none; }
+        [data-lang="pt"] { display: inline; }
     </style>
 </head>
 <body class="bg-warm-50 text-warm-900 font-sans antialiased">
     
     <!-- Corner Ribbon -->
     <div class="corner-ribbon">
-        <a href="retrospectiva/profarma.html" title="Ver Retrospectiva 3 Anos">
-            🎉 3 Anos d1000
+        <a href="retrospectiva/profarma.html">
+            <span data-lang="pt">🎉 3 Anos d1000</span>
+            <span data-lang="en">🎉 3 Years d1000</span>
         </a>
     </div>
     
@@ -123,9 +152,19 @@
                 
                 <!-- Nav Links -->
                 <div class="flex items-center gap-6">
-                    <a href="#projects" class="text-sm text-warm-600 hover:text-warm-900 transition-colors hidden sm:inline">Projetos</a>
-                    <a href="#certifications" class="text-sm text-warm-600 hover:text-warm-900 transition-colors hidden sm:inline">Certificações</a>
-                    <a href="#articles" class="text-sm text-warm-600 hover:text-warm-900 transition-colors hidden sm:inline">Artigos</a>
+                    <a href="#projects" class="text-sm text-warm-600 hover:text-warm-900 transition-colors hidden sm:inline">
+                        <span data-lang="pt">Projetos</span><span data-lang="en">Projects</span>
+                    </a>
+                    <a href="#certifications" class="text-sm text-warm-600 hover:text-warm-900 transition-colors hidden sm:inline">
+                        <span data-lang="pt">Certificações</span><span data-lang="en">Certifications</span>
+                    </a>
+                    <a href="#articles" class="text-sm text-warm-600 hover:text-warm-900 transition-colors hidden sm:inline">
+                        <span data-lang="pt">Artigos</span><span data-lang="en">Articles</span>
+                    </a>
+                    <div class="lang-toggle">
+                        <button id="btn-pt" class="active" onclick="setLang('pt')">PT</button>
+                        <button id="btn-en" onclick="setLang('en')">EN</button>
+                    </div>
                     <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" class="text-warm-600 hover:text-warm-900 transition-colors" title="LinkedIn">
                         <i data-lucide="linkedin" class="w-5 h-5"></i>
                         <span class="sr-only">LinkedIn</span>
@@ -165,14 +204,14 @@
             
             <!-- Subtitle -->
             <p class="text-xl md:text-2xl text-warm-600 font-medium mb-6 max-w-2xl mx-auto">
-                Performance Specialist @ Grupo Profarma | A.I. Researcher | +R$15MM Budget Manager
+                <span data-lang="pt">Performance Specialist @ Grupo Profarma | A.I. Researcher | +R$15MM Budget Manager</span>
+                <span data-lang="en">Performance Specialist @ Grupo Profarma | A.I. Researcher | +$3MM Budget Manager</span>
             </p>
             
             <!-- Summary -->
             <p class="text-lg text-warm-600 mb-6 max-w-2xl mx-auto leading-relaxed">
-                +12 anos em marketing digital, trilhando por agências, startups e fintechs. 
-                Atualmente na 2ª maior distribuidora de medicamentos do Brasil (B3), 
-                gerenciando budget anual de R$15Mi com ROI superior a 10x através de estratégias de mídia paga.
+                <span data-lang="pt">+12 anos em marketing digital, trilhando por agências, startups e fintechs. Atualmente na 2ª maior distribuidora de medicamentos do Brasil (B3), gerenciando budget anual de R$15Mi com ROI superior a 10x através de estratégias de mídia paga.</span>
+                <span data-lang="en">+12 years in digital marketing, navigating agencies, startups and fintechs. Currently at Brazil's 2nd largest pharmaceutical distributor (B3-listed), managing a $3M annual budget with 10x+ ROI through paid media strategies.</span>
             </p>
             
             <!-- Tech Bio -->
@@ -183,7 +222,7 @@
             <!-- Location -->
             <div class="flex items-center justify-center gap-2 text-warm-500 text-sm mb-8">
                 <i data-lucide="map-pin" class="w-4 h-4"></i>
-                <span>Rio de Janeiro, Brasil</span>
+                <span><span data-lang="pt">Rio de Janeiro, Brasil</span><span data-lang="en">Rio de Janeiro, Brazil</span></span>
             </div>
             
             <!-- CTA Buttons -->
@@ -207,9 +246,10 @@
             
             <!-- Scroll Indicator -->
             <div class="mt-20 animate-bounce">
-                <a href="#projects" class="text-warm-400 hover:text-warm-600 transition-colors" title="Ver projetos">
+                <a href="#projects" class="text-warm-400 hover:text-warm-600 transition-colors">
                     <i data-lucide="chevron-down" class="w-6 h-6 mx-auto"></i>
-                    <span class="sr-only">Ver projetos</span>
+                    <span class="sr-only" data-lang="pt">Ver projetos</span>
+                    <span class="sr-only" data-lang="en">See projects</span>
                 </a>
             </div>
         </div>
@@ -221,10 +261,12 @@
             <!-- Section Header -->
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">
-                    Projetos & Apps
+                    <span data-lang="pt">Projetos & Apps</span>
+                    <span data-lang="en">Projects & Apps</span>
                 </h2>
                 <p class="text-lg text-warm-600 max-w-xl mx-auto">
-                    Ferramentas standalone, open-source e prontas para usar. Sem expirações, sem cadastros.
+                    <span data-lang="pt">Ferramentas standalone, open-source e prontas para usar. Sem expirações, sem cadastros.</span>
+                    <span data-lang="en">Standalone, open-source tools ready to use. No expirations, no sign-ups.</span>
                 </p>
             </div>
             
@@ -236,7 +278,8 @@
                 <div class="col-span-full flex items-center justify-center py-12" id="loading-state">
                     <div class="flex items-center gap-3 text-warm-500">
                         <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
-                        <span>Carregando projetos...</span>
+                        <span data-lang="pt">Carregando projetos...</span>
+                        <span data-lang="en">Loading projects...</span>
                     </div>
                 </div>
             </div>
@@ -246,7 +289,10 @@
                 <div class="w-16 h-16 mx-auto mb-4 bg-warm-200 rounded-2xl flex items-center justify-center">
                     <i data-lucide="folder-open" class="w-8 h-8 text-warm-500"></i>
                 </div>
-                <p class="text-warm-500">Nenhum projeto encontrado.</p>
+                <p class="text-warm-500">
+                    <span data-lang="pt">Nenhum projeto encontrado.</span>
+                    <span data-lang="en">No projects found.</span>
+                </p>
             </div>
         </div>
     </section>
@@ -256,10 +302,12 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">
-                    Certificações & Licenças
+                    <span data-lang="pt">Certificações & Licenças</span>
+                    <span data-lang="en">Certifications & Licenses</span>
                 </h2>
                 <p class="text-lg text-warm-600 max-w-xl mx-auto">
-                    Certificações oficiais em Marketing Digital, Google Ads e Análise de Dados.
+                    <span data-lang="pt">Certificações oficiais em Marketing Digital, Google Ads e Análise de Dados.</span>
+                    <span data-lang="en">Official certifications in Digital Marketing, Google Ads and Data Analysis.</span>
                 </p>
             </div>
             
@@ -327,7 +375,10 @@
                     <div class="w-12 h-12 mx-auto mb-4 bg-warm-50 rounded-xl flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
                         <i data-lucide="brain" class="w-6 h-6 text-warm-700"></i>
                     </div>
-                    <h3 class="font-semibold text-warm-900 text-sm mb-1">IA em Google Ads</h3>
+                    <h3 class="font-semibold text-warm-900 text-sm mb-1">
+                        <span data-lang="pt">IA em Google Ads</span>
+                        <span data-lang="en">AI in Google Ads</span>
+                    </h3>
                     <p class="text-xs text-warm-600">Google</p>
                 </div>
                 
@@ -348,10 +399,12 @@
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">
-                    Artigos & Publicações
+                    <span data-lang="pt">Artigos & Publicações</span>
+                    <span data-lang="en">Articles & Publications</span>
                 </h2>
                 <p class="text-lg text-warm-600 max-w-xl mx-auto">
-                    Reflexões sobre marketing, performance, IA e carreira no LinkedIn.
+                    <span data-lang="pt">Reflexões sobre marketing, performance, IA e carreira no LinkedIn.</span>
+                    <span data-lang="en">Reflections on marketing, performance, AI and career on LinkedIn.</span>
                 </p>
             </div>
             
@@ -359,7 +412,9 @@
                 <!-- Article - Ontological Gravity Manifesto (Novo) -->
                 <a href="projects/ontological-gravity/index.html" 
                    class="group bg-warm-50 rounded-2xl p-6 border border-warm-200 hover:shadow-xl hover:border-warm-300 transition-all relative overflow-hidden">
-                    <span class="absolute top-3 right-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">Novo</span>
+                    <span class="absolute top-3 right-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                        <span data-lang="pt">Novo</span><span data-lang="en">New</span>
+                    </span>
                     <div class="flex items-center gap-2 text-warm-700 text-sm mb-3">
                         <i data-lucide="sparkles" class="w-4 h-4"></i>
                         <span>Manifesto · read-me #101</span>
@@ -367,7 +422,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Entities with Ontological Gravity
                     </h3>
-                    <p class="text-sm text-warm-600">Arquitetura cognitiva para seres digitais com peso existencial — memória estratificada, autonomia paralela e gravidade narrativa.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Arquitetura cognitiva para seres digitais com peso existencial — memória estratificada, autonomia paralela e gravidade narrativa.</span>
+                        <span data-lang="en">Cognitive architecture for digital beings with existential weight — stratified memory, parallel autonomy and narrative gravity.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 1 -->
@@ -380,7 +438,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Convencional, Estatística, Criativa & Corporativa
                     </h3>
-                    <p class="text-sm text-warm-600">Reflexão sobre diferentes abordagens no marketing digital.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Reflexão sobre diferentes abordagens no marketing digital.</span>
+                        <span data-lang="en">Reflection on different approaches to digital marketing.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 2 -->
@@ -393,7 +454,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Mentalidade NPS Positiva
                     </h3>
-                    <p class="text-sm text-warm-600">Como cultivar uma mentalidade focada em experiência do cliente.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Como cultivar uma mentalidade focada em experiência do cliente.</span>
+                        <span data-lang="en">How to cultivate a mindset focused on customer experience.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 3 -->
@@ -406,7 +470,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Contrate um Empreendedor Falido
                     </h3>
-                    <p class="text-sm text-warm-600">Por que a experiência de falhar traz valor único para equipes.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Por que a experiência de falhar traz valor único para equipes.</span>
+                        <span data-lang="en">Why the experience of failure brings unique value to teams.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 4 -->
@@ -419,7 +486,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Nova Era da Medição de Conversões
                     </h3>
-                    <p class="text-sm text-warm-600">Mudanças na atribuição e tracking no marketing digital.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Mudanças na atribuição e tracking no marketing digital.</span>
+                        <span data-lang="en">Changes in attribution and tracking in digital marketing.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 5 -->
@@ -432,7 +502,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         ROI Profissional
                     </h3>
-                    <p class="text-sm text-warm-600">Uma reflexão sobre o valor que entregamos na carreira.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Uma reflexão sobre o valor que entregamos na carreira.</span>
+                        <span data-lang="en">A reflection on the value we deliver in our careers.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 6 -->
@@ -445,7 +518,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Varejo em Ascensão: Estratégias de Mídia Paga
                     </h3>
-                    <p class="text-sm text-warm-600">Estratégias para maximizar ROAS no varejo digital.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Estratégias para maximizar ROAS no varejo digital.</span>
+                        <span data-lang="en">Strategies to maximize ROAS in digital retail.</span>
+                    </p>
                 </a>
                 
                 <!-- Article 7 -->
@@ -458,7 +534,10 @@
                     <h3 class="font-semibold text-warm-900 mb-2 group-hover:text-warm-700 transition-colors">
                         Eu Artificial: Tokenização do Pensamento
                     </h3>
-                    <p class="text-sm text-warm-600">Reflexões sobre IA e o futuro do pensamento humano.</p>
+                    <p class="text-sm text-warm-600">
+                        <span data-lang="pt">Reflexões sobre IA e o futuro do pensamento humano.</span>
+                        <span data-lang="en">Reflections on AI and the future of human thought.</span>
+                    </p>
                 </a>
 
             </div>
@@ -485,7 +564,9 @@
                 
                 <!-- Contact -->
                 <div>
-                    <h4 class="font-semibold mb-4">Contato</h4>
+                    <h4 class="font-semibold mb-4">
+                        <span data-lang="pt">Contato</span><span data-lang="en">Contact</span>
+                    </h4>
                     <ul class="space-y-2 text-sm text-warm-400">
                         <li>
                             <a href="mailto:felipi.fernandes@proton.me" class="hover:text-warm-100 transition-colors flex items-center gap-2">
@@ -512,16 +593,22 @@
                 <div>
                     <h4 class="font-semibold mb-4">Links</h4>
                     <ul class="space-y-2 text-sm text-warm-400">
-                        <li><a href="#projects" class="hover:text-warm-100 transition-colors">Projetos & Apps</a></li>
-                        <li><a href="#certifications" class="hover:text-warm-100 transition-colors">Certificações</a></li>
-                        <li><a href="#articles" class="hover:text-warm-100 transition-colors">Artigos</a></li>
+                        <li><a href="#projects" class="hover:text-warm-100 transition-colors">
+                            <span data-lang="pt">Projetos & Apps</span><span data-lang="en">Projects & Apps</span>
+                        </a></li>
+                        <li><a href="#certifications" class="hover:text-warm-100 transition-colors">
+                            <span data-lang="pt">Certificações</span><span data-lang="en">Certifications</span>
+                        </a></li>
+                        <li><a href="#articles" class="hover:text-warm-100 transition-colors">
+                            <span data-lang="pt">Artigos</span><span data-lang="en">Articles</span>
+                        </a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="pt-8 border-t border-warm-800 flex flex-col md:flex-row items-center justify-between gap-4">
                 <p class="text-sm text-warm-500">
-                    © <span id="current-year">2025</span> Felipi Fernandes. Todos os direitos reservados.
+                    © <span id="current-year">2025</span> Felipi Fernandes. <span data-lang="pt">Todos os direitos reservados.</span><span data-lang="en">All rights reserved.</span>
                 </p>
                 <div class="flex items-center gap-4">
                     <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" 
@@ -575,7 +662,7 @@
             <div class="flex">
                 <a href="#" class="inline-flex items-center gap-1.5 px-5 py-2.5 bg-warm-900 text-warm-50 text-sm font-medium rounded-lg hover:bg-warm-800 transition-colors project-demo">
                     <i data-lucide="external-link" class="w-4 h-4"></i>
-                    Abrir
+                    <span data-lang="pt">Abrir</span><span data-lang="en">Open</span>
                 </a>
             </div>
         </div>
@@ -587,11 +674,40 @@
             <div class="w-12 h-12 bg-warm-200/50 rounded-xl flex items-center justify-center mb-4">
                 <i data-lucide="wrench" class="w-6 h-6 text-warm-400"></i>
             </div>
-            <p class="text-warm-500 font-medium text-sm mb-1">Em breve...</p>
-            <p class="text-warm-400 text-xs text-center">Novo projeto em desenvolvimento</p>
+            <p class="text-warm-500 font-medium text-sm mb-1">
+                <span data-lang="pt">Em breve...</span><span data-lang="en">Coming soon...</span>
+            </p>
+            <p class="text-warm-400 text-xs text-center">
+                <span data-lang="pt">Novo projeto em desenvolvimento</span><span data-lang="en">New project in development</span>
+            </p>
         </div>
     </template>
     
+    <!-- Language System -->
+    <script>
+        function setLang(lang) {
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+            document.querySelectorAll('[data-lang="pt"]').forEach(function(el) {
+                el.style.display = lang === 'pt' ? '' : 'none';
+            });
+            document.querySelectorAll('[data-lang="en"]').forEach(function(el) {
+                el.style.display = lang === 'en' ? '' : 'none';
+            });
+            document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            try { localStorage.setItem('site-lang', lang); } catch(e) {}
+            // Dispatch event for main.js to react
+            window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang } }));
+        }
+        // Restore saved preference
+        (function() {
+            try {
+                var saved = localStorage.getItem('site-lang');
+                if (saved === 'en') setLang('en');
+            } catch(e) {}
+        })();
+    </script>
+
     <!-- Main JavaScript -->
     <script src="assets/js/main.js"></script>
 </body>

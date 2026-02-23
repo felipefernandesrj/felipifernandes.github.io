@@ -1435,8 +1435,8 @@
                 <span data-lang="en">Where the manifesto was first shared.</span>
                 <span data-lang="pt" style="display:none">Onde o manifesto foi compartilhado pela primeira vez.</span>
             </p>
-            <div style="display:flex; justify-content:center;">
-                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7431080038831169536" height="1827" width="504" frameborder="0" allowfullscreen="" title="Publicação incorporada" style="max-width:100%; border-radius:12px;"></iframe>
+            <div style="display:flex; justify-content:center; overflow:hidden; border-radius:12px;">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7431080038831169536" width="504" height="2000" frameborder="0" scrolling="no" allowfullscreen="" title="Publicação incorporada" style="max-width:100%; border:none; overflow:hidden;"></iframe>
             </div>
         </div>
     </section>
@@ -1516,12 +1516,12 @@
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
             document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
             
-            try { localStorage.setItem('og-lang', lang); } catch(e) {}
+            try { localStorage.setItem('og-lang', lang); localStorage.setItem('site-lang', lang); } catch(e) {}
         }
         
         // Restore preference
         try {
-            var saved = localStorage.getItem('og-lang');
+            var saved = localStorage.getItem('site-lang') || localStorage.getItem('og-lang');
             if (saved === 'en' || saved === 'pt') setLang(saved);
         } catch(e) {}
         

@@ -149,7 +149,9 @@
     const FALLBACK_PROJECT = {
         id: "qrcode",
         name: "Gerador de QR Code",
+        name_en: "QR Code Generator",
         description: "Crie QR Codes permanentes para links, contatos, WiFi e muito mais. Sem expiração, 100% gratuito.",
+        description_en: "Create permanent QR Codes for links, contacts, WiFi and more. No expiration, 100% free.",
         stack: ["JavaScript", "Bootstrap 5", "HTML5", "CSS3"],
         standalone: true,
         icon: "qr-code"
@@ -208,7 +210,31 @@
         if (typeof AOS !== 'undefined') {
             AOS.refresh();
         }
+
+        // Re-apply current language to dynamically rendered elements
+        applyCurrentLang();
     }
+
+    // ================================================
+    // Apply Language to Dynamic Content
+    // ================================================
+    
+    function applyCurrentLang() {
+        try {
+            var lang = localStorage.getItem('site-lang') || 'pt';
+            document.querySelectorAll('[data-lang="pt"]').forEach(function(el) {
+                el.style.display = lang === 'pt' ? '' : 'none';
+            });
+            document.querySelectorAll('[data-lang="en"]').forEach(function(el) {
+                el.style.display = lang === 'en' ? '' : 'none';
+            });
+        } catch(e) {}
+    }
+
+    // Listen for language changes from the toggle
+    window.addEventListener('langchange', function() {
+        applyCurrentLang();
+    });
 
     // ================================================
     // Create Project Card
@@ -227,13 +253,33 @@
         // Set animation delay
         card.setAttribute('data-aos-delay', (index * CONFIG.animationDelay).toString());
 
-        // Set project name
+        // Set project name (bilingual)
         const nameEl = card.querySelector('.project-name');
-        if (nameEl) nameEl.textContent = project.name || 'Projeto sem nome';
+        if (nameEl) {
+            nameEl.innerHTML = '';
+            var ptName = document.createElement('span');
+            ptName.setAttribute('data-lang', 'pt');
+            ptName.textContent = project.name || 'Projeto sem nome';
+            var enName = document.createElement('span');
+            enName.setAttribute('data-lang', 'en');
+            enName.textContent = project.name_en || project.name || 'Unnamed project';
+            nameEl.appendChild(ptName);
+            nameEl.appendChild(enName);
+        }
 
-        // Set project description
+        // Set project description (bilingual)
         const descEl = card.querySelector('.project-description');
-        if (descEl) descEl.textContent = project.description || '';
+        if (descEl) {
+            descEl.innerHTML = '';
+            var ptDesc = document.createElement('span');
+            ptDesc.setAttribute('data-lang', 'pt');
+            ptDesc.textContent = project.description || '';
+            var enDesc = document.createElement('span');
+            enDesc.setAttribute('data-lang', 'en');
+            enDesc.textContent = project.description_en || project.description || '';
+            descEl.appendChild(ptDesc);
+            descEl.appendChild(enDesc);
+        }
 
         // Set standalone badge
         const standaloneBadge = card.querySelector('.project-standalone-badge');
@@ -294,8 +340,12 @@
                 <div class="w-12 h-12 bg-warm-200/50 rounded-xl flex items-center justify-center mb-4">
                     <i data-lucide="wrench" class="w-6 h-6 text-warm-400"></i>
                 </div>
-                <p class="text-warm-500 font-medium text-sm mb-1">Em breve...</p>
-                <p class="text-warm-400 text-xs text-center">Novo projeto em desenvolvimento</p>
+                <p class="text-warm-500 font-medium text-sm mb-1">
+                    <span data-lang="pt">Em breve...</span><span data-lang="en">Coming soon...</span>
+                </p>
+                <p class="text-warm-400 text-xs text-center">
+                    <span data-lang="pt">Novo projeto em desenvolvimento</span><span data-lang="en">New project in development</span>
+                </p>
             `;
             return div;
         }
