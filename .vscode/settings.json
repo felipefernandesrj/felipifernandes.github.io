@@ -1,0 +1,11 @@
+{
+  "css.validate": true,
+  "html.validate.styles": false,
+  "htmlhint.options": {
+    "inline-style-disabled": false
+  },
+  "editor.formatOnSave": false,
+  "files.associations": {
+    "*.html": "html"
+  }
+}
