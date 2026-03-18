@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Proposta de Consultoria Estratégica — Embelleze">
+    <title>Estratégia Digital — Embelleze | Felipi Fernandes</title>
+
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] },
+                    colors: {
+                        'warm': {
+                            50:'#faf9f7', 100:'#f7f6f4', 200:'#eae8e4', 300:'#dddad4',
+                            400:'#c8c5bc', 500:'#b0aca2', 600:'#8f8b81', 700:'#6b6860',
+                            800:'#4a4843', 900:'#2a2825', 950:'#1a1917'
+                        },
+                        'accent': { warm:'#c8c5bc', gold:'#b8a88a', sage:'#a8b5a0' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+    <style>
+        :root {
+            --warm-50:#faf9f7;--warm-100:#f7f6f4;--warm-200:#eae8e4;--warm-300:#dddad4;
+            --warm-400:#c8c5bc;--warm-500:#b0aca2;--warm-600:#8f8b81;--warm-700:#6b6860;
+            --warm-800:#4a4843;--warm-900:#2a2825;--warm-950:#1a1917;
+        }
+        html{scroll-behavior:smooth}
+        ::selection{background-color:rgba(200,197,188,.4);color:var(--warm-900)}
+        body{overflow-x:hidden}
+
+        #lock-screen{transition:opacity .5s ease,visibility .5s ease}
+        #lock-screen.fade-out{opacity:0;visibility:hidden}
+        #main-content{opacity:0;pointer-events:none;transition:opacity .8s ease}
+        #main-content.visible{opacity:1;pointer-events:auto}
+
+        nav.scrolled{box-shadow:0 1px 3px rgba(42,40,37,.08)}
+
+        [data-aos]{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+
+        input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:var(--warm-300);border-radius:3px;outline:none}
+        input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;background:var(--warm-900);border-radius:50%;cursor:pointer;border:3px solid var(--warm-50);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+        input[type="range"]::-moz-range-thumb{width:24px;height:24px;background:var(--warm-900);border-radius:50%;cursor:pointer;border:3px solid var(--warm-50);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+        @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+        .shake{animation:shake .4s ease}
+
+        .logo-dark{filter:brightness(0)}
+        .bg-salon{background:#b8a88a}
+        .bg-lola{background:#a8b5a0}
+
+        .scenario-card{transition:all .3s cubic-bezier(.4,0,.2,1)}
+        .scenario-card:hover{transform:translateY(-4px)}
+        .scenario-card.recommended{ring:2px;ring-color:var(--warm-900)}
+
+        @media print{
+            #lock-screen,nav,.no-print{display:none!important}
+            #main-content{opacity:1!important;pointer-events:auto!important}
+            body{background:#fff!important}
+            section{break-inside:avoid}
+            canvas{max-height:300px}
+        }
+
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    </style>
+</head>
+<body class="bg-warm-50 text-warm-900 font-sans antialiased">
+
+    <!-- ============================================ -->
+    <!-- LOCK SCREEN                                  -->
+    <!-- ============================================ -->
+    <div id="lock-screen" class="fixed inset-0 z-[999] bg-warm-50 flex items-center justify-center">
+        <div class="max-w-sm w-full mx-6 text-center">
+            <div class="w-14 h-14 bg-warm-900 rounded-2xl flex items-center justify-center mx-auto mb-8">
+                <span class="text-warm-100 text-lg font-bold">FF</span>
+            </div>
+            <p class="text-xs tracking-widest uppercase text-warm-500 mb-2">Documento restrito</p>
+            <h1 class="text-2xl font-bold text-warm-900 mb-1">Proposta Estratégica</h1>
+            <p class="text-warm-600 text-sm mb-8">Embelleze — Março 2026</p>
+            <div class="relative mb-4">
+                <input id="password-input" type="password" placeholder="Senha de acesso"
+                    class="w-full px-4 py-3 pr-11 bg-warm-100 border border-warm-300 rounded-xl text-warm-900 text-center text-sm focus:outline-none focus:border-warm-500 focus:ring-2 focus:ring-warm-200 transition-all"
+                    autocomplete="off">
+                <button type="button" id="toggle-password"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-warm-400 hover:text-warm-700 transition-colors"
+                    aria-label="Mostrar senha">
+                    <i data-lucide="eye" class="w-4 h-4" id="toggle-password-icon"></i>
+                </button>
+            </div>
+            <button id="unlock-btn"
+                class="w-full px-6 py-3 bg-warm-900 text-warm-100 rounded-xl font-medium text-sm hover:bg-warm-800 transition-all">
+                Acessar documento
+            </button>
+            <p id="password-error" class="text-red-500 text-xs mt-3 hidden">Senha incorreta.</p>
+            <p class="text-warm-400 text-xs mt-6">Felipi Fernandes — Consultoria</p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT                                 -->
+    <!-- ============================================ -->
+    <div id="main-content">
+
+        <!-- Navbar -->
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-50/80 backdrop-blur-xl border-b border-warm-200">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex items-center justify-between h-14">
+                    <a href="#hero" class="flex items-center gap-2 font-semibold text-warm-900">
+                        <div class="w-7 h-7 bg-warm-900 rounded-lg flex items-center justify-center">
+                            <span class="text-warm-100 text-[10px] font-bold">FF</span>
+                        </div>
+                        <span class="hidden sm:inline text-sm">Felipi Fernandes</span>
+                    </a>
+                    <div class="flex items-center gap-5 text-xs">
+                        <a href="#cenario" class="text-warm-600 hover:text-warm-900 transition-colors hidden md:inline">O Cenário</a>
+                        <a href="#evidencia" class="text-warm-600 hover:text-warm-900 transition-colors hidden md:inline">Evidências</a>
+                        <a href="#anuncios" class="text-warm-600 hover:text-warm-900 transition-colors hidden md:inline">Publicidade</a>
+                        <a href="#oportunidade" class="text-warm-600 hover:text-warm-900 transition-colors hidden md:inline">Oportunidade</a>
+                        <a href="#caminhos" class="text-warm-600 hover:text-warm-900 transition-colors hidden md:inline">Caminhos</a>
+                        <a href="#proximos" class="text-warm-600 hover:text-warm-900 transition-colors hidden md:inline">Contato</a>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-warm-200 text-warm-700 rounded-full font-medium">
+                            <i data-lucide="lock" class="w-3 h-3"></i>
+                            Confidencial
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ======================================== -->
+        <!-- HERO                                     -->
+        <!-- ======================================== -->
+        <section id="hero" class="min-h-screen flex items-center justify-center pt-14">
+            <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up" data-aos-duration="800">
+                <div class="mb-8">
+                    <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-14 mx-auto logo-dark opacity-80">
+                </div>
+
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-warm-200 text-warm-700 rounded-full text-xs font-medium mb-6">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    Documento confidencial — Março 2026
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-warm-900 mb-4 leading-tight">
+                    Estratégia de Fortalecimento<br>do Canal Digital
+                </h1>
+                <p class="text-lg md:text-xl text-warm-600 font-medium mb-6 max-w-2xl mx-auto">
+                    Proposta de consultoria estratégica para retomada de relevância do e-commerce próprio
+                </p>
+                <p class="text-sm text-warm-500 max-w-lg mx-auto mb-12">
+                    Elaborado por Felipi Fernandes — Performance Specialist &amp; A.I. Researcher<br>
+                    Top #80 Google Experts Brasil 2024
+                </p>
+
+                <div class="mt-16 animate-bounce">
+                    <a href="#cenario" class="text-warm-400 hover:text-warm-600 transition-colors">
+                        <i data-lucide="chevron-down" class="w-6 h-6 mx-auto"></i>
+                        <span class="sr-only">Ver conteúdo</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 01 — O CENÁRIO ATUAL                     -->
+        <!-- ======================================== -->
+        <section id="cenario" class="py-24 bg-warm-100">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">01 — Diagnóstico</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">O Cenário Atual</h2>
+                    <p class="text-lg text-warm-600 max-w-xl mx-auto">
+                        Desafios estruturais que limitam o crescimento do canal digital.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Card 1 -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="trending-down" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">E-commerce perdeu relevância</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">O canal próprio perdeu participação e autonomia frente a outros canais de venda nos últimos anos.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="shopping-cart" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Dependência de marketplaces</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Estimativa de 80 a 90% do faturamento digital concentrado em canais de terceiros, reduzindo margem e controle de dados.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="coins" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Subinvestimento em mídia</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Investimento em aquisição digital abaixo do necessário para competir no ritmo que o mercado exige.</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Baixa maturidade de mensuração</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Infraestrutura de tracking (GA4, GTM, conversões) com oportunidades significativas de melhoria e confiabilidade.</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="building-2" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Cultura digital em amadurecimento</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Tomada de decisão ainda pouco orientada a dados digitais, com processos sendo adaptados gradualmente.</p>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="users" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Baixa presença em creators</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Enquanto concorrentes operam redes de +1.000 micro-influenciadores, a presença em creator economy é limitada.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 02 — A EVIDÊNCIA                         -->
+        <!-- ======================================== -->
+        <section id="evidencia" class="py-24 bg-warm-50">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">02 — Benchmark</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">O que os Dados de Mercado Mostram</h2>
+                    <p class="text-lg text-warm-600 max-w-xl mx-auto">
+                        Comparativo de presença digital no setor capilar brasileiro, baseado em dados públicos.
+                    </p>
+                </div>
+
+                <!-- Chart: Visits over time -->
+                <div class="bg-warm-100 rounded-2xl p-6 md:p-8 border border-warm-200 mb-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h3 class="font-semibold text-warm-900">Visitas ao longo do tempo</h3>
+                            <p class="text-xs text-warm-500 mt-1">Dez 2025 – Fev 2026 (SimilarWeb)</p>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded inline-block bg-salon"></span> <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-3.5 inline-block"></span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded inline-block bg-lola"></span> <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-5 inline-block"></span>
+                            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-warm-800 inline-block"></span> <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-3.5 inline-block logo-dark"></span>
+                        </div>
+                    </div>
+                    <div class="relative h-[280px]">
+                        <canvas id="chart-visits-time"></canvas>
+                    </div>
+                </div>
+                <!-- Insight: Visits over time -->
+                <div class="bg-warm-200/50 rounded-xl p-5 mb-8 border border-warm-200" data-aos="fade-up" data-aos-delay="150">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-warm-600 flex-shrink-0 mt-0.5"></i>
+                        <p class="text-sm text-warm-700 leading-relaxed"><strong class="text-warm-900">Leitura do gráfico:</strong> Nos últimos 3 meses a Embelleze permaneceu estagnada na faixa de ~10 mil visitas/mês. A Salon Line, que abriu o período com ampla liderança (~93 mil em Dez), sofreu queda acentuada em Janeiro. Enquanto isso, a Lola Cosmetics apresentou crescimento consistente — saindo de ~22 mil para ~50 mil — e já disputa posição direta com a Salon Line. A tendência expõe um mercado em movimento onde manter-se estático equivale a perder espaço.</p>
+                    </div>
+                </div>
+
+                <!-- Charts: Key metrics comparison (split by scale) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Volume chart -->
+                    <div class="bg-warm-100 rounded-2xl p-6 border border-warm-200">
+                        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                            <div>
+                                <h3 class="font-semibold text-warm-900 text-sm">Volume de tráfego</h3>
+                                <p class="text-[11px] text-warm-500">Visitantes únicos e visitas/mês</p>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded inline-block bg-salon"></span> <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-3 inline-block"></span>
+                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded inline-block bg-lola"></span> <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-4 inline-block"></span>
+                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-warm-800 inline-block"></span> <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-3 inline-block logo-dark"></span>
+                            </div>
+                        </div>
+                        <div class="relative h-40">
+                            <canvas id="chart-volume"></canvas>
+                        </div>
+                    </div>
+                    <!-- Quality chart -->
+                    <div class="bg-warm-100 rounded-2xl p-6 border border-warm-200">
+                        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                            <div>
+                                <h3 class="font-semibold text-warm-900 text-sm">Qualidade de navegação</h3>
+                                <p class="text-[11px] text-warm-500">Páginas/visita e duração média (min)</p>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs">
+                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded inline-block bg-salon"></span></span>
+                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded inline-block bg-lola"></span></span>
+                                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-warm-800 inline-block"></span></span>
+                            </div>
+                        </div>
+                        <div class="relative h-40">
+                            <canvas id="chart-quality"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Insight: Key metrics -->
+                <div class="bg-warm-200/50 rounded-xl p-5 mb-8 border border-warm-200" data-aos="fade-up" data-aos-delay="150">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5 text-warm-600 flex-shrink-0 mt-0.5"></i>
+                        <p class="text-sm text-warm-700 leading-relaxed"><strong class="text-warm-900">Detalhe relevante:</strong> A Lola Cosmetics, mesmo com uma operação menor que a Salon Line, já acumula quase 3x mais visitantes únicos que a Embelleze (20,6 mil vs. 7 mil). Com duração de visita de 4min 47s e 4,27 páginas/visita, a experiência do site da Lola supera a da Embelleze em engajamento — indicando um e-commerce mais otimizado.</p>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="bg-warm-100 rounded-2xl border border-warm-200 overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6 md:p-8 pb-0">
+                        <h3 class="font-semibold text-warm-900 mb-1">Benchmark de presença digital</h3>
+                        <p class="text-xs text-warm-500 mb-6">Fonte: SimilarWeb — Dez 2025 a Fev 2026 (dados públicos)</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-warm-200">
+                                    <th class="text-left px-6 md:px-8 py-3 font-medium text-warm-600">Métrica</th>
+                                    <th class="text-right px-6 md:px-8 py-3 font-medium text-warm-600">
+                                        <span class="flex items-center justify-end gap-2">
+                                            <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-6 inline-block">
+                                        </span>
+                                    </th>
+                                    <th class="text-right px-6 md:px-8 py-3 font-medium text-warm-600">
+                                        <span class="flex items-center justify-end gap-2">
+                                            <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-9 inline-block">
+                                        </span>
+                                    </th>
+                                    <th class="text-right px-6 md:px-8 py-3 font-medium text-warm-900">
+                                        <span class="flex items-center justify-end gap-2">
+                                            <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-6 inline-block logo-dark">
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-warm-200">
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Visitas totais (3 meses)</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">196.390 <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">117.015</td><td class="px-6 md:px-8 py-3 text-right font-medium">29.041</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Visitas mensais</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">65.463 <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">39.005</td><td class="px-6 md:px-8 py-3 text-right font-medium">9.680</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Visitantes únicos / mês</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">37.538 <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">20.649</td><td class="px-6 md:px-8 py-3 text-right font-medium">7.090</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Duração média da visita</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">7min 35s <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">4min 47s</td><td class="px-6 md:px-8 py-3 text-right font-medium">2min 36s</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Páginas / visita</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">5,70 <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">4,27</td><td class="px-6 md:px-8 py-3 text-right font-medium">3,56</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Bounce rate</td><td class="px-6 md:px-8 py-3 text-right text-warm-600">49,27%</td><td class="px-6 md:px-8 py-3 text-right text-warm-600">53,55%</td><td class="px-6 md:px-8 py-3 text-right font-medium"><span class="inline-flex items-center justify-end gap-1.5">48,35% <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Page views (3 meses)</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">373.420 <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">166.448</td><td class="px-6 md:px-8 py-3 text-right font-medium">34.435</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Device — Mobile</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">92,8% <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">76,6%</td><td class="px-6 md:px-8 py-3 text-right font-medium">90,0%</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">Instagram (seguidores)</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">4,48M <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">1,0M</td><td class="px-6 md:px-8 py-3 text-right font-medium">1,42M</td></tr>
+                                <tr><td class="px-6 md:px-8 py-3 text-warm-700">TikTok (seguidores)</td><td class="px-6 md:px-8 py-3 text-right text-warm-600"><span class="inline-flex items-center justify-end gap-1.5">4,7M <i data-lucide="trophy" class="w-3 h-3 text-accent-gold opacity-80"></i></span></td><td class="px-6 md:px-8 py-3 text-right text-warm-600">Expressivo</td><td class="px-6 md:px-8 py-3 text-right font-medium">Pouco expressivo</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Callout -->
+                <div class="mt-8 bg-warm-900 rounded-2xl p-6 md:p-8 text-warm-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-warm-800 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i data-lucide="lightbulb" class="w-5 h-5 text-warm-300"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-1">Insight principal</p>
+                            <p class="text-warm-300 text-sm leading-relaxed">
+                                A Salon Line gera <strong class="text-warm-100">6,7x mais tráfego</strong> que a Embelleze e a Lola Cosmetics já gera <strong class="text-warm-100">4x mais</strong> — ambas com proporcionalmente menos investimento em mídia paga. A Embelleze, com 28,2% do tráfego vindo de paid, é a mais dependente de mídia comprada entre as três. Enquanto os concorrentes diversificam canais (orgânico, social, creators), a Embelleze aposta num modelo de alto custo e baixo retorno.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 03 — BENCHMARKING DE ANÚNCIOS            -->
+        <!-- ======================================== -->
+        <section id="anuncios" class="py-24 bg-warm-100">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">03 — Publicidade</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">Benchmarking de Estratégia Publicitária</h2>
+                    <p class="text-lg text-warm-600 max-w-2xl mx-auto">
+                        Análise comparativa das estratégias de comunicação e mídia no setor capilar — baseada em dados públicos de Ad Transparency e Ad Library.
+                    </p>
+                </div>
+
+                <!-- Brand logos bar -->
+                <div class="flex items-center justify-center gap-8 md:gap-16 mb-12 opacity-70" data-aos="fade-up" data-aos-delay="50">
+                    <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-10 logo-dark">
+                    <span class="text-warm-400 text-lg font-light">vs</span>
+                    <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-10">
+                    <span class="text-warm-400 text-lg font-light">vs</span>
+                    <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-14">
+                </div>
+
+                <!-- Investimento estimado -->
+                <div class="bg-warm-50 rounded-2xl p-6 md:p-8 border border-warm-200 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-semibold text-warm-900 mb-1">Investimento digital estimado — Salon Line</h3>
+                    <p class="text-xs text-warm-500 mb-6">Estimativa baseada em benchmarks de mercado e dados públicos (2025)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-warm-100 rounded-xl p-5 text-center">
+                            <p class="text-xs text-warm-500 uppercase tracking-wider mb-1">Search + Social Ads</p>
+                            <p class="text-xl font-bold text-warm-900">R$ 1,1M – 3,4M</p>
+                            <p class="text-[11px] text-warm-400 mt-1">/ano (Google + Meta)</p>
+                        </div>
+                        <div class="bg-warm-100 rounded-xl p-5 text-center">
+                            <p class="text-xs text-warm-500 uppercase tracking-wider mb-1">Influencer Marketing</p>
+                            <p class="text-xl font-bold text-warm-900">R$ 10,8M – 32,4M</p>
+                            <p class="text-[11px] text-warm-400 mt-1">/ano (rede de 1.000+ creators)</p>
+                        </div>
+                        <div class="bg-warm-100 rounded-xl p-5 text-center">
+                            <p class="text-xs text-warm-500 uppercase tracking-wider mb-1">Total estimado</p>
+                            <p class="text-xl font-bold text-warm-900">R$ 14M – 41M</p>
+                            <p class="text-[11px] text-warm-400 mt-1">/ano (central ~R$ 20–35M)</p>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-warm-400 leading-relaxed text-center">
+                        A Salon Line investe pesado em creator economy — enquanto seu gasto em mídia paga representa apenas 13,9% do tráfego, a rede de influenciadores gera alcance orgânico escalonável.
+                    </p>
+                </div>
+
+                <!-- Creator Economy comparison -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8" data-aos="fade-up" data-aos-delay="150">
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-7">
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Embaixadores</p>
+                                <p class="text-lg font-bold text-warm-900">~30 creators</p>
+                                <p class="text-[11px] text-warm-400">Contas grandes, contratos formais</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Top Migs</p>
+                                <p class="text-lg font-bold text-warm-900">Centenas</p>
+                                <p class="text-[11px] text-warm-400">Engajamento médio-alto</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Migs (#migssalonline)</p>
+                                <p class="text-lg font-bold text-warm-900">1.000+</p>
+                                <p class="text-[11px] text-warm-400">Micro-influenciadores, envio mensal de produto</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-10">
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Abordagem</p>
+                                <p class="text-lg font-bold text-warm-900">Comunidade</p>
+                                <p class="text-[11px] text-warm-400">DNA similar a Salon Line, menor escala</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Diferencial</p>
+                                <p class="text-lg font-bold text-warm-900">Humor &amp; irreverência</p>
+                                <p class="text-[11px] text-warm-400">Tom leve, meme-style, social commentary</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Consolidação</p>
+                                <p class="text-lg font-bold text-warm-900">Fusão Lola + Skala</p>
+                                <p class="text-[11px] text-warm-400">Consolidação estratégica (2025)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-300">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-7 logo-dark">
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Rede de creators</p>
+                                <p class="text-lg font-bold text-warm-900">Limitada</p>
+                                <p class="text-[11px] text-warm-400">Sem programa estruturado de influenciadores</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">TikTok</p>
+                                <p class="text-lg font-bold text-warm-900">Pouco expressivo</p>
+                                <p class="text-[11px] text-warm-400">vs. 4,7M seguidores da Salon Line</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-warm-500 mb-0.5">Ativo exclusivo</p>
+                                <p class="text-lg font-bold text-accent-gold">Instituto Embelleze</p>
+                                <p class="text-[11px] text-warm-400">Pipeline natural de creators — inativado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Creative Strategy Comparison Table -->
+                <div class="bg-warm-50 rounded-2xl border border-warm-200 overflow-hidden mb-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6 md:p-8 pb-0">
+                        <h3 class="font-semibold text-warm-900 mb-1">Estratégia criativa comparada</h3>
+                        <p class="text-xs text-warm-500 mb-6">Análise de posicionamento, formatos e abordagem publicitária</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-warm-200">
+                                    <th class="text-left px-6 md:px-8 py-3 font-medium text-warm-600">Dimensão</th>
+                                    <th class="text-center px-4 py-3 font-medium text-warm-600">Salon Line</th>
+                                    <th class="text-center px-4 py-3 font-medium text-warm-600">Lola Cosmetics</th>
+                                    <th class="text-center px-4 py-3 font-medium text-warm-900">Embelleze</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-warm-200 text-xs">
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Posicionamento</td>
+                                    <td class="px-4 py-3 text-center">Empoderamento capilar<br><span class="text-warm-400">#TôDeCacho</span></td>
+                                    <td class="px-4 py-3 text-center">Humor &amp; irreverência</td>
+                                    <td class="px-4 py-3 text-center">Tradição profissional</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Formato principal</td>
+                                    <td class="px-4 py-3 text-center">Short-form video<br><span class="text-warm-400">Reels + TikTok</span></td>
+                                    <td class="px-4 py-3 text-center">UGC / meme-style</td>
+                                    <td class="px-4 py-3 text-center">Institucional + Search Ads</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Produção criativa</td>
+                                    <td class="px-4 py-3 text-center">UGC autêntico + polish</td>
+                                    <td class="px-4 py-3 text-center">Intencionalmente raw</td>
+                                    <td class="px-4 py-3 text-center">Estúdio / corporativo</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Canais dominantes</td>
+                                    <td class="px-4 py-3 text-center">TikTok, Reels, YouTube</td>
+                                    <td class="px-4 py-3 text-center">Instagram, TikTok</td>
+                                    <td class="px-4 py-3 text-center">Facebook, Google Search</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Modelo de influência</td>
+                                    <td class="px-4 py-3 text-center">Pirâmide em 3 tiers<br><span class="text-warm-400">1.000+ micro-influencers</span></td>
+                                    <td class="px-4 py-3 text-center">Comunidade orgânica</td>
+                                    <td class="px-4 py-3 text-center">Modelo tradicional</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Conteúdo educacional</td>
+                                    <td class="px-4 py-3 text-center">Tutoriais, before/after</td>
+                                    <td class="px-4 py-3 text-center">Dicas rápidas</td>
+                                    <td class="px-4 py-3 text-center">Formação profissional</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Fidelização</td>
+                                    <td class="px-4 py-3 text-center">Clube da Xêrosa<br><span class="text-warm-400">Programa de assinatura</span></td>
+                                    <td class="px-4 py-3 text-center">Comunidade de marca</td>
+                                    <td class="px-4 py-3 text-center">Instituto Embelleze<br><span class="text-warm-400">(subutilizado no digital)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Chart: Ad Strategy Distribution -->
+                <div class="bg-warm-50 rounded-2xl p-6 md:p-8 border border-warm-200 mb-8" data-aos="fade-up" data-aos-delay="250">
+                    <h3 class="font-semibold text-warm-900 mb-1">Composição de tráfego por canal</h3>
+                    <p class="text-xs text-warm-500 mb-6">Diversificação de canais de aquisição — 3 players do setor capilar</p>
+                    <div class="relative max-h-72">
+                        <canvas id="chart-traffic-mix"></canvas>
+                    </div>
+                </div>
+                <!-- Insight: Traffic mix -->
+                <div class="bg-warm-200/50 rounded-xl p-5 mb-8 border border-warm-200" data-aos="fade-up" data-aos-delay="280">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="pie-chart" class="w-5 h-5 text-warm-600 flex-shrink-0 mt-0.5"></i>
+                        <p class="text-sm text-warm-700 leading-relaxed"><strong class="text-warm-900">Leitura do gráfico:</strong> Tráfego pago elevado (28,2%) não é apenas dependência de mídia — é evidência de falha no acúmulo orgânico. Tráfego orgânico se constrói com o tempo: visitantes recorrentes, buscas diretas, SEO consolidado. Se após anos de operação a Embelleze ainda depende de 28,2% de paid para sustentar o fluxo, o site não está convertendo visitas em audiência fiel — cada sessão começa do zero, comprada. A Salon Line construiu o oposto: <strong class="text-warm-900">38,6% de orgânico</strong> e 41,6% direto significam que a marca vive na memória do consumidor sem precisar de anúncio. Resolver esse ciclo é o maior alavancador de eficiência disponível para a Embelleze.</p>
+                    </div>
+                </div>
+
+                <!-- Callout -->
+                <div class="bg-warm-900 rounded-2xl p-6 md:p-8 text-warm-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-warm-800 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i data-lucide="megaphone" class="w-5 h-5 text-warm-300"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-1">O gap real não é de orçamento — é de modelo</p>
+                            <p class="text-warm-300 text-sm leading-relaxed">
+                                A Salon Line construiu um ecossistema de <strong class="text-warm-100">1.000+ micro-influenciadores</strong> que geram conteúdo autêntico em escala. Isso explica como 38,59% do tráfego é orgânico vs. 14,4% da Embelleze. O Instituto Embelleze tem potencial para gerar uma rede ainda mais qualificada — mas esse ativo não está ativado digitalmente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Creative Analysis Gallery -->
+                <div class="mt-12" data-aos="fade-up" data-aos-delay="350">
+                    <div class="flex flex-wrap items-end justify-between gap-4 mb-3">
+                        <div>
+                            <h3 class="font-semibold text-warm-900 text-xl">Análise comparativa de criativos</h3>
+                            <p class="text-sm text-warm-500 mt-1">Amostra de anúncios ativos coletados das bibliotecas públicas das plataformas de mídia.</p>
+                        </div>
+                        <!-- Platform badges -->
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] text-warm-600 bg-warm-100 border border-warm-200 rounded-full px-3 py-1">
+                                <!-- Meta wordmark SVG -->
+                                <svg class="h-3" viewBox="0 0 62 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <text x="0" y="11" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#4a4843">meta</text>
+                                </svg>
+                                Ad Library
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 text-[11px] text-warm-600 bg-warm-100 border border-warm-200 rounded-full px-3 py-1">
+                                <!-- Google G SVG -->
+                                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 11h8.6c.1.5.1 1 .1 1.5C20.7 17.8 17 21 12 21 6.5 21 2 16.5 2 11S6.5 1 12 1c2.7 0 5 1 6.7 2.7l-2.7 2.6C15 5.4 13.6 5 12 5 9 5 6.5 7.5 6.5 11S9 17 12 17c2.6 0 4.3-1.1 5.1-2.7H12v-3.3z" fill="#6b6860"/>
+                                </svg>
+                                Ad Transparency
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 3-column brand gallery -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+                        <!-- Embelleze column -->
+                        <div class="bg-warm-50 rounded-2xl border border-warm-300 overflow-hidden">
+                            <div class="px-4 pt-4 pb-3 border-b border-warm-200 flex items-center justify-between">
+                                <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-5 logo-dark">
+                                <span class="text-[10px] text-warm-400 bg-warm-100 rounded px-2 py-0.5">Meta</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 p-3">
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library_files/649250088_957318623399923_8046049133102902690_n.jpg" alt="Embelleze ad 1" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Produto</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library_files/634721338_2178993556177781_6850067449887788961_n.jpg" alt="Embelleze ad 2" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Institucional</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library_files/648338075_1233387782301487_1585035458384626289_n.jpg" alt="Embelleze ad 3" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Promoção</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library_files/649188364_1249958939911829_6542887846735227752_n.jpg" alt="Embelleze ad 4" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Produto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-3">
+                                <p class="text-[10px] text-warm-500 text-center">Tom corporativo · Foco em produto · Sem UGC</p>
+                            </div>
+                        </div>
+
+                        <!-- Salon Line column -->
+                        <div class="bg-warm-50 rounded-2xl border border-warm-200 overflow-hidden">
+                            <div class="px-4 pt-4 pb-3 border-b border-warm-200 flex items-center justify-between">
+                                <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-5">
+                                <span class="text-[10px] text-warm-400 bg-warm-100 rounded px-2 py-0.5">Meta</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 p-3">
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-2_files/645370112_893135420014584_739300361749964791_n.jpg" alt="Salon Line ad 1" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Produto</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-2_files/646990669_797337510078287_8360333322805055205_n.jpg" alt="Salon Line ad 2" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">UGC</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Creator</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-2_files/649459363_864367599954761_7573844156888914934_n.jpg" alt="Salon Line ad 3" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Promoção</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-2_files/647147382_1376240220924384_1413421008502450886_n.jpg" alt="Salon Line ad 4" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Catálogo</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Produto</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-3">
+                                <p class="text-[10px] text-warm-500 text-center">Mix UGC + produto · Alta diversidade · Creator-first</p>
+                            </div>
+                        </div>
+
+                        <!-- Lola Cosmetics column -->
+                        <div class="bg-warm-50 rounded-2xl border border-warm-200 overflow-hidden">
+                            <div class="px-4 pt-4 pb-3 border-b border-warm-200 flex items-center justify-between">
+                                <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-7">
+                                <span class="text-[10px] text-warm-400 bg-warm-100 rounded px-2 py-0.5">Meta</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 p-3">
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-3_files/650322201_2922265341310024_8858676223511509454_n.jpg" alt="Lola ad 1" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Produto</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-3_files/638122179_1466848454883141_254416895322003771_n.jpg" alt="Lola ad 2" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">UGC</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Humor</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-3_files/637721515_2096355587811613_2567351295767090013_n.jpg" alt="Lola ad 3" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Promoção</span>
+                                    </div>
+                                </div>
+                                <div class="group relative">
+                                    <div class="rounded-lg overflow-hidden border border-warm-200 bg-white aspect-square">
+                                        <img src="files/Ad Library-3_files/650402812_936052279372723_4847924131509233459_n.jpg" alt="Lola ad 4" class="w-full h-full object-cover" loading="lazy">
+                                    </div>
+                                    <div class="mt-1 flex flex-wrap gap-1">
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Estático</span>
+                                        <span class="inline-block px-1.5 py-0.5 bg-warm-200 text-warm-700 rounded text-[9px] font-medium">Comunidade</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-4 pb-3">
+                                <p class="text-[10px] text-warm-500 text-center">Tom irreverente · Humor + comunidade · Raw style</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Diagnostic Summary -->
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <h4 class="font-semibold text-warm-900 mb-4">Diagnóstico criativo</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-xs font-semibold text-red-600 uppercase tracking-wider mb-3">Padrões identificados — Embelleze</p>
+                                <ul class="space-y-2 text-sm text-warm-700">
+                                    <li class="flex items-start gap-2"><i data-lucide="x" class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"></i>Predominância de criativos estáticos (baixo CTR vs. vídeo)</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="x" class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"></i>Tom institucional / corporativo — pouco UGC</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="x" class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"></i>Foco em produto sem contexto de uso (antes/depois)</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="x" class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5"></i>Ausência de formato short-form (Reels/TikTok nativo)</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-accent-sage uppercase tracking-wider mb-3">Oportunidades de melhoria</p>
+                                <ul class="space-y-2 text-sm text-warm-700">
+                                    <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-sage flex-shrink-0 mt-0.5"></i>Introduzir UGC e conteúdo de creators do Instituto</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-sage flex-shrink-0 mt-0.5"></i>Teste A/B de vídeo curto vs. estático (benchmark: +30% CTR)</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-sage flex-shrink-0 mt-0.5"></i>Formatos nativos de cada canal (Reels, TikTok, Shorts)</li>
+                                    <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-accent-sage flex-shrink-0 mt-0.5"></i>Storytelling antes/depois com clientes reais</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mt-6 text-[11px] text-warm-400 text-center">Análise comparativa baseada em criativos públicos: Embelleze (~25 ads), Salon Line (~149 ads), Lola Cosmetics (~82 ads) — Meta Ad Library · Fev/Mar 2026</p>
+                    </div>
+                </div>
+
+                <!-- Google Transparency — Video Creative Audit -->
+                <div class="mt-16" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex flex-wrap items-end justify-between gap-4 mb-3">
+                        <div>
+                            <h3 class="font-semibold text-warm-900 text-xl">Presença em vídeo — Google Ads</h3>
+                            <p class="text-sm text-warm-500 mt-1">Amostras de anúncios em vídeo coletados do Centro de Transparência de Anúncios do Google.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 text-[11px] text-warm-600 bg-warm-100 border border-warm-200 rounded-full px-3 py-1">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 11h8.6c.1.5.1 1 .1 1.5C20.7 17.8 17 21 12 21 6.5 21 2 16.5 2 11S6.5 1 12 1c2.7 0 5 1 6.7 2.7l-2.7 2.6C15 5.4 13.6 5 12 5 9 5 6.5 7.5 6.5 11S9 17 12 17c2.6 0 4.3-1.1 5.1-2.7H12v-3.3z" fill="#6b6860"/>
+                            </svg>
+                            Google Ad Transparency
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                        <!-- Embelleze Google Ads -->
+                        <div>
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-warm-200">
+                                <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze" class="h-5 logo-dark">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="text-[10px] text-warm-500 bg-warm-100 border border-warm-200 rounded-full px-2 py-0.5 font-medium">44 anúncios</span>
+                                    <span class="text-[9px] text-warm-400 bg-warm-50 border border-warm-200 rounded-full px-1.5 py-0.5">3 formatos</span>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-1_files/hqdefault(6).jpg" alt="Embelleze Google video ad" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">embelleze.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-1_files/hqdefault(5).jpg" alt="Embelleze Google video ad 2" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">embelleze.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-1_files/hqdefault(4).jpg" alt="Embelleze Google video ad 3" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">embelleze.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Salon Line Google Ads -->
+                        <div>
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-warm-200">
+                                <img src="files/svg/salon-line-logo-svg.svg" alt="Salon Line" class="h-5">
+                                <span class="text-[10px] text-[#b8a88a] bg-[#f7f0e6] border border-[#e8d8c0] rounded-full px-2 py-0.5 font-semibold">~300 anúncios</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-2_files/hqdefault(2).jpg" alt="Salon Line Google video ad" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">salonline.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-2_files/hqdefault.jpg" alt="Salon Line Google video ad 2" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">salonline.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-2_files/hqdefault(1).jpg" alt="Salon Line Google video ad 3" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">salonline.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lola Cosmetics Google Ads -->
+                        <div>
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-warm-200">
+                                <img src="files/svg/lola-cosmetics-logo-svg.svg" alt="Lola Cosmetics" class="h-7">
+                                <span class="text-[10px] text-warm-500 bg-warm-100 border border-warm-200 rounded-full px-2 py-0.5 font-medium">38 anúncios</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-3_files/hqdefault.jpg" alt="Lola Google video ad" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">lolacosmetics.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-3_files/hqdefault(1).jpg" alt="Lola Google video ad 2" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">lolacosmetics.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl overflow-hidden border border-warm-200 bg-white shadow-sm">
+                                    <div class="relative">
+                                        <img src="files/Central de transparência de anúncios-3_files/hqdefault(3).jpg" alt="Lola Google video ad 3" class="w-full aspect-video object-cover" loading="lazy">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <div class="w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                                                <svg class="w-3.5 h-3.5 text-warm-700 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                            </div>
+                                        </div>
+                                        <span class="absolute bottom-2 left-2 text-[8px] font-bold bg-[#e8c43c] text-black px-1.5 py-0.5 rounded leading-tight">Anúncio</span>
+                                    </div>
+                                    <div class="px-3 py-2 bg-warm-50 border-t border-warm-100">
+                                        <p class="text-[10px] text-warm-400">lolacosmetics.com.br · YouTube</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Smart Bidding Insight Callout -->
+                    <div class="mt-8 rounded-2xl border border-warm-200 bg-warm-50 p-5 md:p-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-start gap-4">
+                            <div class="shrink-0 w-10 h-10 rounded-xl bg-warm-200 flex items-center justify-center mt-0.5">
+                                <i data-lucide="brain-circuit" class="w-5 h-5 text-warm-600"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-warm-900 mb-2">Volume de anúncios &amp; Smart Bidding — por que a diferença é crítica</p>
+                                <p class="text-[13px] text-warm-600 leading-relaxed">O Smart Bidding do Google aprende com sinais de conversão agregados por criativo, audiência e contexto. Com <strong class="text-warm-800">apenas 44 anúncios ativos</strong>, a Embelleze gera sinal insuficiente para o algoritmo identificar padrões de alta performance. A Salon Line opera com <strong class="text-warm-800">~300 anúncios</strong> — <span class="font-semibold">6,8× mais</span> — alimentando o ML com vastamente mais dados. Mais criativos = mais variáveis testadas = aprendizado mais rápido = ROAS superior.</p>
+                                <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+                                    <div class="rounded-xl bg-white border border-warm-200 py-3 px-2">
+                                        <p class="text-2xl font-bold text-warm-400">44</p>
+                                        <p class="text-[10px] text-warm-400 mt-0.5">Embelleze</p>
+                                        <p class="text-[9px] text-warm-300 mt-0.5">Gráfico · Texto · Vídeo</p>
+                                    </div>
+                                    <div class="rounded-xl bg-[#f7f0e6] border border-[#e8d8c0] py-3 px-2">
+                                        <p class="text-2xl font-bold text-[#b8a88a]">~300</p>
+                                        <p class="text-[10px] text-[#b8a88a] mt-0.5">Salon Line</p>
+                                        <p class="text-[9px] text-[#c9b89a] mt-0.5">6,8× mais anúncios</p>
+                                    </div>
+                                    <div class="rounded-xl bg-white border border-warm-200 py-3 px-2">
+                                        <p class="text-2xl font-bold text-[#a8b5a0]">38</p>
+                                        <p class="text-[10px] text-warm-400 mt-0.5">Lola Cosmetics</p>
+                                        <p class="text-[9px] text-warm-300 mt-0.5">volume similar</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 04 — A OPORTUNIDADE                      -->
+        <!-- ======================================== -->
+        <section id="oportunidade" class="py-24 bg-warm-50">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">04 — Oportunidade</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">O que Está em Jogo</h2>
+                    <p class="text-lg text-warm-600 max-w-2xl mx-auto">
+                        A Embelleze possui ativos estratégicos subutilizados no digital. O momento de ativá-los é agora.
+                    </p>
+                </div>
+
+                <!-- Cost of Inaction -->
+                <div class="bg-warm-50 rounded-2xl p-6 md:p-8 border border-warm-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start gap-4 mb-6">
+                        <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-red-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-warm-900 mb-1">O custo de não agir</h3>
+                            <p class="text-sm text-warm-600 leading-relaxed">
+                                Dependência crescente de marketplaces reduz margem e controle sobre dados do consumidor. A ausência de investimento consistente em aquisição digital limita o crescimento do canal próprio e dificulta a construção de first-party data — cada mês sem ação é um mês de share perdido para concorrentes mais digitalizados.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assets -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Marca Novex</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Reconhecimento nacional existente, com potencial enorme de ativação digital — especialmente em short-form video e creators.</p>
+                    </div>
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Instituto Embelleze</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">Rede educacional-profissional que funciona como pipeline natural de creators e influenciadores — um ativo que nenhum concorrente direto possui.</p>
+                    </div>
+                    <div class="bg-warm-50 rounded-2xl p-6 border border-warm-200">
+                        <div class="w-11 h-11 bg-warm-200 rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="target" class="w-5 h-5 text-warm-700"></i>
+                        </div>
+                        <h3 class="font-semibold text-warm-900 mb-2">Base com alta intenção</h3>
+                        <p class="text-sm text-warm-600 leading-relaxed">57,2% do tráfego é direto — a maior proporção entre os concorrentes mapeados. Isso indica uma base loyal e intencional, pronta para conversão.</p>
+                    </div>
+                </div>
+
+                <!-- Case d1000 CTA -->
+                <div class="bg-warm-900 rounded-2xl p-6 md:p-8 text-warm-100 relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <!-- d1000 brand rings overlay — right, vertically centered -->
+                    <svg aria-hidden="true" class="pointer-events-none select-none absolute top-0 right-0 h-full w-64" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 100" preserveAspectRatio="xMaxYMid meet" overflow="visible">
+                        <!-- Yellow ring -->
+                        <circle cx="14"  cy="50" r="42" fill="none" stroke="#F5C518" stroke-width="20" opacity="0.20"/>
+                        <!-- Orange ring -->
+                        <circle cx="78"  cy="50" r="42" fill="none" stroke="#F47920" stroke-width="20" opacity="0.17"/>
+                        <!-- Green ring -->
+                        <circle cx="142" cy="50" r="42" fill="none" stroke="#39B54A" stroke-width="20" opacity="0.15"/>
+                        <!-- Blue ring -->
+                        <circle cx="206" cy="50" r="42" fill="none" stroke="#0072BC" stroke-width="20" opacity="0.14"/>
+                    </svg>
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div class="flex items-start gap-4">
+                            <!-- d1000 logo — pre-cropped, transparent bg -->
+                            <img src="../../../assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_02_rgb_cropped.png"
+                                alt="Rede d1000"
+                                class="flex-shrink-0 self-center"
+                                style="height:44px;width:auto;opacity:0.95;padding:4px 8px;">
+                            <div>
+                                <p class="font-semibold mb-1">Caso real — grande afinidade com saúde &amp; beleza</p>
+                                <p class="text-warm-300 text-sm leading-relaxed">
+                                    Na Rede d1000 (Profarma), conduzi a transformação do canal digital no segmento de saúde e beleza — crescimento de 20x no e-commerce, com share subindo de 1% para 8% frente ao físico e outros canais.
+                                </p>
+                            </div>
+                        </div>
+                        <a href="../../../retrospectiva/profarma.html" target="_blank" rel="noopener"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-warm-100 text-warm-900 rounded-xl text-sm font-medium hover:bg-white transition-colors flex-shrink-0 whitespace-nowrap">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                            Ver retrospectiva
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 04 — CAMINHOS DE EVOLUÇÃO                -->
+        <!-- ======================================== -->
+        <section id="caminhos" class="py-24 bg-warm-100">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">05 — Caminhos</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">Modelo de Evolução</h2>
+                    <p class="text-lg text-warm-600 max-w-2xl mx-auto">
+                        Não são pacotes. São fases de maturidade. Cada cenário implica um ritmo diferente de crescimento e uma estrutura operacional diferente.
+                    </p>
+                </div>
+
+                <!-- Diagnóstico (one-time, separate) -->
+                <div class="bg-warm-50 rounded-2xl p-6 md:p-8 border-2 border-accent-gold mb-10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-9 h-9 bg-accent-gold/20 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="search" class="w-4 h-4 text-accent-gold"></i>
+                                </div>
+                                <div>
+                                    <span class="inline-flex items-center px-2 py-0.5 bg-accent-gold/15 text-warm-700 rounded text-[10px] font-semibold uppercase tracking-wider">Projeto único</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-warm-900 mb-2">Cenário Fundação — Diagnóstico &amp; Roadmap</h3>
+                            <p class="text-sm text-warm-600 leading-relaxed mb-4">
+                                Ideal para empresas que precisam de clareza antes de acelerar. Organiza dados, identifica gargalos e constrói um plano de crescimento executável. Pode ser contratado independentemente.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Auditoria GA4</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Auditoria GTM</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Auditoria Google Ads</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Auditoria Meta Ads</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Benchmark competitivo</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Diagnóstico de catálogo</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Análise histórica</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Budget &amp; Forecast</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Roadmap 12 meses</span>
+                                <span class="px-2.5 py-1 bg-warm-200 text-warm-700 rounded-full">Dashboard executivo</span>
+                            </div>
+                        </div>
+                        <div class="text-left md:text-right flex-shrink-0">
+                            <p class="text-xs text-warm-500 uppercase tracking-wider mb-1">Investimento único</p>
+                            <p class="text-3xl font-bold text-warm-900">R$ 7.800</p>
+                            <p class="text-xs text-warm-500 mt-1">Duração: 60-90 dias</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cenários Recorrentes -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5" data-aos="fade-up" data-aos-delay="200">
+
+                    <!-- Crescimento -->
+                    <div class="scenario-card bg-warm-100 rounded-2xl p-6 border border-warm-200 flex flex-col">
+                        <div class="mb-4">
+                            <p class="text-[10px] uppercase tracking-widest text-warm-500 font-semibold mb-2">Cenário</p>
+                            <h3 class="text-xl font-bold text-warm-900 mb-1">Crescimento</h3>
+                            <p class="text-xs text-warm-500">Estrutura enxuta — crescimento gradual</p>
+                        </div>
+                        <div class="mb-5">
+                            <p class="text-3xl font-bold text-warm-900">R$ 12.250<span class="text-sm font-medium text-warm-500"> /mês</span></p>
+                            <p class="text-xs text-warm-500 mt-1">Mídia recomendada: R$ 50k – 80k /mês</p>
+                        </div>
+                        <ul class="space-y-2.5 text-sm text-warm-700 flex-1 mb-6">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Liderança estratégica e coordenação</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Gestão de campanhas Google + Meta</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Curadoria de catálogo (Merchant + Meta)</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Suporte criativo (designer dedicado)</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Dashboard de performance (Looker)</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Reuniões estratégicas mensais</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Budget &amp; Forecast mensal</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Calendário promocional</li>
+                        </ul>
+                        <div class="pt-4 border-t border-warm-200">
+                            <p class="text-xs text-warm-500 mb-3">Contrato recomendado: 6 meses (renovável)</p>
+                            <p class="text-[10px] font-semibold uppercase tracking-wider text-warm-400 mb-2">Squad</p>
+                            <ul class="space-y-1.5 text-[11px] text-warm-600">
+                                <li class="flex items-center gap-1.5"><i data-lucide="user" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>1× coordenador <span class="text-warm-400">(part-time)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="users" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>2× media buyer <span class="text-warm-400">(part-time)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Aceleração (RECOMENDADO) -->
+                    <div class="scenario-card bg-warm-900 rounded-2xl p-6 border-2 border-warm-900 flex flex-col text-warm-100 relative shadow-xl shadow-warm-900/20">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+                            <span class="inline-flex items-center gap-1 px-3 py-1 bg-warm-100 text-warm-900 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-md">
+                                <i data-lucide="star" class="w-3 h-3"></i>
+                                Recomendado
+                            </span>
+                        </div>
+                        <div class="mb-4 pt-2">
+                            <p class="text-[10px] uppercase tracking-widest text-warm-400 font-semibold mb-2">Cenário</p>
+                            <h3 class="text-xl font-bold text-warm-100 mb-1">Aceleração</h3>
+                            <p class="text-xs text-warm-400">Estrutura robusta — crescimento consistente</p>
+                        </div>
+                        <div class="mb-5">
+                            <p class="text-3xl font-bold text-warm-100">R$ 24.800<span class="text-sm font-medium text-warm-400"> /mês</span></p>
+                            <p class="text-xs text-warm-400 mt-1">Mídia recomendada: R$ 120k – 200k /mês</p>
+                        </div>
+                        <ul class="space-y-2.5 text-sm text-warm-300 flex-1 mb-6">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Tudo do cenário Crescimento</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Operação robusta com equipe Parceiro 1</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Dashboards integrados via API Shopify</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Até 2x Landing pages de alta conversão</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Testes A/B estruturados</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Especialista GTM com homologações</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Auditorias contínuas (on-demand)</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-400 flex-shrink-0 mt-0.5"></i>Pesquisas de mercado (on-demand)</li>
+                        </ul>
+                        <div class="pt-4 border-t border-warm-700">
+                            <p class="text-xs text-warm-400 mb-3">Contrato: 12 meses · 1x visita/mês + sazonal com Parceiro 1</p>
+                            <p class="text-[10px] font-semibold uppercase tracking-wider text-warm-500 mb-2">Squad</p>
+                            <ul class="space-y-1.5 text-[11px] text-warm-300">
+                                <li class="flex items-center gap-1.5"><i data-lucide="user" class="w-3 h-3 flex-shrink-0 text-warm-500"></i>1× coordenador <span class="text-warm-500">(part-time)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="users" class="w-3 h-3 flex-shrink-0 text-warm-500"></i>2× media buyer <span class="font-semibold text-warm-300">(full-time · dedicado)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="code-2" class="w-3 h-3 flex-shrink-0 text-warm-500"></i>1× especialista GTM <span class="text-warm-500">(part-time)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Aceleração Máxima -->
+                    <div class="scenario-card bg-warm-100 rounded-2xl p-6 border border-warm-200 flex flex-col">
+                        <div class="mb-4">
+                            <p class="text-[10px] uppercase tracking-widest text-warm-500 font-semibold mb-2">Cenário</p>
+                            <h3 class="text-xl font-bold text-warm-900 mb-1">Aceleração Máxima</h3>
+                            <p class="text-xs text-warm-500">Estrutura expandida — crescimento agressivo</p>
+                        </div>
+                        <div class="mb-5">
+                            <p class="text-3xl font-bold text-warm-900">R$ 32.400<span class="text-sm font-medium text-warm-500"> /mês</span></p>
+                            <p class="text-xs text-warm-500 mt-1">Mídia recomendada: R$ 250k+ /mês</p>
+                        </div>
+                        <ul class="space-y-2.5 text-sm text-warm-700 flex-1 mb-6">
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Tudo do cenário Aceleração</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Programática via Parceiro 2 (DV360)</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Testes criativos em escala</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Estratégia de creators e conteúdo</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Funil completo: aquisição → fidelização</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Análises estratégicas recorrentes</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Gestão de múltiplos canais de mídia</li>
+                            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-warm-500 flex-shrink-0 mt-0.5"></i>Expansão para novos canais potenciais</li>
+                        </ul>
+                        <div class="pt-4 border-t border-warm-200">
+                            <p class="text-xs text-warm-500 mb-3">Contrato: 12 meses · 2x visitas/mês + sazonal com Parceiro 1</p>
+                            <p class="text-[10px] font-semibold uppercase tracking-wider text-warm-400 mb-2">Squad</p>
+                            <ul class="space-y-1.5 text-[11px] text-warm-600">
+                                <li class="flex items-center gap-1.5"><i data-lucide="user" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>1× coordenador <span class="font-semibold text-warm-700">(full-time)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="users" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>2× media buyer <span class="font-semibold text-warm-700">(full-time · dedicado)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="users-round" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>Pool de media buyers <span class="text-warm-400">(CPS)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="code-2" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>1× especialista GTM <span class="text-warm-400">(part-time)</span></li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="monitor-play" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>Programática Parceiro 2 <span class="text-warm-400">(DV360)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario comparison quick view -->
+                <div class="mt-10 bg-warm-100 rounded-2xl border border-warm-200 overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6 md:p-8 pb-0">
+                        <h3 class="font-semibold text-warm-900 mb-1">Comparativo rápido</h3>
+                        <p class="text-xs text-warm-500 mb-4">Velocidade de crescimento vs. estrutura operacional</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-warm-200">
+                                    <th class="text-left px-6 md:px-8 py-3 font-medium text-warm-600">Aspecto</th>
+                                    <th class="text-center px-4 py-3 font-medium text-warm-600">Crescimento</th>
+                                    <th class="text-center px-4 py-3 font-medium text-warm-900 bg-warm-200/50">Aceleração ★</th>
+                                    <th class="text-center px-4 py-3 font-medium text-warm-600">Máxima</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-warm-200 text-xs">
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Fee mensal</td>
+                                    <td class="px-4 py-3 text-center">R$ 12.250</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">R$ 24.800</td>
+                                    <td class="px-4 py-3 text-center">R$ 32.400</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Mídia recomendada</td>
+                                    <td class="px-4 py-3 text-center">50k – 80k</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">120k – 200k</td>
+                                    <td class="px-4 py-3 text-center">250k+</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Estrutura operacional</td>
+                                    <td class="px-4 py-3 text-center">Enxuta</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">Robusta (Parceiro 1)</td>
+                                    <td class="px-4 py-3 text-center">Expandida</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Squad</td>
+                                    <td class="px-4 py-3 text-center leading-tight">1 coord. + 2 buyers<br><span class="text-[10px] text-warm-400">todos part-time</span></td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 leading-tight">1 coord. + 2 buyers + GTM<br><span class="text-[10px] font-semibold text-warm-700">buyers full-time dedicado</span></td>
+                                    <td class="px-4 py-3 text-center leading-tight">1 coord. FT + 2 buyers FT + pool CPS<br><span class="text-[10px] text-warm-400">GTM + programática</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Velocidade de crescimento</td>
+                                    <td class="px-4 py-3 text-center">Gradual</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">Consistente</td>
+                                    <td class="px-4 py-3 text-center">Agressiva</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Landing pages</td>
+                                    <td class="px-4 py-3 text-center">—</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">Até 2x</td>
+                                    <td class="px-4 py-3 text-center">Sob demanda</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Testes A/B</td>
+                                    <td class="px-4 py-3 text-center">—</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">✓</td>
+                                    <td class="px-4 py-3 text-center">✓ em escala</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 md:px-8 py-3 text-warm-700">Contrato</td>
+                                    <td class="px-4 py-3 text-center">6 meses</td>
+                                    <td class="px-4 py-3 text-center bg-warm-200/50 font-medium">12 meses</td>
+                                    <td class="px-4 py-3 text-center">12 meses</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Simulador de Escala -->
+                <div class="mt-16 pt-10 border-t border-warm-200" data-aos="fade-up">
+                    <div class="text-center mb-10">
+                        <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">Como chegar lá</p>
+                        <h3 class="text-2xl md:text-3xl font-bold text-warm-900 mb-3">Simulador de Escala</h3>
+                        <p class="text-base text-warm-600 max-w-2xl mx-auto">
+                            Ajuste o investimento atual e a margem bruta para visualizar a trajetória de escala, os meses até cada cenário e o impacto no tráfego — tudo recalcula ao vivo.
+                        </p>
+                    </div>
+
+                    <!-- Input sliders -->
+                    <div class="bg-warm-50 rounded-2xl p-6 md:p-8 border border-warm-200 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Budget slider -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <label for="sim-budget" class="text-sm font-medium text-warm-700">Investimento mensal atual</label>
+                                    <span id="sim-budget-display" class="text-lg font-bold text-warm-900">R$ 50.000</span>
+                                </div>
+                                <input type="range" id="sim-budget" min="10000" max="500000" step="5000" value="50000" class="w-full" aria-label="Investimento mensal atual">
+                                <div class="flex justify-between text-[10px] text-warm-400 mt-1">
+                                    <span>R$ 10k</span>
+                                    <span>R$ 500k</span>
+                                </div>
+                            </div>
+                            <!-- Margin slider -->
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <label for="sim-margin" class="text-sm font-medium text-warm-700">Margem bruta</label>
+                                    <span id="sim-margin-display" class="text-lg font-bold text-warm-900">30%</span>
+                                </div>
+                                <input type="range" id="sim-margin" min="15" max="60" step="1" value="30" class="w-full" aria-label="Margem bruta">
+                                <div class="flex justify-between text-[10px] text-warm-400 mt-1">
+                                    <span>15%</span>
+                                    <span>60%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                        <div class="bg-warm-50 rounded-xl p-4 text-center border border-warm-200">
+                            <p class="text-[10px] text-warm-500 uppercase tracking-wider mb-1">ROAS break-even</p>
+                            <p id="sim-roas-be" class="text-2xl font-bold text-warm-900">3,33×</p>
+                            <p class="text-[10px] text-warm-400 mt-0.5">1 ÷ margem</p>
+                        </div>
+                        <div class="bg-warm-50 rounded-xl p-4 text-center border border-warm-200">
+                            <p class="text-[10px] text-warm-500 uppercase tracking-wider mb-1">Cliques estimados</p>
+                            <p id="sim-clicks" class="text-2xl font-bold text-warm-900">18.182</p>
+                            <p class="text-[10px] text-warm-400 mt-0.5">por mês</p>
+                        </div>
+                        <div class="bg-warm-50 rounded-xl p-4 text-center border border-warm-200">
+                            <p class="text-[10px] text-warm-500 uppercase tracking-wider mb-1">Tráfego projetado</p>
+                            <p id="sim-traffic" class="text-2xl font-bold text-warm-900">25.272</p>
+                            <p class="text-[10px] text-warm-400 mt-0.5">visitantes / mês</p>
+                        </div>
+                        <div class="bg-warm-50 rounded-xl p-4 text-center border border-warm-200">
+                            <p class="text-[10px] text-warm-500 uppercase tracking-wider mb-1">Crescimento vs. atual</p>
+                            <p id="sim-growth" class="text-2xl font-bold text-warm-900">+256%</p>
+                            <p class="text-[10px] text-warm-400 mt-0.5">sobre baseline 7.090</p>
+                        </div>
+                    </div>
+
+                    <!-- Ramp-up chart -->
+                    <div class="bg-warm-50 rounded-2xl p-6 md:p-8 border border-warm-200 mb-8">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
+                            <div>
+                                <h4 class="font-semibold text-warm-900 mb-1">Trajetória de escala</h4>
+                                <p class="text-xs text-warm-500">Projeção realista com fase de diagnóstico (M0–M2) · Escolha as camadas de visualização</p>
+                            </div>
+                        </div>
+                        <!-- Toggle buttons -->
+                        <div class="flex flex-wrap gap-2 mb-5" id="chart-toggles">
+                            <button type="button" data-layer="investment" class="chart-toggle active px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all bg-warm-800 text-warm-50 border-warm-800">
+                                <span class="inline-block w-2 h-2 rounded-full mr-1" style="background:#2a2825"></span>Investimento
+                            </button>
+                            <button type="button" data-layer="clicks" class="chart-toggle px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all bg-warm-50 text-warm-600 border-warm-300 hover:border-warm-500">
+                                <span class="inline-block w-2 h-2 rounded-full mr-1" style="background:#a5a0e8"></span>Cliques estimados
+                            </button>
+                            <button type="button" data-layer="traffic" class="chart-toggle px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all bg-warm-50 text-warm-600 border-warm-300 hover:border-warm-500">
+                                <span class="inline-block w-2 h-2 rounded-full mr-1" style="background:#7ec8e3"></span>Tráfego projetado
+                            </button>
+                            <button type="button" data-layer="market" class="chart-toggle px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all bg-warm-50 text-warm-600 border-warm-300 hover:border-warm-500">
+                                <span class="inline-block w-2 h-2 rounded-full mr-1" style="background:#b5bec9"></span>Média saúde &amp; beleza
+                            </button>
+                            <button type="button" data-layer="salon" class="chart-toggle px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all bg-warm-50 text-warm-600 border-warm-300 hover:border-warm-500">
+                                <span class="inline-block w-2 h-2 rounded-full mr-1" style="background:#cec3a8"></span>Salon Line
+                            </button>
+                            <button type="button" data-layer="lola" class="chart-toggle px-3 py-1.5 rounded-full text-[11px] font-medium border transition-all bg-warm-50 text-warm-600 border-warm-300 hover:border-warm-500">
+                                <span class="inline-block w-2 h-2 rounded-full mr-1" style="background:#bcc8b5"></span>Lola Cosmetics
+                            </button>
+                        </div>
+                        <!-- Legend for zone lines -->
+                        <div class="flex items-center gap-5 text-[10px] text-warm-400 mb-3 flex-wrap">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-4 inline-block" style="border-top:2px dashed #b5b1a8"></span>Teto Crescimento (80k)
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-4 inline-block" style="border-top:2px dashed #e0d5a8"></span>Piso Aceleração (120k)
+                            </span>
+                            <span class="flex items-center gap-1.5" id="legend-y2" style="display:none">
+                                <span class="w-4 inline-block" style="border-top:1px solid #b5bec9"></span>Eixo direito: visitantes/mês
+                            </span>
+                        </div>
+                        <!-- Phase labels above chart -->
+                        <div class="grid grid-cols-3 gap-1 mb-2">
+                            <div class="text-center">
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider" style="background:rgba(180,175,165,0.18);color:#7a7568">
+                                    <i data-lucide="search" class="w-2.5 h-2.5"></i>Diagnóstico
+                                </span>
+                                <p class="text-[9px] text-warm-400 mt-0.5">M0–M2 · Calibragem</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider" style="background:rgba(210,195,160,0.22);color:#8a7e5f">
+                                    <i data-lucide="trending-up" class="w-2.5 h-2.5"></i>Validação
+                                </span>
+                                <p class="text-[9px] text-warm-400 mt-0.5">M3–M5 · Escala gradual</p>
+                            </div>
+                            <div class="text-center">
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider" style="background:rgba(168,181,160,0.22);color:#6b7a63">
+                                    <i data-lucide="rocket" class="w-2.5 h-2.5"></i>Aceleração
+                                </span>
+                                <p class="text-[9px] text-warm-400 mt-0.5">M6+ · Crescimento pleno</p>
+                            </div>
+                        </div>
+                        <div class="relative h-[340px]">
+                            <canvas id="chart-rampup"></canvas>
+                        </div>
+                        <p class="text-[10px] text-warm-400 mt-3 text-center">M0–M2: fase de diagnóstico e calibragem — crescimento existe, mas é conservador independente do valor investido. A partir de M3, campanhas validadas permitem escala de até +20%/mês. Benchmarks de tráfego: Salon Line ~37,5k vis./mês · Lola ~20,6k · Média categoria ~25k (SimilarWeb, Fev 2026).</p>
+                    </div>
+
+                    <!-- Timeline milestones -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <div id="ms-cresc" class="rounded-2xl border border-warm-200 bg-warm-50 p-5 text-center">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-warm-500 mb-2">Cenário Crescimento</p>
+                            <p class="text-xs text-warm-500 mb-1">Teto: R$ 80k /mês</p>
+                            <p id="sim-months-cresc" class="text-2xl font-bold text-warm-900">~3 meses</p>
+                        </div>
+                        <div id="ms-acel" class="rounded-2xl border-2 border-accent-gold/50 bg-accent-gold/5 p-5 text-center">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-warm-600 mb-2">Cenário Aceleração ★</p>
+                            <p class="text-xs text-warm-500 mb-1">Piso: R$ 120k /mês</p>
+                            <p id="sim-months-acel" class="text-2xl font-bold text-warm-900">~5 meses</p>
+                        </div>
+                        <div id="ms-max" class="rounded-2xl border border-warm-200 bg-warm-50 p-5 text-center">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-warm-500 mb-2">Cenário Máxima</p>
+                            <p class="text-xs text-warm-500 mb-1">Piso: R$ 250k /mês</p>
+                            <p id="sim-months-max" class="text-2xl font-bold text-warm-900">~9 meses</p>
+                        </div>
+                    </div>
+
+                    <!-- +20% rule callout -->
+                    <div class="bg-accent-gold/10 border border-accent-gold/30 rounded-2xl p-6 md:p-8 mb-8 flex flex-col md:flex-row gap-5 items-start md:items-center">
+                        <div class="flex-shrink-0">
+                            <div class="w-11 h-11 bg-accent-gold/20 rounded-xl flex items-center justify-center">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-warm-700"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-warm-900 mb-1">Escala progressiva: diagnóstico primeiro, +20%/mês depois</h4>
+                            <p class="text-sm text-warm-700 leading-relaxed">
+                                Nos <strong>2 primeiros meses</strong> priorizamos diagnóstico e calibragem — o crescimento existe, mas é conservador enquanto validamos públicos, criativos e catálogo. A partir de M3, campanhas provadas recebem incremento de até <strong>+20% por mês</strong>, o limite sustentável para que os algoritmos do Google e Meta se adaptem sem desperdício de ROAS.
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <!-- ROAS phase cards -->
+                    <div class="text-center mb-6">
+                        <h4 class="font-semibold text-warm-900">Quando escalar — e como — depende do ROAS</h4>
+                        <p class="text-xs text-warm-500 mt-1">As três fases de maturidade da mídia paga</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <!-- Fase 1 — Instável -->
+                        <div class="rounded-2xl border border-warm-200 bg-warm-50 p-5">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:rgba(180,175,165,0.18);color:#7a7568">
+                                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-warm-500">Fase 1 — Instável</span>
+                            </div>
+                            <p class="text-2xl font-bold text-warm-800 mb-0.5">ROAS ~<span id="sim-phase1-roas">3,3</span>×</p>
+                            <p id="sim-phase1-label" class="text-xs text-warm-500 font-medium mb-3">Break-even com <span id="sim-phase1-margin">30</span>% de margem</p>
+                            <p class="text-sm text-warm-700 leading-relaxed mb-4">Cada venda via mídia apenas se paga — sem margem para reinvestir. O algoritmo ainda está aprendendo. <strong>Foco em otimização campanha a campanha.</strong></p>
+                            <ul class="space-y-1.5 text-xs text-warm-700">
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>Otimize criativos e catálogo por campanha</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>Reinvista nos ad sets com ROAS consistente</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0 text-warm-400"></i>Refine CRO e funil antes de escalar budget geral</li>
+                            </ul>
+                        </div>
+                        <!-- Fase 2 — Saudável -->
+                        <div class="rounded-2xl border p-5" style="border-color:rgba(210,195,160,0.45);background:rgba(210,195,160,0.08)">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:rgba(210,195,160,0.22);color:#8a7e5f">
+                                    <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider" style="color:#8a7e5f">Fase 2 — Saudável</span>
+                            </div>
+                            <p class="text-2xl font-bold text-warm-800 mb-0.5">ROAS 4–5×</p>
+                            <p class="text-xs font-medium mb-3" style="color:#8a7e5f">Margem positiva, algoritmo aprendendo</p>
+                            <p class="text-sm text-warm-700 leading-relaxed mb-4">Cada real investido retorna mais do que custa. Campanhas validadas podem receber incremento. <strong>Escala controlada: +20%/mês nos ad sets que provam consistência.</strong></p>
+                            <ul class="space-y-1.5 text-xs text-warm-700">
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0" style="color:#b0a580"></i>50% aporte direto da empresa</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0" style="color:#b0a580"></i>50% reinvestimento da margem gerada</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0" style="color:#b0a580"></i>Escale individualmente os conjuntos validados</li>
+                            </ul>
+                        </div>
+                        <!-- Fase 3 — Ideal -->
+                        <div class="rounded-2xl border p-5" style="border-color:rgba(168,181,160,0.5);background:rgba(168,181,160,0.1)">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:rgba(168,181,160,0.22);color:#6b7a63">
+                                    <i data-lucide="rocket" class="w-3.5 h-3.5"></i>
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider" style="color:#6b7a63">Fase 3 — Ideal</span>
+                            </div>
+                            <p class="text-2xl font-bold text-warm-800 mb-0.5">ROAS ≥6–7×</p>
+                            <p class="text-xs font-medium mb-3" style="color:#6b7a63">Crescimento autofinanciado</p>
+                            <p class="text-sm text-warm-700 leading-relaxed mb-4">A margem gerada cobre a maior parte da escala. <strong>O aporte direto vira opcional — o crescimento se autofinancia.</strong></p>
+                            <ul class="space-y-1.5 text-xs text-warm-700">
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0" style="color:#92a589"></i>70–100% autofinanciado pela margem</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0" style="color:#92a589"></i>Aporte direto apenas para acelerar ainda mais</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3 h-3 flex-shrink-0" style="color:#92a589"></i>Crescimento sustentável de longo prazo</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Break-even formula + funding sources -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Break-even formula -->
+                        <div class="bg-warm-100 rounded-2xl p-6 border border-warm-200">
+                            <h4 class="font-semibold text-warm-900 mb-4 flex items-center gap-2">
+                                <i data-lucide="calculator" class="w-4 h-4 text-warm-600"></i>
+                                Break-even de ROAS
+                            </h4>
+                            <div class="flex items-center justify-center py-5 px-4 bg-warm-50 rounded-xl mb-4">
+                                <div class="flex items-center gap-3 text-warm-900">
+                                    <div class="text-center">
+                                        <p class="text-sm font-semibold">ROAS<sub>be</sub></p>
+                                    </div>
+                                    <span class="text-xl font-light text-warm-500">=</span>
+                                    <div class="text-center">
+                                        <p class="text-sm font-semibold border-b border-warm-400 pb-1 mb-1 px-2">1</p>
+                                        <p class="text-sm font-semibold px-2">margem</p>
+                                    </div>
+                                    <span class="text-xl font-light text-warm-500">=</span>
+                                    <div class="text-center">
+                                        <p class="text-sm font-semibold border-b border-warm-400 pb-1 mb-1 px-2">1</p>
+                                        <p id="sim-formula-denom" class="text-sm font-semibold px-2">0,30</p>
+                                    </div>
+                                    <span class="text-xl font-light text-warm-500">=</span>
+                                    <div class="text-center">
+                                        <p id="sim-formula-result" class="text-2xl font-bold text-warm-900">3,33×</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-warm-600 leading-relaxed">
+                                Com a margem definida acima, esse é o ROAS mínimo para cobrir o custo da mídia. Abaixo disso, cada venda via mídia não paga a si mesma. Acima, começa a geração de margem para reinvestimento e crescimento.
+                            </p>
+                        </div>
+                        <!-- Funding sources -->
+                        <div class="bg-warm-100 rounded-2xl p-6 border border-warm-200">
+                            <h4 class="font-semibold text-warm-900 mb-4 flex items-center gap-2">
+                                <i data-lucide="split" class="w-4 h-4 text-warm-600"></i>
+                                Como financiar o crescimento
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3 p-3 bg-warm-50 rounded-xl">
+                                    <div class="w-8 h-8 rounded-lg bg-accent-gold/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-warm-700"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-warm-900">Reinvestimento da margem</p>
+                                        <p class="text-xs text-warm-600 leading-relaxed mt-0.5">A margem bruta gerada pelas vendas via mídia é direcionada para aumentar o budget do mês seguinte. Quanto maior o ROAS, mais esse caminho se autofinancia.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-3 bg-warm-50 rounded-xl">
+                                    <div class="w-8 h-8 rounded-lg bg-warm-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="arrow-right-from-line" class="w-3.5 h-3.5 text-warm-700"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-warm-900">Aporte direto (acelerador)</p>
+                                        <p class="text-xs text-warm-600 leading-relaxed mt-0.5">Investimento adicional do fluxo de caixa da empresa. Acelera a chegada ao patamar ideal sem esperar a acumulação de margem. Mais necessário nas fases iniciais.</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-accent-gold/10 rounded-xl border border-accent-gold/20">
+                                    <p class="text-xs text-warm-700 leading-relaxed"><strong>Na prática:</strong> a maioria dos clientes combina os dois — aporta diretamente nos primeiros meses enquanto o ROAS sobe, e vai reduzindo o aporte à medida que a margem reinvestida toma conta do crescimento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-[11px] text-warm-400 mt-6 leading-relaxed text-center">
+                        Projeções baseadas em benchmarks de mercado (CPC médio categoria beleza: R$ 2,75). Baseline atual: 7.090 visitantes únicos/mês. M0–M2: fase de diagnóstico com crescimento conservador. A partir de M3, escala de até +20%/mês nos ad sets validados — ritmo real depende de ROAS, margem e decisão estratégica mês a mês.
+                    </p>
+                </div>
+
+                <!-- Expansion clause note -->
+                <p class="text-xs text-warm-500 text-center mt-10 max-w-2xl mx-auto" data-aos="fade-up">
+                    Caso o investimento mensal em mídia ultrapasse o patamar inicial, poderá haver revisão proporcional do fee para acomodar o aumento de escopo operacional e complexidade de gestão — sempre com faixas e limites pré-definidos.
+                </p>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 06 — QUEM CONDUZ                         -->
+        <!-- ======================================== -->
+        <section id="quem" class="py-24 bg-warm-100">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">06 — Sobre</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">Quem Conduz</h2>
+                </div>
+
+                <div class="bg-warm-100 rounded-2xl overflow-hidden border border-warm-200" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-col md:flex-row items-stretch">
+                        <img src="files/Felipi.png" alt="Felipi Fernandes"
+                            class="w-full md:w-72 flex-shrink-0 object-cover object-top rounded-t-2xl md:rounded-none md:rounded-l-2xl">
+                        <div class="p-6 md:p-8">
+                            <h3 class="text-xl font-bold text-warm-900 mb-1">Felipi Fernandes</h3>
+                            <p class="text-sm text-warm-600 mb-4">Performance Specialist @ Grupo Profarma | A.I. Researcher</p>
+
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-warm-200 text-warm-700 rounded-full text-xs font-medium">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#009739"/><path d="M12 4.5L5 8.5v4.5c0 4.14 2.88 8.02 7 9 4.12-.98 7-4.86 7-9V8.5l-7-4z" fill="#FEDD00"/><circle cx="12" cy="12" r="3.5" fill="#012169"/></svg>
+                                    Top #80 Google Experts Brasil 2024
+                                </span>
+                                <span class="px-3 py-1 bg-warm-200 text-warm-700 rounded-full text-xs font-medium">12+ anos em performance</span>
+                                <span class="px-3 py-1 bg-warm-200 text-warm-700 rounded-full text-xs font-medium">R$ 15MM+ under management</span>
+                            </div>
+
+                            <p class="text-sm text-warm-600 leading-relaxed mb-4">
+                                Minha atuação não se limita à gestão de campanhas. O foco é estruturar a retomada do e-commerce próprio com visão de negócio, dados, governança e performance — conectando mídia, mensuração, sortimento, calendário comercial e execução.
+                            </p>
+                            <p class="text-sm text-warm-700 font-medium leading-relaxed">
+                                Além da experiência de mais de 12 anos com performance digital, trago um diferencial raro: vivência prática em uma grande operação de varejo do segmento de saúde e beleza, com histórico comprovado de transformação de canal digital e crescimento consistente da participação do e-commerce no faturamento.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- 07 — PRÓXIMOS PASSOS                     -->
+        <!-- ======================================== -->
+        <section id="proximos" class="py-24 bg-warm-50">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">08 — Próximos passos</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-warm-900 mb-4">Como Começar</h2>
+                </div>
+
+                <!-- Timeline -->
+                <div class="relative max-w-lg mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute left-6 top-0 bottom-0 w-px bg-warm-300"></div>
+
+                    <div class="relative pl-16 pb-10">
+                        <div class="absolute left-3 w-7 h-7 bg-warm-900 rounded-full flex items-center justify-center text-warm-100 text-xs font-bold">1</div>
+                        <h4 class="font-semibold text-warm-900 mb-1">Alinhamento de cenário</h4>
+                        <p class="text-sm text-warm-600">Definição conjunta do caminho mais adequado ao momento da Embelleze.</p>
+                    </div>
+                    <div class="relative pl-16 pb-10">
+                        <div class="absolute left-3 w-7 h-7 bg-warm-900 rounded-full flex items-center justify-center text-warm-100 text-xs font-bold">2</div>
+                        <h4 class="font-semibold text-warm-900 mb-1">Kickoff e diagnóstico</h4>
+                        <p class="text-sm text-warm-600">Primeiros 15 a 30 dias dedicados a auditoria, setup e planejamento estratégico.</p>
+                    </div>
+                    <div class="relative pl-16">
+                        <div class="absolute left-3 w-7 h-7 bg-warm-900 rounded-full flex items-center justify-center text-warm-100 text-xs font-bold">3</div>
+                        <h4 class="font-semibold text-warm-900 mb-1">Operação e otimização contínua</h4>
+                        <p class="text-sm text-warm-600">Definição de KPIs, lançamento de campanhas e ciclo de melhoria com acompanhamento executivo.</p>
+                    </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-lg font-semibold text-warm-900 mb-6">Qual desses caminhos faz mais sentido para vocês neste momento?</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="https://wa.me/5521967079559?text=Ol%C3%A1%20Felipi%2C%20vi%20a%20proposta%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-warm-900 text-warm-100 rounded-xl font-medium text-sm hover:bg-warm-800 transition-all hover:scale-105 shadow-lg shadow-warm-900/25">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            WhatsApp
+                        </a>
+                        <a href="mailto:felipi.fernandes@proton.me?subject=Proposta%20Embelleze%20-%20Pr%C3%B3ximos%20passos" target="_blank" rel="noopener"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-warm-50 text-warm-900 border border-warm-300 rounded-xl font-medium text-sm hover:bg-warm-200 hover:border-warm-400 transition-all hover:scale-105">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            E-mail
+                        </a>
+                        <a href="playbook.html"
+                            class="inline-flex items-center gap-2 px-6 py-3 bg-warm-50 text-warm-900 border border-warm-300 rounded-xl font-medium text-sm hover:bg-warm-200 hover:border-warm-400 transition-all hover:scale-105">
+                            <i data-lucide="book-open" class="w-5 h-5"></i>
+                            Playbook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================== -->
+        <!-- FOOTER                                   -->
+        <!-- ======================================== -->
+        <footer class="py-10 bg-warm-950 text-warm-100">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-warm-100 rounded-lg flex items-center justify-center">
+                            <span class="text-warm-900 text-xs font-bold">FF</span>
+                        </div>
+                        <p class="text-warm-400">
+                            © 2026 Felipi Fernandes — Documento confidencial
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 text-warm-500">
+                        <a href="mailto:felipi.fernandes@proton.me" class="hover:text-warm-100 transition-colors flex items-center gap-1.5">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            <span class="text-xs">felipi.fernandes@proton.me</span>
+                        </a>
+                        <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" class="hover:text-warm-100 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                            <span class="sr-only">LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div><!-- /main-content -->
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ============================================ -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ========================================
+        // AUTH
+        // ========================================
+        const lockScreen = document.getElementById('lock-screen');
+        const mainContent = document.getElementById('main-content');
+        const passwordInput = document.getElementById('password-input');
+        const unlockBtn = document.getElementById('unlock-btn');
+        const passwordError = document.getElementById('password-error');
+
+        function unlock() {
+            const k = [90,87,49,105,90,87,120,115,90,88,112,108,77,106,65,121,78,103,61,61];
+            const expected = atob(k.map(c => String.fromCharCode(c)).join(''));
+            if (passwordInput.value === expected) {
+                lockScreen.classList.add('fade-out');
+                mainContent.classList.add('visible');
+                setTimeout(() => { lockScreen.style.display = 'none'; initPage(); }, 600);
+            } else {
+                passwordError.classList.remove('hidden');
+                passwordInput.parentElement.classList.add('shake');
+                setTimeout(() => passwordInput.parentElement.classList.remove('shake'), 400);
+            }
+        }
+
+        unlockBtn.addEventListener('click', unlock);
+        passwordInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') unlock(); });
+        passwordInput.focus();
+
+        // Toggle password visibility
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            var isText = passwordInput.type === 'text';
+            passwordInput.type = isText ? 'password' : 'text';
+            var icon = document.getElementById('toggle-password-icon');
+            icon.setAttribute('data-lucide', isText ? 'eye' : 'eye-off');
+            lucide.createIcons({ nodes: [icon] });
+        });
+
+        // ========================================
+        // INIT PAGE (after auth)
+        // ========================================
+        function initPage() {
+            // AOS
+            AOS.init({ duration: 700, once: true, offset: 80 });
+
+            // Lucide
+            lucide.createIcons();
+
+            // Navbar scroll
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', function() {
+                nav.classList.toggle('scrolled', window.scrollY > 10);
+            });
+
+            // Charts
+            initCharts();
+
+            // Investment Simulator
+            initInvestmentSimulator();
+        }
+
+        // ========================================
+        // CHARTS
+        // ========================================
+        function initCharts() {
+            const warmColors = {
+                400: '#c8c5bc',
+                500: '#b0aca2',
+                700: '#6b6860',
+                800: '#4a4843',
+                900: '#2a2825',
+                200: '#eae8e4'
+            };
+
+            const lolaGreen = '#a8b5a0';  // accent-sage
+            const salonOrange = '#b8a88a'; // accent-gold
+
+            // Visits over time line chart
+            const ctxTime = document.getElementById('chart-visits-time');
+            if (ctxTime) {
+                new Chart(ctxTime, {
+                    type: 'line',
+                    data: {
+                        labels: ['Dez 2025', 'Jan 2026', 'Fev 2026'],
+                        datasets: [
+                            {
+                                label: 'Salon Line',
+                                data: [93000, 45000, 58000],
+                                borderColor: salonOrange,
+                                backgroundColor: salonOrange + '20',
+                                tension: 0.3,
+                                pointRadius: 5,
+                                pointBackgroundColor: salonOrange,
+                                borderWidth: 2.5,
+                                fill: false
+                            },
+                            {
+                                label: 'Lola Cosmetics',
+                                data: [22000, 45000, 50000],
+                                borderColor: lolaGreen,
+                                backgroundColor: lolaGreen + '20',
+                                tension: 0.3,
+                                pointRadius: 5,
+                                pointBackgroundColor: lolaGreen,
+                                borderWidth: 2.5,
+                                fill: false
+                            },
+                            {
+                                label: 'Embelleze',
+                                data: [10000, 10000, 9000],
+                                borderColor: warmColors[800],
+                                backgroundColor: warmColors[800] + '20',
+                                tension: 0.3,
+                                pointRadius: 5,
+                                pointBackgroundColor: warmColors[800],
+                                borderWidth: 2.5,
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: warmColors[900],
+                                titleFont: { family: 'Inter', weight: '600' },
+                                bodyFont: { family: 'Inter' },
+                                cornerRadius: 8,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + ctx.raw.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { family: 'Inter', size: 12 }, color: warmColors[700] }
+                            },
+                            y: {
+                                grid: { color: warmColors[200], drawBorder: false },
+                                ticks: {
+                                    font: { family: 'Inter', size: 11 },
+                                    color: warmColors[700],
+                                    callback: function(v) { return (v/1000) + 'K'; }
+                                },
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Volume chart (visitors + visits)
+            const ctxVolume = document.getElementById('chart-volume');
+            if (ctxVolume) {
+                new Chart(ctxVolume, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Visitantes únicos/mês', 'Visitas mensais'],
+                        datasets: [
+                            {
+                                label: 'Salon Line',
+                                data: [37538, 65463],
+                                backgroundColor: salonOrange,
+                                borderRadius: 5,
+                                borderSkipped: false
+                            },
+                            {
+                                label: 'Lola Cosmetics',
+                                data: [20649, 39005],
+                                backgroundColor: lolaGreen,
+                                borderRadius: 5,
+                                borderSkipped: false
+                            },
+                            {
+                                label: 'Embelleze',
+                                data: [7090, 9680],
+                                backgroundColor: warmColors[900],
+                                borderRadius: 5,
+                                borderSkipped: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: warmColors[900],
+                                titleFont: { family: 'Inter', weight: '600' },
+                                bodyFont: { family: 'Inter' },
+                                cornerRadius: 8,
+                                padding: 10,
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + ctx.raw.toLocaleString('pt-BR');
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: warmColors[200], drawBorder: false },
+                                ticks: { font: { family: 'Inter', size: 10 }, color: warmColors[700], callback: function(v) { return (v/1000) + 'K'; } }
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: { font: { family: 'Inter', size: 10 }, color: warmColors[700] }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Quality chart (pages/visit + duration)
+            const ctxQuality = document.getElementById('chart-quality');
+            if (ctxQuality) {
+                new Chart(ctxQuality, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Páginas / visita', 'Duração (min)'],
+                        datasets: [
+                            {
+                                label: 'Salon Line',
+                                data: [5.70, 7.58],
+                                backgroundColor: salonOrange,
+                                borderRadius: 5,
+                                borderSkipped: false
+                            },
+                            {
+                                label: 'Lola Cosmetics',
+                                data: [4.27, 4.78],
+                                backgroundColor: lolaGreen,
+                                borderRadius: 5,
+                                borderSkipped: false
+                            },
+                            {
+                                label: 'Embelleze',
+                                data: [3.56, 2.60],
+                                backgroundColor: warmColors[900],
+                                borderRadius: 5,
+                                borderSkipped: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: warmColors[900],
+                                titleFont: { family: 'Inter', weight: '600' },
+                                bodyFont: { family: 'Inter' },
+                                cornerRadius: 8,
+                                padding: 10,
+                                callbacks: {
+                                    label: function(ctx) {
+                                        const suffix = ctx.dataIndex === 1 ? ' min' : '';
+                                        return ctx.dataset.label + ': ' + ctx.raw.toFixed(2) + suffix;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { color: warmColors[200], drawBorder: false },
+                                ticks: { font: { family: 'Inter', size: 10 }, color: warmColors[700] },
+                                max: 10
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: { font: { family: 'Inter', size: 10 }, color: warmColors[700] }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Traffic mix composition chart
+            const ctxMix = document.getElementById('chart-traffic-mix');
+            if (ctxMix) {
+                new Chart(ctxMix, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Direto', 'Orgânico', 'Pago', 'Social', 'Referral', 'E-mail/Display'],
+                        datasets: [
+                            {
+                                label: 'Salon Line',
+                                data: [41.56, 38.59, 13.9, 5.85, 0.1, 0],
+                                backgroundColor: salonOrange,
+                                borderRadius: 6,
+                                borderSkipped: false
+                            },
+                            {
+                                label: 'Lola Cosmetics',
+                                data: [28.0, 34.0, 8.0, 5.0, 3.0, 2.0],
+                                backgroundColor: lolaGreen,
+                                borderRadius: 6,
+                                borderSkipped: false
+                            },
+                            {
+                                label: 'Embelleze',
+                                data: [57.2, 14.4, 28.2, 0.2, 0, 0],
+                                backgroundColor: warmColors[900],
+                                borderRadius: 6,
+                                borderSkipped: false
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                align: 'end',
+                                labels: {
+                                    font: { family: 'Inter', size: 11 },
+                                    color: warmColors[700],
+                                    boxWidth: 12,
+                                    boxHeight: 12,
+                                    borderRadius: 3,
+                                    useBorderRadius: true,
+                                    padding: 16
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: warmColors[900],
+                                titleFont: { family: 'Inter', weight: '600' },
+                                bodyFont: { family: 'Inter' },
+                                cornerRadius: 8,
+                                padding: 12,
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ctx.dataset.label + ': ' + ctx.raw + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { family: 'Inter', size: 11 }, color: warmColors[700] }
+                            },
+                            y: {
+                                grid: { color: warmColors[200], drawBorder: false },
+                                ticks: {
+                                    font: { family: 'Inter', size: 11 },
+                                    color: warmColors[700],
+                                    callback: function(v) { return v + '%'; }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // ========================================
+        // INVESTMENT SIMULATOR (unified)
+        // ========================================
+        let simChart = null;
+
+        function initInvestmentSimulator() {
+            const budgetSlider = document.getElementById('sim-budget');
+            const marginSlider = document.getElementById('sim-margin');
+            if (!budgetSlider || !marginSlider) return;
+
+            const budgetDisplay = document.getElementById('sim-budget-display');
+            const marginDisplay = document.getElementById('sim-margin-display');
+            const roasBeEl      = document.getElementById('sim-roas-be');
+            const clicksEl      = document.getElementById('sim-clicks');
+            const trafficEl     = document.getElementById('sim-traffic');
+            const growthEl      = document.getElementById('sim-growth');
+            const monthsCrescEl = document.getElementById('sim-months-cresc');
+            const monthsAcelEl  = document.getElementById('sim-months-acel');
+            const monthsMaxEl   = document.getElementById('sim-months-max');
+            const phase1Roas    = document.getElementById('sim-phase1-roas');
+            const phase1Margin  = document.getElementById('sim-phase1-margin');
+            const formulaDenom  = document.getElementById('sim-formula-denom');
+            const formulaResult = document.getElementById('sim-formula-result');
+            const legendY2      = document.getElementById('legend-y2');
+
+            const BASELINE = 7090;
+            const CPC = 2.75;
+            const TARGETS = { cresc: 80, acel: 120, max: 250 }; // in k
+
+            // Competitor / market benchmarks (visitors/month — SimilarWeb Fev 2026)
+            const BENCH = {
+                salon: 37538,
+                lola: 20649,
+                market: 25000  // avg health & beauty e-commerce
+            };
+
+            // Active overlay layers
+            var activeLayers = { investment: true, clicks: false, traffic: false, market: false, salon: false, lola: false };
+
+            function formatBRL(v) {
+                return 'R$ ' + v.toLocaleString('pt-BR');
+            }
+
+            // S-curve growth model:
+            // M0-M2: diagnostic phase — conservative growth (~5-8%/mo)
+            // M3-M5: validation — ramps up toward +20%/mo
+            // M6+: full acceleration — +20%/mo or more if already at target budget
+            function buildRampData(budgetK) {
+                var numMonths = 12;
+                var values = [budgetK];
+                for (var i = 1; i <= numMonths; i++) {
+                    var prev = values[i - 1];
+                    var growthRate;
+                    if (i <= 2) {
+                        // Diagnostic: slow growth (5-8%)
+                        growthRate = 1.05 + (i * 0.015);
+                    } else if (i <= 5) {
+                        // Validation: ramp from 10% to 18%
+                        growthRate = 1.10 + ((i - 3) * 0.027);
+                    } else {
+                        // Full acceleration: +20%/mo
+                        growthRate = 1.20;
+                    }
+                    values.push(Math.round(prev * growthRate * 10) / 10);
+                }
+                return values;
+            }
+
+            // Effective months to target using S-curve model
+            function monthsToSCurve(budgetK, targetK) {
+                if (budgetK >= targetK) return -1;
+                var ramp = buildRampData(budgetK);
+                for (var i = 0; i < ramp.length; i++) {
+                    if (ramp[i] >= targetK) return i;
+                }
+                return ramp.length; // beyond 12 months
+            }
+
+            // Traffic projection per month (based on investment ramp + efficiency curve)
+            function buildTrafficData(rampValues) {
+                return rampValues.map(function(invK, i) {
+                    var monthBudget = invK * 1000;
+                    var rawClicks = monthBudget / CPC;
+                    // Efficiency multiplier: diagnostic months are less efficient
+                    var eff;
+                    if (i <= 1) eff = 0.55;       // M0-M1: 55% efficiency (learning)
+                    else if (i === 2) eff = 0.70;  // M2: 70%
+                    else if (i <= 4) eff = 0.85;   // M3-M4: 85%
+                    else eff = 1.0;                // M5+: full efficiency
+                    return Math.round(BASELINE + rawClicks * eff);
+                });
+            }
+
+            function buildClicksData(rampValues) {
+                return rampValues.map(function(invK, i) {
+                    var monthBudget = invK * 1000;
+                    var rawClicks = monthBudget / CPC;
+                    var eff;
+                    if (i <= 1) eff = 0.55;
+                    else if (i === 2) eff = 0.70;
+                    else if (i <= 4) eff = 0.85;
+                    else eff = 1.0;
+                    return Math.round(rawClicks * eff);
+                });
+            }
+
+            // Toggle button logic
+            var toggleBtns = document.querySelectorAll('#chart-toggles .chart-toggle');
+            toggleBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var layer = btn.getAttribute('data-layer');
+                    activeLayers[layer] = !activeLayers[layer];
+                    // Update button style
+                    if (activeLayers[layer]) {
+                        btn.classList.remove('bg-warm-50', 'text-warm-600', 'border-warm-300');
+                        btn.classList.add('bg-warm-800', 'text-warm-50', 'border-warm-800');
+                    } else {
+                        btn.classList.remove('bg-warm-800', 'text-warm-50', 'border-warm-800');
+                        btn.classList.add('bg-warm-50', 'text-warm-600', 'border-warm-300');
+                    }
+                    updateRampChart(parseInt(budgetSlider.value) / 1000);
+                });
+            });
+
+            function update() {
+                var budget = parseInt(budgetSlider.value);
+                var margin = parseInt(marginSlider.value);
+                var budgetK = budget / 1000;
+                var marginDec = margin / 100;
+                var roasBe = 1 / marginDec;
+
+                budgetDisplay.textContent = formatBRL(budget);
+                marginDisplay.textContent = margin + '%';
+
+                roasBeEl.textContent = roasBe.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 2 }) + '×';
+
+                // Traffic projections (at full efficiency = month 5+)
+                var clicks = Math.round(budget / CPC);
+                var newTraffic = BASELINE + clicks;
+                var growth = ((newTraffic - BASELINE) / BASELINE * 100);
+                clicksEl.textContent = clicks.toLocaleString('pt-BR');
+                trafficEl.textContent = newTraffic.toLocaleString('pt-BR');
+                growthEl.textContent = '+' + Math.round(growth).toLocaleString('pt-BR') + '%';
+
+                // S-curve months to each scenario
+                var mCresc = monthsToSCurve(budgetK, TARGETS.cresc);
+                var mAcel  = monthsToSCurve(budgetK, TARGETS.acel);
+                var mMax   = monthsToSCurve(budgetK, TARGETS.max);
+
+                monthsCrescEl.textContent = mCresc < 0 ? '✓ Já atingido' : mCresc > 12 ? '+12 meses' : '~' + mCresc + ' meses';
+                monthsAcelEl.textContent  = mAcel < 0  ? '✓ Já atingido' : mAcel > 12  ? '+12 meses' : '~' + mAcel + ' meses';
+                monthsMaxEl.textContent   = mMax < 0   ? '✓ Já atingido' : mMax > 12   ? '+12 meses' : '~' + mMax + ' meses';
+
+                // Milestone card styling
+                var msCrescEl = document.getElementById('ms-cresc');
+                var msAcelEl  = document.getElementById('ms-acel');
+                var msMaxEl   = document.getElementById('ms-max');
+                if (mCresc < 0) {
+                    msCrescEl.className = 'rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-5 text-center';
+                    monthsCrescEl.className = 'text-2xl font-bold text-emerald-700';
+                } else {
+                    msCrescEl.className = 'rounded-2xl border border-warm-200 bg-warm-50 p-5 text-center';
+                    monthsCrescEl.className = 'text-2xl font-bold text-warm-900';
+                }
+                if (mAcel < 0) {
+                    msAcelEl.className = 'rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-5 text-center';
+                    monthsAcelEl.className = 'text-2xl font-bold text-emerald-700';
+                } else {
+                    msAcelEl.className = 'rounded-2xl border-2 border-accent-gold/50 bg-accent-gold/5 p-5 text-center';
+                    monthsAcelEl.className = 'text-2xl font-bold text-warm-900';
+                }
+                if (mMax < 0) {
+                    msMaxEl.className = 'rounded-2xl border-2 border-emerald-200 bg-emerald-50 p-5 text-center';
+                    monthsMaxEl.className = 'text-2xl font-bold text-emerald-700';
+                } else {
+                    msMaxEl.className = 'rounded-2xl border border-warm-200 bg-warm-50 p-5 text-center';
+                    monthsMaxEl.className = 'text-2xl font-bold text-warm-900';
+                }
+
+                if (phase1Roas) phase1Roas.textContent = roasBe.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+                if (phase1Margin) phase1Margin.textContent = margin;
+
+                if (formulaDenom) formulaDenom.textContent = '0,' + (margin < 10 ? '0' + margin : margin);
+                if (formulaResult) formulaResult.textContent = roasBe.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '×';
+
+                updateRampChart(budgetK);
+            }
+
+            function updateRampChart(budgetK) {
+                var ctx = document.getElementById('chart-rampup');
+                if (!ctx) return;
+
+                var rampValues = buildRampData(budgetK);
+                var numMonths = rampValues.length;
+                var labels = rampValues.map(function(_, i) {
+                    if (i === 0) return 'M0';
+                    return 'M' + i;
+                });
+
+                var trafficData = buildTrafficData(rampValues);
+                var clicksData  = buildClicksData(rampValues);
+
+                // Determine if we need a secondary Y axis
+                var needY2 = activeLayers.clicks || activeLayers.traffic || activeLayers.market || activeLayers.salon || activeLayers.lola;
+                if (legendY2) legendY2.style.display = needY2 ? '' : 'none';
+
+                var crescLine = new Array(numMonths).fill(TARGETS.cresc);
+                var acelLine  = new Array(numMonths).fill(TARGETS.acel);
+
+                var maxInv = rampValues[rampValues.length - 1];
+                var yMax = Math.max(Math.ceil(Math.max(maxInv, TARGETS.acel) / 50) * 50 + 30, 150);
+                var showMaxLine = maxInv > TARGETS.max * 0.6;
+                var maxLine = showMaxLine ? new Array(numMonths).fill(TARGETS.max) : null;
+
+                // S-curve milestone month for Aceleração
+                var mAcel = monthsToSCurve(budgetK, TARGETS.acel);
+
+                var pointRadii = rampValues.map(function(_, i) {
+                    if (i === 0) return 5;
+                    if (mAcel > 0 && i === mAcel) return 6;
+                    return 3;
+                });
+
+                var datasets = [];
+
+                // -- Investment line (always base, but can be hidden)
+                if (activeLayers.investment) {
+                    datasets.push({
+                        label: 'Investimento projetado',
+                        data: rampValues,
+                        borderColor: '#6b6560',
+                        backgroundColor: 'rgba(107,101,96,0.06)',
+                        fill: true,
+                        borderWidth: 2.5,
+                        tension: 0.35,
+                        pointRadius: pointRadii,
+                        pointHoverRadius: pointRadii.map(function(r) { return r + 2; }),
+                        pointBackgroundColor: '#6b6560',
+                        pointBorderColor: '#6b6560',
+                        pointBorderWidth: 1.5,
+                        yAxisID: 'y',
+                        order: 1
+                    });
+                }
+
+                // -- Zone lines (always shown)
+                datasets.push({
+                    label: 'Teto Crescimento (R$ 80k)',
+                    data: crescLine,
+                    borderColor: '#b5b1a8',
+                    backgroundColor: 'transparent',
+                    fill: false, borderWidth: 1.5, borderDash: [6, 4],
+                    pointRadius: 0, pointHoverRadius: 0, tension: 0,
+                    yAxisID: 'y', order: 10
+                });
+                datasets.push({
+                    label: 'Piso Aceleração (R$ 120k)',
+                    data: acelLine,
+                    borderColor: '#e0d5a8',
+                    backgroundColor: 'rgba(224,213,168,0.04)',
+                    fill: true, borderWidth: 1.5, borderDash: [6, 4],
+                    pointRadius: 0, pointHoverRadius: 0, tension: 0,
+                    yAxisID: 'y', order: 11
+                });
+                if (maxLine) {
+                    datasets.push({
+                        label: 'Piso Máxima (R$ 250k)',
+                        data: maxLine,
+                        borderColor: '#c8c5bc',
+                        backgroundColor: 'transparent',
+                        fill: false, borderWidth: 1, borderDash: [4, 4],
+                        pointRadius: 0, pointHoverRadius: 0, tension: 0,
+                        yAxisID: 'y', order: 12
+                    });
+                }
+
+                // -- Clicks overlay (pastel lavender)
+                if (activeLayers.clicks) {
+                    datasets.push({
+                        label: 'Cliques estimados',
+                        data: clicksData,
+                        borderColor: '#a5a0e8',
+                        backgroundColor: 'rgba(165,160,232,0.08)',
+                        fill: false, borderWidth: 2, tension: 0.35,
+                        pointRadius: 2, pointHoverRadius: 4,
+                        pointBackgroundColor: '#a5a0e8',
+                        yAxisID: 'y2', order: 2
+                    });
+                }
+
+                // -- Traffic overlay (pastel sky)
+                if (activeLayers.traffic) {
+                    datasets.push({
+                        label: 'Tráfego projetado',
+                        data: trafficData,
+                        borderColor: '#7ec8e3',
+                        backgroundColor: 'rgba(126,200,227,0.08)',
+                        fill: false, borderWidth: 2, tension: 0.35,
+                        pointRadius: 2, pointHoverRadius: 4,
+                        pointBackgroundColor: '#7ec8e3',
+                        yAxisID: 'y2', order: 3
+                    });
+                }
+
+                // -- Market average (pastel slate)
+                if (activeLayers.market) {
+                    datasets.push({
+                        label: 'Média saúde & beleza',
+                        data: new Array(numMonths).fill(BENCH.market),
+                        borderColor: '#b5bec9',
+                        backgroundColor: 'transparent',
+                        fill: false, borderWidth: 1.5, borderDash: [8, 4],
+                        pointRadius: 0, pointHoverRadius: 0, tension: 0,
+                        yAxisID: 'y2', order: 5
+                    });
+                }
+
+                // -- Salon Line benchmark
+                if (activeLayers.salon) {
+                    datasets.push({
+                        label: 'Salon Line',
+                        data: new Array(numMonths).fill(BENCH.salon),
+                        borderColor: '#cec3a8',
+                        backgroundColor: 'transparent',
+                        fill: false, borderWidth: 1.5, borderDash: [8, 4],
+                        pointRadius: 0, pointHoverRadius: 0, tension: 0,
+                        yAxisID: 'y2', order: 6
+                    });
+                }
+
+                // -- Lola Cosmetics benchmark
+                if (activeLayers.lola) {
+                    datasets.push({
+                        label: 'Lola Cosmetics',
+                        data: new Array(numMonths).fill(BENCH.lola),
+                        borderColor: '#bcc8b5',
+                        backgroundColor: 'transparent',
+                        fill: false, borderWidth: 1.5, borderDash: [8, 4],
+                        pointRadius: 0, pointHoverRadius: 0, tension: 0,
+                        yAxisID: 'y2', order: 7
+                    });
+                }
+
+                // Compute y2 max
+                var y2Vals = [];
+                if (activeLayers.traffic) y2Vals = y2Vals.concat(trafficData);
+                if (activeLayers.clicks) y2Vals = y2Vals.concat(clicksData);
+                if (activeLayers.salon) y2Vals.push(BENCH.salon);
+                if (activeLayers.lola) y2Vals.push(BENCH.lola);
+                if (activeLayers.market) y2Vals.push(BENCH.market);
+                var y2Max = y2Vals.length > 0 ? Math.ceil(Math.max.apply(null, y2Vals) / 10000) * 10000 + 5000 : 50000;
+
+                var scales = {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter', size: 11 }, color: '#8f8b81', maxRotation: 0 }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        max: yMax,
+                        grid: { color: '#eae8e4', drawBorder: false },
+                        border: { display: false },
+                        title: { display: true, text: 'Investimento (R$ mil)', font: { family: 'Inter', size: 10 }, color: '#8f8b81' },
+                        ticks: {
+                            font: { family: 'Inter', size: 10 },
+                            color: '#8f8b81',
+                            callback: function(v) { return 'R$' + v + 'k'; }
+                        }
+                    }
+                };
+
+                if (needY2) {
+                    scales.y2 = {
+                        type: 'linear',
+                        position: 'right',
+                        min: 0,
+                        max: y2Max,
+                        grid: { drawOnChartArea: false },
+                        border: { display: false },
+                        title: { display: true, text: 'Visitantes / mês', font: { family: 'Inter', size: 10 }, color: '#8f8b81' },
+                        ticks: {
+                            font: { family: 'Inter', size: 10 },
+                            color: '#8f8b81',
+                            callback: function(v) {
+                                return v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v;
+                            }
+                        }
+                    };
+                }
+
+                var chartOpts = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#2a2825',
+                            titleFont: { family: 'Inter', size: 11, weight: '600' },
+                            bodyFont: { family: 'Inter', size: 11 },
+                            cornerRadius: 8,
+                            padding: 10,
+                            filter: function(item) {
+                                // Hide zone line tooltips
+                                var lbl = item.dataset.label || '';
+                                return lbl.indexOf('Teto') === -1 && lbl.indexOf('Piso') === -1;
+                            },
+                            callbacks: {
+                                title: function(items) {
+                                    var idx = items[0].dataIndex;
+                                    var phase = idx <= 2 ? ' (Diagnóstico)' : idx <= 5 ? ' (Validação)' : ' (Aceleração)';
+                                    return (idx === 0 ? 'Mês 0 — Hoje' : 'Mês ' + idx) + phase;
+                                },
+                                label: function(ctx) {
+                                    var lbl = ctx.dataset.label;
+                                    var v = ctx.raw;
+                                    if (ctx.dataset.yAxisID === 'y2') {
+                                        return ' ' + lbl + ': ' + v.toLocaleString('pt-BR') + ' /mês';
+                                    }
+                                    if (lbl === 'Investimento projetado') {
+                                        return ' Investimento: R$ ' + v.toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + 'k';
+                                    }
+                                    return null;
+                                },
+                                afterBody: function(items) {
+                                    var idx = items[0].dataIndex;
+                                    if (idx <= 2) return ['', ' ↳ Fase de diagnóstico — escala conservadora por design'];
+                                    return null;
+                                }
+                            }
+                        }
+                    },
+                    scales: scales
+                };
+
+                // Phase band plugin — draws soft vertical background areas per phase
+                var phaseBandsPlugin = {
+                    id: 'phaseBands',
+                    beforeDraw: function(chart) {
+                        var xScale = chart.scales.x;
+                        var yScale = chart.scales.y;
+                        var ctx2 = chart.ctx;
+                        var top = yScale.top;
+                        var bottom = yScale.bottom;
+                        // Phase: M0-M2, M3-M5, M6+
+                        var phases = [
+                            { start: 0, end: 2, color: 'rgba(180,175,165,0.08)' },
+                            { start: 3, end: 5, color: 'rgba(210,195,160,0.08)' },
+                            { start: 6, end: numMonths - 1, color: 'rgba(168,181,160,0.08)' }
+                        ];
+                        var ticks = xScale.ticks;
+                        if (!ticks || ticks.length === 0) return;
+                        phases.forEach(function(p) {
+                            var si = Math.max(p.start, 0);
+                            var ei = Math.min(p.end, numMonths - 1);
+                            if (si >= numMonths) return;
+                            var x0 = xScale.getPixelForTick(si);
+                            var x1 = xScale.getPixelForTick(ei);
+                            // Extend half-step before first and after last
+                            var step = ticks.length > 1 ? (xScale.getPixelForTick(1) - xScale.getPixelForTick(0)) : 0;
+                            x0 -= step * 0.5;
+                            x1 += step * 0.5;
+                            // Clamp to chart area
+                            x0 = Math.max(x0, xScale.left);
+                            x1 = Math.min(x1, xScale.right);
+                            ctx2.save();
+                            ctx2.fillStyle = p.color;
+                            ctx2.fillRect(x0, top, x1 - x0, bottom - top);
+                            ctx2.restore();
+                        });
+                    }
+                };
+
+                if (simChart) simChart.destroy();
+                simChart = new Chart(ctx, { type: 'line', data: { labels: labels, datasets: datasets }, options: chartOpts, plugins: [phaseBandsPlugin] });
+            }
+
+            budgetSlider.addEventListener('input', update);
+            marginSlider.addEventListener('input', update);
+            update();
+        }
+
+        // Init lucide for lock screen
+        lucide.createIcons();
+
+    })();
+    </script>
+</body>
+</html>

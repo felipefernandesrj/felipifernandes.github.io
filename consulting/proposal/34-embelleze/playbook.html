@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Playbook Embelleze vs Salon Line</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] },
+                    colors: {
+                        warm: {
+                            50:'#faf9f7', 100:'#f7f6f4', 200:'#eae8e4', 300:'#dddad4',
+                            400:'#c8c5bc', 500:'#b0aca2', 600:'#8f8b81', 700:'#6b6860',
+                            800:'#4a4843', 900:'#2a2825', 950:'#1a1917'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <style>
+        :root {
+            --warm-50:#faf9f7; --warm-100:#f7f6f4; --warm-200:#eae8e4; --warm-300:#dddad4;
+            --warm-400:#c8c5bc; --warm-500:#b0aca2; --warm-600:#8f8b81; --warm-700:#6b6860;
+            --warm-800:#4a4843; --warm-900:#2a2825; --warm-950:#1a1917;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; }
+
+        /* Lock screen */
+        #lock-screen { transition: opacity .5s ease, visibility .5s ease; }
+        #lock-screen.fade-out { opacity: 0; visibility: hidden; }
+        #main-content { opacity: 0; pointer-events: none; transition: opacity .8s ease; }
+        #main-content.visible { opacity: 1; pointer-events: auto; }
+
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%,60%  { transform: translateX(-6px); }
+            40%,80%  { transform: translateX(6px); }
+        }
+        .shake { animation: shake .4s ease; }
+
+        /* ── Action bar ── */
+        #action-bar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: var(--warm-950);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            height: 52px; display: flex; align-items: center;
+        }
+
+        /* ── A4 paper pages ── */
+        .playbook-bg {
+            background: #d8d4ce;
+            min-height: 100vh;
+            padding: 68px 20px 48px;
+        }
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 0 auto 20px;
+            padding: 20mm 22mm;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.08);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ── Document typography ── */
+        .doc-cover-label {
+            font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--warm-500); margin-bottom: 5mm;
+        }
+        .doc-cover-title {
+            font-size: 38px; font-weight: 800; color: var(--warm-900);
+            line-height: 1.1; margin-bottom: 5mm;
+        }
+        .doc-cover-subtitle {
+            font-size: 13px; color: var(--warm-600); line-height: 1.65; max-width: 120mm;
+        }
+        .doc-h2 {
+            font-size: 15.5px; font-weight: 700; color: var(--warm-900);
+            margin-bottom: 11px; padding-bottom: 8px;
+            border-bottom: 2px solid var(--warm-900);
+            display: flex; align-items: center; gap: 9px; flex-shrink: 0;
+        }
+        .doc-h2 .sn {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 26px; height: 26px; background: var(--warm-900);
+            color: var(--warm-50); border-radius: 5px;
+            font-size: 11px; font-weight: 700; flex-shrink: 0;
+        }
+        .doc-h2.cont {
+            border-bottom-color: var(--warm-300); color: var(--warm-700);
+        }
+        .doc-h2.cont .sn { background: var(--warm-300); color: var(--warm-700); }
+        .doc-h3 {
+            font-size: 12.5px; font-weight: 600; color: var(--warm-800);
+            margin-top: 14px; margin-bottom: 6px;
+        }
+        .doc-p {
+            font-size: 11px; line-height: 1.72; color: var(--warm-800);
+            margin-bottom: 8px;
+        }
+        .doc-p strong { color: var(--warm-900); font-weight: 600; }
+        .doc-p code {
+            font-size: 10.5px; background: var(--warm-100);
+            padding: 1px 5px; border-radius: 3px; font-family: monospace;
+        }
+        .doc-ul { padding-left: 15px; margin-bottom: 8px; }
+        .doc-ul li {
+            font-size: 11px; line-height: 1.72; color: var(--warm-800);
+            margin-bottom: 3px; list-style-type: disc;
+        }
+        .doc-ul li strong { color: var(--warm-900); font-weight: 600; }
+
+        /* tables */
+        .doc-table { width: 100%; border-collapse: collapse; font-size: 10px; margin: 10px 0; }
+        .doc-table th {
+            background: var(--warm-900); color: var(--warm-100);
+            padding: 7px 9px; text-align: left; font-weight: 600;
+            font-size: 9.5px; letter-spacing: 0.03em;
+        }
+        .doc-table td {
+            padding: 6.5px 9px; border-bottom: 1px solid var(--warm-200);
+            color: var(--warm-800); vertical-align: top; font-size: 10.5px;
+        }
+        .doc-table tr:last-child td { border-bottom: none; }
+        .doc-table tr:nth-child(even) td { background: #faf9f7; }
+        .doc-table td strong { color: var(--warm-900); font-weight: 600; }
+        .doc-table td.total-row {
+            background: var(--warm-100) !important; font-weight: 600; color: var(--warm-900);
+        }
+
+        /* callouts */
+        .doc-note {
+            background: var(--warm-100); border-left: 3px solid var(--warm-400);
+            padding: 9px 13px; border-radius: 0 6px 6px 0; margin: 10px 0;
+            font-size: 10.5px; line-height: 1.65; color: var(--warm-700);
+        }
+        .doc-note strong { color: var(--warm-800); }
+        .doc-highlight {
+            background: var(--warm-900); color: var(--warm-100);
+            padding: 12px 16px; border-radius: 8px; margin: 10px 0;
+            font-size: 10.5px; line-height: 1.65;
+        }
+        .doc-highlight strong { color: white; font-weight: 600; }
+        .doc-highlight ul { padding-left: 16px; list-style: disc; color: var(--warm-300); }
+        .doc-highlight ul li { margin-bottom: 2px; }
+
+        /* page footer */
+        .page-footer {
+            margin-top: auto; padding-top: 7px; flex-shrink: 0;
+            border-top: 1px solid var(--warm-200);
+            display: flex; align-items: center; justify-content: space-between;
+            font-size: 8.5px; color: var(--warm-400);
+        }
+
+        /* section divider */
+        .sec-divider { border: none; border-top: 1px solid var(--warm-200); margin: 16px 0 14px; }
+
+        /* cover decorators */
+        .cover-blob {
+            position: absolute; top: 0; right: 0;
+            width: 55mm; height: 55mm;
+            background: var(--warm-100); border-radius: 0 0 0 55mm;
+            pointer-events: none;
+        }
+
+        /* modal */
+        #share-modal .modal-inner {
+            background: white; border-radius: 18px; width: 100%;
+            max-width: 420px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        /* toast */
+        #toast {
+            position: fixed; bottom: 24px; left: 50%;
+            transform: translateX(-50%) translateY(70px);
+            background: var(--warm-900); color: var(--warm-100);
+            padding: 9px 20px; border-radius: 8px; font-size: 12.5px;
+            z-index: 9999; transition: transform .28s ease; pointer-events: none;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ── Print ── */
+        @media print {
+            #action-bar, #share-modal, #toast, .no-print { display: none !important; }
+            #lock-screen { display: none !important; }
+            #main-content { opacity: 1 !important; pointer-events: auto !important; }
+            .playbook-bg { background: white !important; padding: 0 !important; }
+            .a4-page {
+                width: 100%; min-height: 0; margin: 0;
+                padding: 14mm 16mm; box-shadow: none;
+            }
+            .a4-page:not(:first-child) { break-before: page; }
+            @page { size: A4; margin: 0; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body class="bg-warm-100 font-sans antialiased text-warm-900">
+
+<!-- ============================================================ -->
+<!-- LOCK SCREEN                                                   -->
+<!-- ============================================================ -->
+<div id="lock-screen" class="fixed inset-0 z-[999] bg-warm-50 flex items-center justify-center">
+    <div class="max-w-sm w-full mx-6 text-center">
+        <div class="w-14 h-14 bg-warm-900 rounded-2xl flex items-center justify-center mx-auto mb-8">
+            <span class="text-warm-100 text-lg font-bold">FF</span>
+        </div>
+        <p class="text-xs tracking-widest uppercase text-warm-500 mb-2">Documento restrito</p>
+        <h1 class="text-2xl font-bold text-warm-900 mb-1">Playbook</h1>
+        <p class="text-warm-600 text-sm mb-8">Embelleze vs Salon Line — Março 2026</p>
+        <div class="relative mb-4">
+            <input id="password-input" type="password" placeholder="Senha de acesso"
+                class="w-full px-4 py-3 pr-11 bg-warm-100 border border-warm-300 rounded-xl text-warm-900 text-center text-sm focus:outline-none focus:border-warm-500 focus:ring-2 focus:ring-warm-200 transition-all"
+                autocomplete="off">
+            <button type="button" id="toggle-password"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-warm-400 hover:text-warm-700 transition-colors">
+                <i data-lucide="eye" class="w-4 h-4" id="toggle-password-icon"></i>
+            </button>
+        </div>
+        <button id="unlock-btn"
+            class="w-full px-6 py-3 bg-warm-900 text-warm-100 rounded-xl font-medium text-sm hover:bg-warm-800 transition-all">
+            Acessar documento
+        </button>
+        <p id="password-error" class="text-red-500 text-xs mt-3 hidden">Senha incorreta.</p>
+        <p class="text-warm-400 text-xs mt-6">Felipi Fernandes — Consultoria Estratégica</p>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MAIN CONTENT                                                  -->
+<!-- ============================================================ -->
+<div id="main-content">
+
+    <!-- Action Bar -->
+    <div id="action-bar" class="no-print">
+        <div class="max-w-[240mm] mx-auto px-4 w-full flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html"
+                    class="flex items-center gap-1.5 text-warm-400 hover:text-warm-100 transition-colors text-xs">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>Proposta</span>
+                </a>
+                <span class="text-warm-700 text-xs">|</span>
+                <span class="text-warm-300 text-xs font-medium truncate max-w-[200px] sm:max-w-none">
+                    Playbook Embelleze vs Salon Line
+                </span>
+            </div>
+            <div class="flex items-center gap-1">
+                <button onclick="printDoc()"
+                    class="flex items-center gap-1.5 px-2.5 py-1.5 text-warm-400 hover:text-white hover:bg-warm-800 rounded-lg text-xs transition-colors">
+                    <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Imprimir</span>
+                </button>
+                <button onclick="downloadPDF()"
+                    class="flex items-center gap-1.5 px-2.5 py-1.5 bg-warm-700 hover:bg-warm-600 text-warm-100 rounded-lg text-xs transition-colors">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Download PDF</span>
+                </button>
+                <button onclick="openShareModal()"
+                    class="flex items-center gap-1.5 px-2.5 py-1.5 text-warm-400 hover:text-white hover:bg-warm-800 rounded-lg text-xs transition-colors">
+                    <i data-lucide="share-2" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">Compartilhar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- PLAYBOOK PAGES                                           -->
+    <!-- ======================================================= -->
+    <div class="playbook-bg">
+
+        <!-- ═══ PAGE 1 · COVER ═══ -->
+        <div class="a4-page">
+            <div class="cover-blob"></div>
+
+            <!-- Top: logos + attribution -->
+            <div class="flex items-start justify-between" style="margin-bottom:auto;padding-bottom:10mm;">
+                <img src="files/svg/embelleze-logo-svg.svg" alt="Embelleze"
+                    style="height:26px;filter:brightness(0);opacity:0.8;margin-top:2px;">
+                <div class="text-right">
+                    <p style="font-size:9px;color:var(--warm-500);text-transform:uppercase;letter-spacing:0.07em;">Preparado por</p>
+                    <p style="font-size:11px;color:var(--warm-700);font-weight:600;">Felipi Fernandes</p>
+                </div>
+            </div>
+
+            <!-- Main title -->
+            <div style="margin-bottom:12mm;">
+                <p class="doc-cover-label">Análise Estratégica Competitiva</p>
+                <h1 class="doc-cover-title">
+                    Playbook<br>Embelleze<br>
+                    <span style="color:var(--warm-400);">vs Salon Line</span>
+                </h1>
+                <p class="doc-cover-subtitle">
+                    Mapeamento dos fatores de crescimento da Salon Line e oportunidades
+                    estratégicas para a Embelleze no mercado capilar brasileiro.
+                </p>
+            </div>
+
+            <!-- Metadata strip -->
+            <div style="display:flex;gap:8mm;margin-bottom:10mm;">
+                <div>
+                    <p style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.07em;color:var(--warm-400);margin-bottom:2px;">Referência</p>
+                    <p style="font-size:11px;color:var(--warm-700);font-weight:600;">Março 2026</p>
+                </div>
+                <div>
+                    <p style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.07em;color:var(--warm-400);margin-bottom:2px;">Natureza</p>
+                    <p style="font-size:11px;color:var(--warm-700);font-weight:600;">Fontes públicas</p>
+                </div>
+                <div>
+                    <p style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.07em;color:var(--warm-400);margin-bottom:2px;">Classificação</p>
+                    <p style="font-size:11px;font-weight:600;" style="color:#b45309;">Restrito</p>
+                </div>
+            </div>
+
+            <!-- Table of contents -->
+            <div style="background:var(--warm-50);border-radius:8px;padding:11px 15px;border:1px solid var(--warm-200);">
+                <p style="font-size:8.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--warm-500);font-weight:700;margin-bottom:8px;">Índice</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 16px;">
+                    <p style="font-size:9.5px;color:var(--warm-700);">1. Panorama do Mercado Capilar</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">8. Estimativa de Investimento em Mídia</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">2. Trajetória da Salon Line</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">9. Fatores Explicativos do Crescimento</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">3. Estratégia de Posicionamento</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">10. Oportunidades no Mercado</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">4. Estratégia Digital</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">11. Síntese de Aprendizados</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">5. Estratégia de E-commerce</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">12. Implicações Estratégicas para Embelleze</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">6. Estratégia de Mídia Paga</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">Referências</p>
+                    <p style="font-size:9.5px;color:var(--warm-700);">7. Análise Comparativa de Presença Digital</p>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span>Playbook Embelleze vs Salon Line — Confidencial</span>
+                <span>Felipi Fernandes · 2026</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 2 · SUMÁRIO EXECUTIVO ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2">
+                <span class="sn" style="background:none;border:2px solid var(--warm-400);color:var(--warm-600);font-size:10px;font-weight:400;">SE</span>
+                Sumário Executivo
+            </h2>
+
+            <p class="doc-p">Este relatório apresenta uma análise estratégica da Salon Line, mapeando os fatores que explicam sua trajetória de crescimento no mercado de beleza brasileiro e identificando os mecanismos que sustentam seu posicionamento atual. O objetivo não é qualificar o desempenho da empresa em termos absolutos, mas <strong>extrair aprendizados aplicáveis ao mercado</strong> e identificar oportunidades para players do setor.</p>
+
+            <p class="doc-p">A trajetória da Salon Line é relevante pelo que revela sobre mudanças estruturais no comportamento do consumidor brasileiro. A empresa capitalizou um movimento cultural de valorização dos cabelos cacheados e crespos — um segmento até então com oferta insuficiente frente à demanda latente — e construiu um ecossistema de marca ancorado em comunidade, conteúdo digital e uma rede ampla de criadores de conteúdo.</p>
+
+            <p class="doc-p">Em perspectiva comparada com players como a Embelleze, a Salon Line apresenta distinções estratégicas claras no ambiente digital: maior volume de tráfego orgânico, maior presença em plataformas de vídeo curto e estrutura de influência mais horizontal e escalável. A Embelleze, por sua vez, mantém posições relevantes em canais de vendas tradicionais, investe proporcionalmente mais em mídia paga e sustenta uma rede educacional-profissional de longo prazo através do Instituto Embelleze.</p>
+
+            <div class="doc-highlight" style="margin-top:14px;">
+                <p style="font-size:11px;font-weight:600;margin-bottom:7px;">Principais vetores de crescimento identificados:</p>
+                <ul>
+                    <li><strong>Posicionamento cultural</strong> ancorado em identidade e representatividade</li>
+                    <li><strong>Construção de comunidade</strong> como ativo de marca de longo prazo</li>
+                    <li><strong>Estrutura escalável</strong> de marketing de influência horizontal (programa Migs)</li>
+                    <li><strong>Portfólio amplo e acessível</strong>: 400+ produtos em 16 linhas para múltiplos perfis</li>
+                    <li><strong>Integração digital</strong> entre conteúdo, redes sociais e canais de venda</li>
+                </ul>
+            </div>
+
+            <div class="page-footer">
+                <span>Sumário Executivo</span>
+                <span>2 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 3 · SECTION 1 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">1</span> Panorama do Mercado Capilar no Brasil</h2>
+
+            <h3 class="doc-h3">1.1 Dimensão e Crescimento do Setor</h3>
+            <p class="doc-p">O mercado brasileiro de hair care registrou faturamento de <strong>R$ 28,2 bilhões em 2023</strong>, com crescimento de 11,9% em relação ao ano anterior, posicionando o Brasil entre os três maiores mercados globais do segmento, ao lado de Estados Unidos e China (Euromonitor International). As projeções até 2028 apontam para crescimento acumulado de 54,5%, elevando o faturamento estimado para <strong>R$ 43,6 bilhões</strong>.</p>
+            <p class="doc-p">Esse crescimento é sustentado por alta valorização cultural da estética pessoal, diversidade étnica da população, penetração digital crescente e expansão do consumo nas classes C e D.</p>
+
+            <h3 class="doc-h3">1.2 Estrutura Competitiva</h3>
+            <p class="doc-p">O mercado apresenta estrutura mista: grandes conglomerados multinacionais convivem com marcas nacionais de posicionamento segmentado.</p>
+            <table class="doc-table">
+                <thead>
+                    <tr><th style="width:36%">Player</th><th>Modelo de Atuação</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Unilever</strong></td><td>Presença ampla, múltiplas categorias e canais</td></tr>
+                    <tr><td><strong>Procter &amp; Gamble</strong></td><td>Alto investimento em marketing e inovação de produto</td></tr>
+                    <tr><td><strong>L'Oréal</strong></td><td>Especialização em produtos profissionais e premium</td></tr>
+                    <tr><td><strong>Natura &amp; Co</strong></td><td>Diferenciação por sustentabilidade e ativos da biodiversidade</td></tr>
+                    <tr><td><strong>Salon Line</strong></td><td>Especialização em cabelos cacheados, crespos e ondulados</td></tr>
+                    <tr><td><strong>Embelleze</strong></td><td>Tradição em transformação capilar; força no canal profissional</td></tr>
+                    <tr><td><strong>Skala</strong></td><td>Acessibilidade de preço e presença massiva em redes sociais</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="doc-h3">1.3 Tendências Estruturantes</h3>
+            <ul class="doc-ul">
+                <li><strong>Personalização e sustentabilidade:</strong> crescimento da demanda por fórmulas veganas, naturais e orgânicas, com embalagens ecológicas.</li>
+                <li><strong>Saúde capilar como prioridade:</strong> deslocamento do foco estético para hidratação, nutrição e proteção dos fios.</li>
+                <li><strong>Tecnologia aplicada ao produto:</strong> biotecnologia na formulação e crescimento de diagnóstico capilar digital.</li>
+                <li><strong>Proteção ambiental dos fios:</strong> tendência "hair care shield" reflete preocupação com danos por poluição e radiação solar.</li>
+            </ul>
+
+            <h3 class="doc-h3">1.4 Segmento de Cabelos Cacheados e Crespos</h3>
+            <p class="doc-p">O segmento vive expansão acelerada. O mercado global foi estimado em <strong>US$ 5 bilhões em 2025</strong>, com projeção de atingir <strong>US$ 9 bilhões até 2033</strong> (CAGR de 7%). No Brasil, esse crescimento é amplificado pela representação crescente desse perfil de cabelo na mídia e nas redes sociais.</p>
+
+            <h3 class="doc-h3">1.5 Comportamento do Consumidor Digital</h3>
+            <p class="doc-p">O ambiente digital se consolidou como principal canal de descoberta e decisão de compra. Dados de mercado indicam que <strong>68% dos consumidores buscam referências online antes da compra</strong>, e que <strong>66% acompanham influenciadores de beleza nas redes sociais</strong>, dos quais <strong>62% já realizaram compras por indicação</strong> desses criadores.</p>
+
+            <div class="page-footer">
+                <span>1. Panorama do Mercado Capilar no Brasil</span>
+                <span>3 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 4 · SECTION 2 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">2</span> Trajetória da Salon Line</h2>
+
+            <h3 class="doc-h3">2.1 Origens e Reorientação Estratégica</h3>
+            <p class="doc-p">A Salon Line foi fundada em 1995, com foco inicial em depilação. Em 1996, iniciou a comercialização de produtos capilares com ênfase em alisamento e transformação. Durante quase duas décadas, seu portfólio esteve centrado nesse segmento.</p>
+            <p class="doc-p">Em 2014, a empresa identificou uma transformação cultural em curso: o movimento de transição capilar impulsionado pelo engajamento de mulheres nas redes sociais que passaram a assumir seus cabelos naturais. Diante desse cenário, a empresa optou por uma <strong>reorientação estratégica significativa</strong>: redirecionar de "transformação" para "cuidado e valorização dos cabelos naturais".</p>
+
+            <h3 class="doc-h3">2.2 O Movimento #TôDeCacho</h3>
+            <p class="doc-p">Em 2015, a Salon Line lançou a linha <strong>#TôDeCacho</strong>, que se tornou o principal veículo de comunicação dessa nova fase. A linha incluiu produtos inovadores para o período — como a Maionese Capilar e a Gelatina — que respondiam a necessidades práticas da consumidora em transição capilar.</p>
+            <p class="doc-p">Mais relevante do que o produto em si, o movimento construiu uma plataforma de identificação: uma comunidade de mulheres que compartilhavam experiências de transição, criando fluxo contínuo de conteúdo gerado pelo usuário e fortalecendo o vínculo afetivo com a marca.</p>
+
+            <h3 class="doc-h3">2.3 Expansão de Portfólio e Parcerias</h3>
+            <p class="doc-p">Com o posicionamento consolidado no segmento cacheado, a empresa expandiu progressivamente seu portfólio para atender outros perfis capilares. Parcerias com personalidades de grande visibilidade — como as cantoras Ludmilla e Preta Gil — contribuíram para consolidar a percepção de marca inclusiva junto ao público amplo.</p>
+            <p class="doc-p">Em termos financeiros, dados de 2021 indicam faturamento de <strong>R$ 125,7 milhões apenas no canal farmacêutico</strong>. Estimativas baseadas em dados de mercado sugerem faturamento total anual na faixa de <strong>R$ 200 a R$ 500 milhões</strong>, com margem de incerteza elevada por ser empresa de capital fechado.</p>
+
+            <div class="page-footer">
+                <span>2. Trajetória da Salon Line</span>
+                <span>4 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 5 · SECTION 3 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">3</span> Estratégia de Posicionamento de Marca</h2>
+
+            <h3 class="doc-h3">3.1 Público-Alvo e Construção de Narrativa</h3>
+            <p class="doc-p">A Salon Line direcionou sua comunicação para consumidoras de cabelos crespos, cacheados e ondulados — um segmento historicamente sub-representado nas campanhas de beleza das grandes marcas. A narrativa foi construída sobre os pilares do <strong>empoderamento, da autoaceitação e da identidade cultural</strong>.</p>
+            <p class="doc-p">O movimento <strong>#TôDeCacho</strong> funcionou como plataforma de pertencimento, onde consumidoras podiam compartilhar suas histórias de transição capilar. Esse mecanismo transformou a relação entre marca e consumidora: de transacional para relacional.</p>
+
+            <h3 class="doc-h3">3.2 Representatividade como Elemento Estrutural</h3>
+            <p class="doc-p">A Salon Line incorporou a diversidade como valor central de sua comunicação — não apenas como elemento estético das campanhas, mas como posicionamento político. A presença de criadoras de conteúdo negras, trans e periféricas em suas campanhas é consistente ao longo dos anos, o que fortalece a percepção de autenticidade junto ao seu público principal.</p>
+
+            <h3 class="doc-h3">3.3 Diferenciação Estratégica por Concorrente</h3>
+            <p class="doc-p"><strong>Salon Line vs. Embelleze:</strong> São empresas com histórico e modelos de atuação distintos. A Embelleze tem sua trajetória associada ao canal profissional e ao Instituto Embelleze — com foco em cabeleireiros e técnicos. A Salon Line construiu sua presença diretamente com o consumidor final, priorizando o digital e as redes sociais. Enquanto a Embelleze investe em influência de longo prazo via comunidade profissional, a Salon Line investe em volume e autenticidade via microinfluenciadores.</p>
+            <p class="doc-p"><strong>Salon Line vs. Lola Cosmetics:</strong> A Lola Cosmetics apresenta DNA similar no que se refere ao público jovem e comunicação irreverente. A distinção reside na profundidade da construção de comunidade da Salon Line e na escala de seu programa de criadores de conteúdo.</p>
+
+            <div class="page-footer">
+                <span>3. Estratégia de Posicionamento de Marca</span>
+                <span>5 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 6 · SECTION 4 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">4</span> Estratégia Digital</h2>
+
+            <h3 class="doc-h3">4.1 Presença Orgânica e SEO</h3>
+            <p class="doc-p">O domínio <code>salonline.com.br</code> apresentou, no período de dezembro de 2025 a fevereiro de 2026, <strong>196.390 visitas totais</strong>, com média mensal de <strong>37.538 visitantes únicos</strong>. Métricas de engajamento são consistentes: duração média de <strong>7 min 35 s</strong> e <strong>5,70 páginas por visita</strong> (SimilarWeb, Dez/2025–Fev/2026). O tráfego orgânico representa <strong>38,59%</strong> do total de acessos, sinalizando investimento relevante em SEO e conteúdo editorial.</p>
+
+            <h3 class="doc-h3">4.2 Estratégia por Plataforma</h3>
+            <p class="doc-p"><strong>TikTok e Instagram:</strong> abordagem de "infotenimento" — conteúdo que combina informação prática sobre cuidados capilares com entretenimento. Em março de 2026: <strong>4,48 M de seguidores no Instagram</strong> e <strong>4,7 M no TikTok</strong>.</p>
+            <p class="doc-p"><strong>YouTube:</strong> com <strong>903 mil inscritos</strong>, o canal é utilizado para conteúdos de maior profundidade — documentários, podcasts e entrevistas sobre representatividade e saúde capilar. Posiciona a marca como referência editorial, não apenas comercial.</p>
+            <p class="doc-p"><strong>Giphy:</strong> presença com mais de <strong>10 bilhões de visualizações</strong> em GIFs de marca — estratégia de inserção cultural de baixo custo e alto alcance.</p>
+
+            <h3 class="doc-h3">4.3 Estrutura de Influenciadores</h3>
+            <p class="doc-p">O programa de marketing de influência é organizado em camadas hierárquicas:</p>
+            <table class="doc-table">
+                <thead>
+                    <tr><th style="width:28%">Categoria</th><th>Perfil</th><th style="width:22%">Volume Est.</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Embaixadores</strong></td><td>Criadores de grande audiência, contrato formal com exclusividade parcial</td><td>~30</td></tr>
+                    <tr><td><strong>Top Migs</strong></td><td>Microinfluenciadores com alto engajamento, colaboração próxima e regular</td><td>Centenas</td></tr>
+                    <tr><td><strong>Migs</strong></td><td>Rede ampla de microinfluenciadores; recebem produtos mensalmente — #migssalonline</td><td>+1.000</td></tr>
+                </tbody>
+            </table>
+            <p class="doc-p" style="margin-top:6px;">Essa estrutura combina alcance e autenticidade: os embaixadores garantem visibilidade de massa, enquanto os Migs geram volume constante de conteúdo com elevada credibilidade percebida. Conteúdos patrocinados são identificados por <strong>#publisl</strong> e <strong>#migssalonline</strong>.</p>
+
+            <div class="page-footer">
+                <span>4. Estratégia Digital</span>
+                <span>6 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 7 · SECTIONS 5 + 6 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">5</span> Estratégia de E-commerce</h2>
+
+            <h3 class="doc-h3">5.1 Presença em Marketplaces</h3>
+            <p class="doc-p">A Salon Line mantém lojas oficiais nos principais marketplaces — Mercado Livre, Amazon e Shopee — com portfólios completos e estratégias de avaliações e recorrência de compra. Na Amazon, produtos da marca registram milhares de avaliações e volumes superiores a <strong>2.000 unidades vendidas por mês</strong> em determinados SKUs.</p>
+
+            <h3 class="doc-h3">5.2 E-commerce Próprio e Live Commerce</h3>
+            <p class="doc-p">O site <code>salonline.com.br</code> opera como hub integrado de conteúdo e venda. A marca foi pioneira no uso de <strong>live commerce</strong> no Brasil, convertendo o momento de compra em experiência de entretenimento com interação ao vivo. O <strong>Clube da Xêrosa</strong> — programa de assinatura — é mecanismo de fidelização e receita recorrente.</p>
+
+            <h3 class="doc-h3">5.3 Social Commerce e Integração de Funil</h3>
+            <p class="doc-p">A integração entre conteúdo e canais de venda constitui um funil de conversão relativamente orgânico: a descoberta ocorre via criadores, o interesse se aprofunda nas plataformas de vídeo e a conversão acontece no site próprio e nos marketplaces. Essa arquitetura <strong>reduz a dependência de mídia paga</strong> para geração de demanda.</p>
+
+            <hr class="sec-divider">
+
+            <h2 class="doc-h2"><span class="sn">6</span> Estratégia de Mídia Paga</h2>
+
+            <h3 class="doc-h3">6.1 Google Ads e Meta Ads</h3>
+            <p class="doc-p">A Salon Line mantém presença ativa em Meta Ads com criativos predominantemente em vídeo, curtos e de produção ágil — tutoriais ("como usar"), demonstrações de resultado e conteúdo gerado por influenciadores com impulsionamento pago. No Google Ads, a estratégia combina <strong>brand bidding</strong> e palavras-chave de categoria como "creme para cabelos cacheados".</p>
+
+            <h3 class="doc-h3">6.2 Modelo Always-On e Intensidade</h3>
+            <p class="doc-p">O modelo de campanha é estruturado como <strong>"always-on"</strong> — ativações contínuas ao longo do ano, sem concentração sazonal exclusiva. O tráfego pago representa <strong>13,9%</strong> dos acessos da Salon Line, contra <strong>28,2%</strong> da Embelleze — indicando que a Salon Line tem maior dependência de tráfego orgânico e social para geração de demanda, enquanto a Embelleze ainda depende proporcionalmente mais de mídia paga.</p>
+
+            <div class="page-footer">
+                <span>5. Estratégia de E-commerce · 6. Mídia Paga</span>
+                <span>7 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 8 · SECTION 7 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">7</span> Análise Comparativa de Presença Digital</h2>
+            <p class="doc-p" style="margin-bottom:8px;">Diferenças estratégicas entre Salon Line e Embelleze com base em dados públicos — período Dez/2025–Fev/2026 (SimilarWeb).</p>
+
+            <table class="doc-table">
+                <thead>
+                    <tr><th style="width:44%">Dimensão</th><th>Salon Line</th><th>Embelleze</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Ranking Global (SimilarWeb)</strong></td><td>#72.571</td><td>#388.760</td></tr>
+                    <tr><td><strong>Ranking Brasil</strong></td><td>#6.391</td><td>#34.385</td></tr>
+                    <tr><td><strong>Ranking Categoria Beleza</strong></td><td>#615</td><td>#4.152</td></tr>
+                    <tr><td><strong>Visitas Totais (3 meses)</strong></td><td>196.390</td><td>29.041</td></tr>
+                    <tr><td><strong>Visitantes Únicos/mês</strong></td><td>37.538</td><td>7.090</td></tr>
+                    <tr><td><strong>Duração Média da Visita</strong></td><td>7 min 35 s</td><td>2 min 36 s</td></tr>
+                    <tr><td><strong>Páginas por Visita</strong></td><td>5,70</td><td>3,56</td></tr>
+                    <tr><td><strong>Bounce Rate</strong></td><td>49,27%</td><td>48,35%</td></tr>
+                    <tr><td><strong>Tráfego Orgânico</strong></td><td>38,59%</td><td>14,4%</td></tr>
+                    <tr><td><strong>Tráfego Pago</strong></td><td>13,9%</td><td>28,2%</td></tr>
+                    <tr><td><strong>Mobile</strong></td><td>92,8%</td><td>90%</td></tr>
+                    <tr><td><strong>Instagram (seguidores)</strong></td><td>4,48 milhões</td><td>1,42 milhão</td></tr>
+                    <tr><td><strong>TikTok (seguidores)</strong></td><td>4,7 milhões</td><td>Pouco expressivo</td></tr>
+                    <tr><td><strong>YouTube (inscritos)</strong></td><td>903 mil</td><td>Não expressivo</td></tr>
+                    <tr><td><strong>Faturamento estimado</strong></td><td>R$ 200–500 milhões *</td><td>~R$ 500 milhões **</td></tr>
+                </tbody>
+            </table>
+
+            <p style="font-size:9px;color:var(--warm-500);margin-top:5px;line-height:1.5;">
+                * Faixa ampla — empresa de capital fechado. Fonte: ZoomInfo + estimativas de mercado.
+                ** Dado de 2023. Fonte: Times Brasil.
+            </p>
+
+            <div class="doc-note" style="margin-top:10px;">
+                <strong>Observações:</strong> A Embelleze apresenta menor bounce rate e alto tráfego direto (57,2%), o que pode indicar base de usuários mais fidelizada. A Salon Line apresenta métricas de engajamento por visita (tempo e páginas) significativamente superiores. A maior dependência da Embelleze em mídia paga pode indicar menor autoridade de domínio acumulada — cada sessão começa do zero, comprada; enquanto a Salon Line construiu o oposto: <strong>38,6% de orgânico</strong> significa que a marca vive na memória do consumidor sem precisar de anúncio.
+            </div>
+
+            <div class="page-footer">
+                <span>7. Análise Comparativa de Presença Digital</span>
+                <span>8 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 9 · SECTION 8 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">8</span> Estimativa de Investimento em Mídia Digital</h2>
+
+            <div class="doc-note">
+                <strong>Aviso metodológico:</strong> A Salon Line é empresa de capital fechado e não divulga dados de investimento em marketing. As estimativas a seguir são construídas com base em proxies de métricas digitais públicas e benchmarks da categoria beleza no Brasil. Não representam dados reais — são ordens de grandeza orientativas para análise competitiva.
+            </div>
+
+            <h3 class="doc-h3">Bloco A — Mídia Paga em Search e Social (Google Ads + Meta Ads)</h3>
+            <table class="doc-table">
+                <thead><tr><th style="width:65%">Variável</th><th>Valor</th></tr></thead>
+                <tbody>
+                    <tr><td>Visitas mensais estimadas (média do período)</td><td>65.463</td></tr>
+                    <tr><td>Participação do tráfego pago</td><td>13,9%</td></tr>
+                    <tr><td><strong>Visitas pagas estimadas/mês</strong></td><td><strong>9.099</strong></td></tr>
+                    <tr><td>CPC médio estimado — categoria beleza Brasil</td><td>R$ 2,00–3,50</td></tr>
+                    <tr><td><strong>Gasto estimado em Search/mês</strong></td><td><strong>R$ 18.000–32.000</strong></td></tr>
+                    <tr><td>CPM médio — Meta Brasil (beleza)</td><td>R$ 15–25</td></tr>
+                    <tr><td>Impressões estimadas/mês</td><td>5–10 milhões</td></tr>
+                    <tr><td><strong>Gasto estimado em Meta Ads/mês</strong></td><td><strong>R$ 75.000–250.000</strong></td></tr>
+                    <tr><td class="total-row">Subtotal A (anualizado)</td><td class="total-row">R$ 1,1M – R$ 3,4M</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="doc-h3">Bloco B — Marketing de Influência</h3>
+            <table class="doc-table">
+                <thead><tr><th style="width:22%">Camada</th><th style="width:16%">Volume</th><th>Custo Médio/mês</th><th>Subtotal Mensal</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Embaixadores</strong></td><td>30</td><td>R$ 10K–30K</td><td>R$ 300K–900K</td></tr>
+                    <tr><td><strong>Top Migs</strong></td><td>~200</td><td>R$ 1,5K–5K</td><td>R$ 300K–1M</td></tr>
+                    <tr><td><strong>Migs</strong></td><td>1.000+</td><td>R$ 300–800</td><td>R$ 300K–800K</td></tr>
+                    <tr><td class="total-row" colspan="3">Total Mensal Estimado</td><td class="total-row">R$ 0,9M – R$ 2,7M</td></tr>
+                    <tr><td class="total-row" colspan="3">Total Anual Estimado</td><td class="total-row">R$ 10,8M – R$ 32,4M</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="doc-h3">Bloco C — Produção, Operação Digital e Tecnologia</h3>
+            <table class="doc-table">
+                <thead><tr><th style="width:68%">Componente</th><th>Estimativa Anual</th></tr></thead>
+                <tbody>
+                    <tr><td>Produção de vídeo e criativo para redes sociais</td><td>R$ 1M–3M</td></tr>
+                    <tr><td>Operação de plataformas (e-commerce, CRM, automação)</td><td>R$ 500K–1,5M</td></tr>
+                    <tr><td>Live commerce e experiências digitais</td><td>R$ 500K–1M</td></tr>
+                    <tr><td class="total-row">Subtotal C</td><td class="total-row">R$ 2M – R$ 5,5M</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="doc-h3">Consolidação</h3>
+            <table class="doc-table">
+                <thead><tr><th style="width:60%">Bloco</th><th>Faixa Anual Estimada</th></tr></thead>
+                <tbody>
+                    <tr><td>A — Mídia Paga (Search + Social)</td><td>R$ 1,1M – R$ 3,4M</td></tr>
+                    <tr><td>B — Marketing de Influência</td><td>R$ 10,8M – R$ 32,4M</td></tr>
+                    <tr><td>C — Produção e Operação Digital</td><td>R$ 2M – R$ 5,5M</td></tr>
+                    <tr><td class="total-row"><strong>TOTAL ESTIMADO</strong></td><td class="total-row"><strong>R$ 13,9M – R$ 41,3M</strong></td></tr>
+                    <tr><td><strong>Faixa central de referência</strong></td><td><strong>~R$ 20M – R$ 35M/ano</strong></td></tr>
+                </tbody>
+            </table>
+            <p class="doc-p" style="margin-top:6px;">Essa faixa é consistente com benchmarks do setor: empresas com faturamento estimado entre R$ 200M e R$ 500M e modelo "digital-first" tendem a alocar entre <strong>8% e 15% da receita bruta em marketing</strong>.</p>
+
+            <div class="page-footer">
+                <span>8. Estimativa de Investimento em Mídia Digital</span>
+                <span>9 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 10 · SECTIONS 9 + 10 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">9</span> Fatores Explicativos do Crescimento</h2>
+
+            <h3 class="doc-h3">9.1 Posicionamento Cultural e Identidade de Marca</h3>
+            <p class="doc-p">A decisão de associar a marca ao movimento de valorização dos cabelos naturais respondeu a uma lacuna que era, simultaneamente, comercial e simbólica. O movimento <strong>#TôDeCacho</strong> não apenas gerou demanda, mas criou uma narrativa de pertencimento que diferenciou a marca de competidores que permaneceram com posicionamentos neutros ou tradicionais.</p>
+
+            <h3 class="doc-h3">9.2 Comunidade como Ativo de Longo Prazo</h3>
+            <p class="doc-p">Ao transformar consumidoras em participantes ativas de uma comunidade, a Salon Line criou um mecanismo de defesa de marca de baixo custo e alta resiliência — fonte contínua de conteúdo orgânico, feedback de produto e resistência a ataques competitivos.</p>
+
+            <h3 class="doc-h3">9.3 Escala e Diversidade no Marketing de Influência</h3>
+            <p class="doc-p">O programa Migs é estruturalmente distinto dos modelos tradicionais de endorsement. Ao descentralizar a comunicação em mais de 1.000 criadores de diferentes perfis, a marca garante volume, diversidade de audiências e redução de risco (nenhum criador único representa dependência crítica).</p>
+
+            <h3 class="doc-h3">9.4 Portfólio Acessível e Diversificado</h3>
+            <p class="doc-p">Com mais de <strong>400 produtos em 16 linhas</strong>, a Salon Line cobre múltiplos tipos de cabelo com faixas de preço acessíveis. Essa amplitude reduz o churn por falta de produto adequado e aumenta o ticket médio por consumidora.</p>
+
+            <h3 class="doc-h3">9.5 Integração Digital como Ecossistema</h3>
+            <p class="doc-p">A convergência entre conteúdo (redes sociais, YouTube), descoberta (SEO, social) e conversão (e-commerce próprio, marketplaces) cria um funil com múltiplos pontos de entrada e menor dependência de cada canal isoladamente.</p>
+
+            <hr class="sec-divider">
+
+            <h2 class="doc-h2"><span class="sn">10</span> Oportunidades Identificadas no Mercado</h2>
+
+            <h3 class="doc-h3">10.1 Hipersegmentação</h3>
+            <p class="doc-p">O portfólio amplo da Salon Line atende múltiplos públicos com soluções generalistas. Há espaço para competidores que se especializem em nichos: cuidados para couro cabeludo, cabelos grisalhos, linhas infantis ou produtos com certificações veganas e sustentáveis.</p>
+
+            <h3 class="doc-h3">10.2 Inovação na Jornada do Cliente</h3>
+            <p class="doc-p">Diagnósticos capilares baseados em IA, clubes de assinatura com curation personalizada e novos formatos de produto (barras sólidas, refis) representam vetores de diferenciação ainda em desenvolvimento no mercado brasileiro.</p>
+
+            <h3 class="doc-h3">10.3 Categorias Adjacentes</h3>
+            <p class="doc-p">A incursão da Salon Line em skincare e maquiagem ainda é incipiente. Marcas com credibilidade em cuidados capilares têm path natural de extensão para cuidados com a pele, especialmente para o público de pele negra e parda.</p>
+
+            <div class="page-footer">
+                <span>9. Fatores Explicativos do Crescimento · 10. Oportunidades</span>
+                <span>10 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 11 · SECTION 11 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">11</span> Síntese de Aprendizados Estratégicos</h2>
+
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th style="width:38%">Aprendizado</th>
+                        <th>Implicação para o Mercado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Autenticidade como diferencial</strong></td>
+                        <td>Marcas que adotam posicionamentos coerentes com valores sociais relevantes constroem vínculo emocional mais duradouro do que campanhas de produto isoladas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comunidade como mecanismo de escala</strong></td>
+                        <td>Uma base engajada multiplica o alcance da marca de forma orgânica e autentica o conteúdo patrocinado.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Influência horizontal e distribuída</strong></td>
+                        <td>Redes de microinfluenciadores geram volume, autenticidade e capilaridade superiores ao modelo de endosso por celebrity.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Digital como estrutura central</strong></td>
+                        <td>A integração entre conteúdo, social e venda reduz custo de aquisição e aumenta lifetime value quando bem executada.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-footer">
+                <span>11. Síntese de Aprendizados Estratégicos</span>
+                <span>11 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 12 · SECTION 12 — PART 1 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2"><span class="sn">12</span> Implicações Estratégicas para Embelleze</h2>
+            <p class="doc-p" style="margin-bottom:12px;">Esta seção traduz os aprendizados do caso Salon Line em oportunidades específicas para a Embelleze, considerando seus ativos estratégicos particulares.</p>
+
+            <h3 class="doc-h3">12.1 Ponto de Partida: Ativos Disponíveis</h3>
+            <ul class="doc-ul">
+                <li><strong>Marca Novex:</strong> com presença estabelecida em farmácias, supermercados e varejo popular, a Novex possui reconhecimento em perfis de consumidora distintos dos dominados pela Salon Line.</li>
+                <li><strong>Instituto Embelleze:</strong> rede de formação profissional com alcance nacional — ativo de construção de credibilidade técnica que poucas marcas possuem.</li>
+                <li><strong>Presença em varejo físico:</strong> distribuição consolidada em farmácias e supermercados, garantindo acesso a consumidoras que realizam parte significativa de suas compras fora do digital.</li>
+                <li><strong>Posicionamento de custo-benefício:</strong> competitivo nas classes C e D, onde o crescimento do consumo de beleza é mais acelerado.</li>
+            </ul>
+
+            <h3 class="doc-h3">12.2 Oportunidade 1 — Ativação Digital da Marca Novex</h3>
+            <p class="doc-p"><strong>O que o caso Salon Line ensina:</strong> A construção de presença digital consistente em plataformas de vídeo curto (TikTok, Reels) é o principal mecanismo de geração de awareness junto ao público de 18 a 35 anos. A Salon Line construiu sua posição ao longo de 10 anos de investimento contínuo nesse canal.</p>
+            <p class="doc-p"><strong>O que os dados indicam:</strong> O tráfego social da Embelleze é não expressivo. O perfil Instagram da Embelleze/Novex registra 1,42 milhão de seguidores — base existente, mas com engajamento mais baixo e queda observada no período analisado.</p>
+            <p class="doc-p"><strong>Oportunidade:</strong> Desenvolver estratégia de conteúdo dedicada à Novex nas plataformas de vídeo curto, com linha editorial própria, tom de voz consistente e frequência de publicação suficiente para competir na atenção do algoritmo. O ativo da "tradição" e da "eficácia comprovada" pode ser reposicionado como narrativa de autenticidade. <strong>Ação inicial:</strong> mapear criadores que já usam e comentam produtos Novex organicamente e estruturar um programa de embaixadores voltado especificamente para esse público.</p>
+
+            <h3 class="doc-h3">12.3 Oportunidade 2 — Programa de Creators Estruturado</h3>
+            <p class="doc-p"><strong>O que o caso Salon Line ensina:</strong> O programa Migs demonstra que escala de influência não requer orçamento exclusivo em mega influenciadores. Uma rede de 1.000 microinfluenciadores com custo unitário baixo gera volume e diversidade superiores ao de 5 embaixadores de grande porte.</p>
+            <p class="doc-p"><strong>Oportunidade:</strong> Criar um programa de microinfluenciadores para a Novex com foco em <strong>profissionais de beleza formados pelo Instituto Embelleze</strong> (asset único), clientes fiéis e criadoras periféricas com audiências de classe C e D. O Instituto cria canal de recrutamento exclusivo com credibilidade técnica que a Salon Line não possui sistematizado.</p>
+
+            <div class="page-footer">
+                <span>12. Implicações Estratégicas para Embelleze (1 de 3)</span>
+                <span>12 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 13 · SECTION 12 — PART 2 ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2 cont">
+                <span class="sn">12</span>
+                <span style="font-size:13px;font-weight:500;">Implicações Estratégicas para Embelleze <em style="font-weight:400;">(continuação)</em></span>
+            </h2>
+
+            <h3 class="doc-h3">12.4 Oportunidade 3 — Aceleração do E-commerce e Marketplaces</h3>
+            <p class="doc-p"><strong>O que os dados indicam:</strong> O site da Embelleze registra <strong>7.090 visitantes únicos mensais</strong> — consideravelmente inferior à Salon Line (37.538). A duração de visita (2 min 36 s) e as páginas por visita (3,56) sugerem jornada de navegação menos profunda do que o desejado.</p>
+            <ul class="doc-ul">
+                <li>Reestruturar o site como hub de conteúdo e venda integrados — não apenas catálogo de produtos.</li>
+                <li>Implementar navegação por tipo de cabelo/necessidade, com conteúdo educativo associado a cada produto.</li>
+                <li>Desenvolver clube de assinatura para linhas Novex com maior recorrência (condicionadores, máscaras).</li>
+                <li>Auditar qualidade das listagens nos marketplaces (Amazon, Mercado Livre, Shopee) e identificar gaps de portfólio.</li>
+                <li>Investir em conteúdo A+ nas páginas de produto (vídeos de demonstração, benefícios por tipo de cabelo) para aumentar conversão.</li>
+            </ul>
+
+            <h3 class="doc-h3">12.5 Oportunidade 4 — Rebalanceamento da Estratégia de Mídia Paga</h3>
+            <p class="doc-p">A Embelleze investe proporcionalmente mais em mídia paga (28,2%) do que a Salon Line (13,9%), sem necessariamente traduzir isso em maior engajamento ou tempo de permanência no site.</p>
+            <ul class="doc-ul">
+                <li>Redirecionar parte do investimento em mídia paga para construção de tráfego orgânico (SEO + conteúdo) e social — canais com melhor custo de aquisição no médio prazo.</li>
+                <li>Otimizar campanhas de search para capturar demanda de categoria (termos como "shampoo para cabelos cacheados", "máscara de hidratação") onde a Novex tem credibilidade mas pode estar sem visibilidade adequada.</li>
+                <li>Testar formatos UGC em Meta Ads — formato com CPM mais baixo e CTR mais alto que criativos produzidos em estúdio.</li>
+            </ul>
+
+            <h3 class="doc-h3">12.6 Oportunidade 5 — Ativação da Rede do Instituto como Canal de Influência</h3>
+            <p class="doc-p">O Instituto Embelleze forma milhares de profissionais de beleza por ano em todo o Brasil. Esses profissionais têm audiências próprias (clientes, seguidores nas redes), credibilidade técnica e uso cotidiano dos produtos.</p>
+            <ul class="doc-ul">
+                <li>Criar programa "Parceiros Profissionais Embelleze" que ofereça benefícios aos formandos em troca de presença nas redes sociais.</li>
+                <li>Desenvolver canal YouTube protagonizado por profissionais do Instituto — posicionando a Embelleze como autoridade técnica em beleza no Brasil.</li>
+                <li>Esse modelo transforma um ativo educacional já existente em canal de marketing de influência sem custo de recrutamento adicional.</li>
+            </ul>
+
+            <h3 class="doc-h3">12.7 Oportunidade 6 — Expansão para Categorias Adjacentes</h3>
+            <p class="doc-p">A Salon Line ainda tem presença incipiente em skincare e maquiagem — especialmente para peles negras e pardas. A Novex, com posicionamento de eficácia e custo-benefício, tem extensão natural para linhas de skincare para pele negra e parda — segmento com demanda crescente e oferta fragmentada. A presença física em farmácias é canal de distribuição natural para skincare, onde a concorrência de preço é menos intensa do que nos marketplaces.</p>
+
+            <div class="page-footer">
+                <span>12. Implicações Estratégicas para Embelleze (2 de 3)</span>
+                <span>13 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 14 · SECTION 12 — SÍNTESE TABLE ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2 cont">
+                <span class="sn">12</span>
+                <span style="font-size:13px;font-weight:500;">12.8 Síntese das Oportunidades para Embelleze</span>
+            </h2>
+
+            <table class="doc-table" style="font-size:9.5px;">
+                <thead>
+                    <tr>
+                        <th style="width:20%">Frente</th>
+                        <th style="width:22%">Ativo da Embelleze</th>
+                        <th style="width:28%">Aprendizado da Salon Line</th>
+                        <th style="width:30%">Ação Prioritária</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ativação Digital</strong></td>
+                        <td>Marca Novex com reconhecimento existente</td>
+                        <td>Consistência em vídeo curto gera awareness orgânico</td>
+                        <td>Estratégia editorial para TikTok e Reels com linha narrativa própria</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Programa de Creators</strong></td>
+                        <td>Instituto Embelleze como canal de recrutamento exclusivo</td>
+                        <td>Rede horizontal escala autenticidade sem dependência de celebrity</td>
+                        <td>Criar programa "Parceiros Profissionais" com formandos do Instituto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>E-commerce</strong></td>
+                        <td>Demanda ativa por "novex" em search pago</td>
+                        <td>Site como hub de conteúdo + venda integrados</td>
+                        <td>Reestruturar site e criar clube de assinatura para linhas Novex</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Marketplaces</strong></td>
+                        <td>Presença em Amazon / ML / Shopee existente</td>
+                        <td>Conteúdo A+ e estratégia de reviews aumenta conversão</td>
+                        <td>Auditar listagens e investir em conteúdo de produto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mídia Paga</strong></td>
+                        <td>Maior share de tráfego pago vs. Salon Line</td>
+                        <td>UGC e search de categoria têm melhor CPM e CTR</td>
+                        <td>Rebalancear para UGC, search de categoria e construção orgânica</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Influência Profissional</strong></td>
+                        <td>Rede exclusiva de profissionais de beleza formados</td>
+                        <td>Comunidade engajada é o ativo mais difícil de replicar</td>
+                        <td>Transformar rede do Instituto em canal sistematizado de influência</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extensão de Portfólio</strong></td>
+                        <td>Credibilidade técnica + distribuição em farmácias</td>
+                        <td>Salon Line tem brecha em skincare para pele negra/parda</td>
+                        <td>Explorar scalp care e skincare para pele negra e parda</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-footer">
+                <span>12. Implicações Estratégicas para Embelleze (3 de 3)</span>
+                <span>14 / 15</span>
+            </div>
+        </div>
+
+        <!-- ═══ PAGE 15 · REFERÊNCIAS ═══ -->
+        <div class="a4-page">
+            <h2 class="doc-h2">
+                <span class="sn" style="background:none;border:2px solid var(--warm-900);width:26px;height:26px;font-size:9px;font-weight:600;letter-spacing:0.03em;">REF</span>
+                Referências
+            </h2>
+
+            <ol style="padding-left:16px;list-style:decimal;margin-bottom:0;">
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    Cosmetic Innovation. <em>Brasil fatura R$ 28,2 bi em 2023 e sobe para o terceiro lugar em hair care.</em>
+                    <span style="color:var(--warm-500);">cosmeticinnovation.com.br</span>
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    Mordor Intelligence. <em>Tamanho do mercado de cuidados capilares no Brasil e análise de participação.</em>
+                    <span style="color:var(--warm-500);">mordorintelligence.com</span>
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    Central do Varejo. <em>Tendências de cuidados capilares em 2025: principais inovações e expectativa dos consumidores.</em>
+                    <span style="color:var(--warm-500);">centraldovarejo.com.br</span>
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    Cosmetic Innovation. <em>Negligenciados por décadas, cabelos crespos estão revolucionando o mercado hair care.</em>
+                    <span style="color:var(--warm-500);">cosmeticinnovation.com.br</span>
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    Gente (Globo). <em>Trend ou Rotina? Panorama do Consumo de Higiene e Beleza no Brasil.</em>
+                    <span style="color:var(--warm-500);">gente.globo.com</span>
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    SimilarWeb. <em>Dados de tráfego: salonline.com.br e embelleze.com</em>, período Dez/2025–Fev/2026.
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    Times Brasil. <em>Faturamento Embelleze, 2023.</em>
+                </li>
+                <li style="font-size:11px;line-height:1.75;color:var(--warm-700);margin-bottom:4px;">
+                    ZoomInfo. <em>Receita estimada Salon Line.</em>
+                </li>
+            </ol>
+
+            <!-- Colophon -->
+            <div style="margin-top:auto;padding-top:16mm;">
+                <div style="background:var(--warm-900);color:var(--warm-100);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                    <div>
+                        <p style="font-size:9px;color:var(--warm-500);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:2px;">Elaborado por</p>
+                        <p style="font-size:15px;font-weight:700;margin-bottom:1px;">Felipi Fernandes</p>
+                        <p style="font-size:9.5px;color:var(--warm-400);">Consultoria Estratégica Digital</p>
+                    </div>
+                    <div style="text-align:right;">
+                        <p style="font-size:9.5px;color:var(--warm-400);margin-bottom:1px;">felipi.fernandes@proton.me</p>
+                        <p style="font-size:9.5px;color:var(--warm-400);margin-bottom:1px;">felipifernandes.github.io</p>
+                        <p style="font-size:9.5px;color:var(--warm-500);margin-top:5px;">Março 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span>Referências</span>
+                <span>15 / 15</span>
+            </div>
+        </div>
+
+    </div><!-- /playbook-bg -->
+</div><!-- /main-content -->
+
+<!-- ============================================================ -->
+<!-- SHARE MODAL                                                   -->
+<!-- ============================================================ -->
+<div id="share-modal" class="hidden fixed inset-0 z-[200] flex items-center justify-center no-print"
+    style="background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);">
+    <div class="modal-inner">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 py-4" style="background:var(--warm-900);">
+            <div class="flex items-center gap-2.5">
+                <i data-lucide="share-2" class="w-4 h-4" style="color:var(--warm-400);"></i>
+                <h3 style="color:var(--warm-100);font-size:13.5px;font-weight:600;">Compartilhar Playbook</h3>
+            </div>
+            <button onclick="closeShareModal()" style="color:var(--warm-500);" class="hover:text-white transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <!-- Body -->
+        <div class="px-6 py-5" style="background:white;">
+            <!-- URL -->
+            <div style="margin-bottom:14px;">
+                <p style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.07em;color:var(--warm-600);font-weight:600;margin-bottom:6px;">Link direto</p>
+                <div style="display:flex;gap:6px;">
+                    <input id="share-url" type="text" readonly
+                        style="flex:1;padding:8px 10px;background:var(--warm-100);border:1px solid var(--warm-300);border-radius:8px;font-size:11px;color:var(--warm-800);outline:none;">
+                    <button onclick="copyShareUrl()"
+                        style="padding:8px 12px;background:var(--warm-900);color:var(--warm-100);border-radius:8px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:5px;"
+                        class="hover:bg-warm-800 transition-colors">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
+                    </button>
+                </div>
+            </div>
+            <!-- Password -->
+            <div style="margin-bottom:14px;">
+                <p style="font-size:9.5px;text-transform:uppercase;letter-spacing:0.07em;color:var(--warm-600);font-weight:600;margin-bottom:6px;">Senha de acesso</p>
+                <div style="display:flex;gap:6px;">
+                    <input id="share-password" type="password" readonly
+                        style="flex:1;padding:8px 10px;background:var(--warm-100);border:1px solid var(--warm-300);border-radius:8px;font-size:11px;color:var(--warm-800);outline:none;font-family:monospace;">
+                    <button onclick="toggleSharePassword()"
+                        style="padding:8px 10px;background:var(--warm-200);color:var(--warm-700);border-radius:8px;font-size:11px;cursor:pointer;"
+                        class="hover:bg-warm-300 transition-colors">
+                        <i data-lucide="eye" class="w-3.5 h-3.5" id="share-pw-icon"></i>
+                    </button>
+                    <button onclick="copySharePassword()"
+                        style="padding:8px 12px;background:var(--warm-900);color:var(--warm-100);border-radius:8px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:5px;"
+                        class="hover:bg-warm-800 transition-colors">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
+                    </button>
+                </div>
+            </div>
+            <p style="font-size:10.5px;color:var(--warm-400);line-height:1.55;">Este documento é confidencial. Compartilhe apenas com pessoas autorizadas.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+    // ============================================================
+    // AUTH — same password as the proposal
+    // ============================================================
+    const lockScreen   = document.getElementById('lock-screen');
+    const mainContent  = document.getElementById('main-content');
+    const passwordInput = document.getElementById('password-input');
+    const passwordError = document.getElementById('password-error');
+
+    let DOCUMENT_PASSWORD = null;
+
+    function unlock() {
+        const k = [90,87,49,105,90,87,120,115,90,88,112,108,77,106,65,121,78,103,61,61];
+        const expected = atob(k.map(c => String.fromCharCode(c)).join(''));
+        if (passwordInput.value === expected) {
+            DOCUMENT_PASSWORD = expected;
+            lockScreen.classList.add('fade-out');
+            mainContent.classList.add('visible');
+            setTimeout(() => {
+                lockScreen.style.display = 'none';
+                lucide.createIcons();
+            }, 600);
+        } else {
+            passwordError.classList.remove('hidden');
+            passwordInput.parentElement.classList.add('shake');
+            setTimeout(() => passwordInput.parentElement.classList.remove('shake'), 400);
+        }
+    }
+
+    document.getElementById('unlock-btn').addEventListener('click', unlock);
+    passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+    passwordInput.focus();
+
+    document.getElementById('toggle-password').addEventListener('click', function () {
+        const isText = passwordInput.type === 'text';
+        passwordInput.type = isText ? 'password' : 'text';
+        const icon = document.getElementById('toggle-password-icon');
+        icon.setAttribute('data-lucide', isText ? 'eye' : 'eye-off');
+        lucide.createIcons({ nodes: [icon] });
+    });
+
+    // ============================================================
+    // PRINT / PDF
+    // ============================================================
+    function printDoc() {
+        window.print();
+    }
+
+    function downloadPDF() {
+        const orig = document.title;
+        document.title = 'Playbook Embelleze vs Salon Line – Felipi Fernandes';
+        window.print();
+        setTimeout(() => { document.title = orig; }, 1200);
+    }
+
+    // ============================================================
+    // SHARE MODAL
+    // ============================================================
+    function openShareModal() {
+        document.getElementById('share-url').value = window.location.href;
+        document.getElementById('share-password').value = DOCUMENT_PASSWORD || '';
+        document.getElementById('share-modal').classList.remove('hidden');
+        lucide.createIcons();
+    }
+
+    function closeShareModal() {
+        document.getElementById('share-modal').classList.add('hidden');
+    }
+
+    document.getElementById('share-modal').addEventListener('click', function (e) {
+        if (e.target === this) closeShareModal();
+    });
+
+    function toggleSharePassword() {
+        const input = document.getElementById('share-password');
+        const icon  = document.getElementById('share-pw-icon');
+        const isText = input.type === 'text';
+        input.type = isText ? 'password' : 'text';
+        icon.setAttribute('data-lucide', isText ? 'eye' : 'eye-off');
+        lucide.createIcons({ nodes: [icon] });
+    }
+
+    function copyShareUrl() {
+        navigator.clipboard.writeText(document.getElementById('share-url').value)
+            .then(() => showToast('Link copiado!'));
+    }
+
+    function copySharePassword() {
+        navigator.clipboard.writeText(document.getElementById('share-password').value)
+            .then(() => showToast('Senha copiada!'));
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    // Init lock screen icons
+    lucide.createIcons();
+</script>
+</body>
+</html>

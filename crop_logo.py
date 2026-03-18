@@ -2,7 +2,8 @@ from PIL import Image
 import numpy as np
 
 # Open the logo
-img_path = 'assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_01_rgb.png'
+img_path = 'assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_02_rgb.png'
+out_path = 'assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_02_rgb_cropped.png'
 img = Image.open(img_path)
 
 print(f"Mode: {img.mode}, Size: {img.size}")
@@ -14,13 +15,12 @@ if img.mode != 'RGBA':
 # Get pixel data
 data = np.array(img)
 
-# Find pixels that are NOT white/near-white (threshold 250)
-# Check RGB channels, ignore alpha
-non_white = np.any(data[:, :, :3] < 250, axis=2)
+# Find pixels that are visible (alpha > 0)
+visible = data[:, :, 3] > 0
 
-# Find bounding box of non-white content
-rows = np.any(non_white, axis=1)
-cols = np.any(non_white, axis=0)
+# Find bounding box of visible content
+rows = np.any(visible, axis=1)
+cols = np.any(visible, axis=0)
 
 if rows.any() and cols.any():
     rmin, rmax = np.where(rows)[0][[0, -1]]
@@ -35,7 +35,7 @@ if rows.any() and cols.any():
     
     # Crop
     cropped = img.crop((cmin, rmin, cmax, rmax))
-    cropped.save(img_path)
+    cropped.save(out_path)
     print(f"Cropped successfully! Original: {img.size}, New: {cropped.size}")
 else:
     print("No content found")
