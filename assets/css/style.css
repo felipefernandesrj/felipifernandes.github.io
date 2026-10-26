@@ -27,8 +27,8 @@
     --color-surface: var(--warm-100);
     --color-border: var(--warm-300);
     --color-text-primary: var(--warm-900);
-    --color-text-secondary: var(--warm-600);
-    --color-text-muted: var(--warm-500);
+    --color-text-secondary: #6f6b62;  /* AA >=4.5:1 sobre fundos claros */
+    --color-text-muted: #6f6b62;
     --color-accent: var(--warm-400);
 }
 

@@ -120,7 +120,11 @@
                             gold: '#b8a88a',
                             sage: '#a8b5a0',
                         }
-                    }
+                    },
+                    // Texto secundario com contraste AA (>=4.5:1); bg/bordas mantem a paleta
+                    textColor: {
+                        warm: { 500: '#6f6b62', 600: '#6f6b62' },
+                    },
                 }
             }
         }
@@ -273,15 +277,15 @@
              aria-hidden="true"
              class="pointer-events-none select-none absolute bottom-0 right-0 h-full w-auto max-w-none object-contain object-bottom"
              style="opacity:0.10;">
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 flex flex-col md:block" data-aos="fade-up" data-aos-duration="800">
             <!-- Avatar/Photo -->
-            <div class="mb-8">
+            <div class="mb-5 md:mb-8">
                 <img src="assets/images/felipi-linkedin-256.webp" alt="Felipi Fernandes" width="128" height="128" 
-                     class="w-32 h-32 mx-auto rounded-2xl object-cover shadow-2xl shadow-warm-900/20 border-4 border-warm-100">
+                     class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-2xl object-cover shadow-2xl shadow-warm-900/20 border-4 border-warm-100">
             </div>
             
             <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-warm-200 text-warm-800 rounded-full text-sm font-medium mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-warm-200 text-warm-800 rounded-full text-sm font-medium mb-4 md:mb-6 self-center">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#009739"/>
                     <path d="M12 4.5L5 8.5v4.5c0 4.14 2.88 8.02 7 9 4.12-.98 7-4.86 7-9V8.5l-7-4z" fill="#FEDD00"/>
@@ -291,54 +295,55 @@
             </div>
             
             <!-- Name -->
-            <h1 class="text-5xl md:text-6xl font-bold text-warm-900 mb-4">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-warm-900 mb-3 md:mb-4">
                 Felipi Fernandes
             </h1>
             
             <!-- Subtitle -->
-            <p class="text-xl md:text-2xl text-warm-600 font-medium mb-6 max-w-2xl mx-auto">
+            <p class="text-lg sm:text-xl md:text-2xl text-warm-600 font-medium mb-6 max-w-2xl mx-auto">
                 <span data-lang="pt">Performance Specialist @ Grupo Profarma | A.I. Researcher | +R$15MM Budget Manager</span>
                 <span data-lang="en">Performance Specialist @ Grupo Profarma | A.I. Researcher | +$3MM Budget Manager</span>
             </p>
             
             <!-- Summary -->
-            <p class="text-lg text-warm-600 mb-6 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg text-warm-600 mb-6 max-w-2xl mx-auto leading-relaxed max-md:order-1">
                 <span data-lang="pt">+12 anos em marketing digital, trilhando por agências, startups e fintechs. Atualmente na 2ª maior distribuidora de medicamentos do Brasil (B3), gerenciando budget anual de R$15Mi com ROI superior a 10x através de estratégias de mídia paga.</span>
                 <span data-lang="en">+12 years in digital marketing, navigating agencies, startups and fintechs. Currently at Brazil's 2nd largest pharmaceutical distributor (B3-listed), managing a $3M annual budget with 10x+ ROI through paid media strategies.</span>
             </p>
             
             <!-- Tech Bio -->
-            <p class="text-base text-warm-500 mb-10 max-w-xl mx-auto">
-                E-commerce, APIs, automation and growth. Building SaaS tools for data-driven performance.
+            <p class="text-base text-warm-500 mb-10 max-w-xl mx-auto max-md:order-1">
+                <span data-lang="pt">E-commerce, APIs, automação e growth. Construindo ferramentas SaaS para performance orientada por dados.</span>
+                <span data-lang="en">E-commerce, APIs, automation and growth. Building SaaS tools for data-driven performance.</span>
             </p>
             
             <!-- Location -->
-            <div class="flex items-center justify-center gap-2 text-warm-500 text-sm mb-8">
+            <div class="flex items-center justify-center gap-2 text-warm-500 text-sm mb-8 max-md:order-1">
                 <i data-lucide="map-pin" class="w-4 h-4"></i>
                 <span><span data-lang="pt">Rio de Janeiro, Brasil</span><span data-lang="en">Rio de Janeiro, Brazil</span></span>
             </div>
             
             <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap">
+            <div class="flex flex-row items-center justify-center gap-2 sm:gap-4 flex-wrap max-md:mb-8">
                 <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" 
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-warm-900 text-warm-100 rounded-xl font-medium hover:bg-warm-800 transition-all hover:scale-105 shadow-lg shadow-warm-900/25">
+                   class="inline-flex items-center gap-2 px-3 sm:px-6 py-3 bg-warm-900 text-warm-100 rounded-xl font-medium hover:bg-warm-800 transition-all hover:scale-105 shadow-lg shadow-warm-900/25">
                     <i data-lucide="linkedin" class="w-5 h-5"></i>
                     LinkedIn
                 </a>
                 <a href="https://github.com/felipefernandesrj" target="_blank" rel="noopener" 
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-warm-100 text-warm-900 border border-warm-300 rounded-xl font-medium hover:bg-warm-200 hover:border-warm-400 transition-all hover:scale-105">
+                   class="inline-flex items-center gap-2 px-3 sm:px-6 py-3 bg-warm-100 text-warm-900 border border-warm-300 rounded-xl font-medium hover:bg-warm-200 hover:border-warm-400 transition-all hover:scale-105">
                     <i data-lucide="github" class="w-5 h-5"></i>
                     GitHub
                 </a>
                 <a href="mailto:felipi.fernandes@proton.me" 
-                   class="inline-flex items-center gap-2 px-6 py-3 bg-warm-100 text-warm-900 border border-warm-300 rounded-xl font-medium hover:bg-warm-200 hover:border-warm-400 transition-all hover:scale-105">
+                   class="inline-flex items-center gap-2 px-3 sm:px-6 py-3 bg-warm-100 text-warm-900 border border-warm-300 rounded-xl font-medium hover:bg-warm-200 hover:border-warm-400 transition-all hover:scale-105">
                     <i data-lucide="mail" class="w-5 h-5"></i>
                     E-mail
                 </a>
             </div>
             
             <!-- Scroll Indicator -->
-            <div class="mt-20 animate-bounce">
+            <div class="mt-20 animate-bounce max-md:order-1">
                 <a href="#projects" class="text-warm-400 hover:text-warm-600 transition-colors">
                     <i data-lucide="chevron-down" class="w-6 h-6 mx-auto"></i>
                     <span class="sr-only" data-lang="pt">Ver projetos</span>
@@ -399,7 +404,7 @@
     <section id="consultoria" class="py-24 bg-warm-900">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16" data-aos="fade-up">
-                <p class="text-xs tracking-widest uppercase text-warm-500 mb-3">Consultoria</p>
+                <p class="text-xs tracking-widest uppercase text-[#b0aca2] mb-3">Consultoria</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-warm-100 mb-4">
                     <span data-lang="pt">Cases Estratégicos</span>
                     <span data-lang="en">Strategic Cases</span>
@@ -439,11 +444,11 @@
                                 </span>
                             </div>
                             <div>
-                                <p class="text-xs text-warm-500 mb-1"><span data-lang="pt">Beleza · E-commerce · Março 2026</span><span data-lang="en">Beauty · E-commerce · March 2026</span></p>
+                                <p class="text-xs text-[#b0aca2] mb-1"><span data-lang="pt">Beleza · E-commerce · Março 2026</span><span data-lang="en">Beauty · E-commerce · March 2026</span></p>
                                 <h3 class="font-semibold text-warm-100 mb-2">Embelleze — <span data-lang="pt">Canal Digital</span><span data-lang="en">Digital Channel</span></h3>
                                 <p class="text-sm text-warm-400 leading-relaxed"><span data-lang="pt">Estratégia de retomada de relevância no e-commerce próprio frente à concorrência crescente.</span><span data-lang="en">Strategy to reclaim relevance in owned e-commerce amid growing competition.</span></p>
                             </div>
-                            <div class="mt-auto flex items-center gap-1.5 text-warm-500 text-xs group-hover:text-warm-300 transition-colors">
+                            <div class="mt-auto flex items-center gap-1.5 text-[#b0aca2] text-xs group-hover:text-warm-300 transition-colors">
                                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                                 <span data-lang="pt">Ver proposta</span>
                                 <span data-lang="en">View proposal</span>
@@ -461,11 +466,11 @@
                                 </span>
                             </div>
                             <div>
-                                <p class="text-xs text-warm-500 mb-1"><span data-lang="pt">Saúde & Beleza · Performance · 2022–2024</span><span data-lang="en">Health & Beauty · Performance · 2022–2024</span></p>
+                                <p class="text-xs text-[#b0aca2] mb-1"><span data-lang="pt">Saúde & Beleza · Performance · 2022–2024</span><span data-lang="en">Health & Beauty · Performance · 2022–2024</span></p>
                                 <h3 class="font-semibold text-warm-100 mb-2">Rede d1000 — E-commerce</h3>
                                 <p class="text-sm text-warm-400 leading-relaxed"><span data-lang="pt">Crescimento de 20× no canal digital, com share subindo de 1% para 8% frente ao físico.</span><span data-lang="en">20× growth in digital channel, with share rising from 1% to 8% vs. brick-and-mortar.</span></p>
                             </div>
-                            <div class="mt-auto flex items-center gap-1.5 text-warm-500 text-xs group-hover:text-warm-300 transition-colors">
+                            <div class="mt-auto flex items-center gap-1.5 text-[#b0aca2] text-xs group-hover:text-warm-300 transition-colors">
                                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                                 <span data-lang="pt">Ver retrospectiva</span>
                                 <span data-lang="en">View retrospective</span>
@@ -483,13 +488,13 @@
                                 </span>
                             </div>
                             <div>
-                                <p class="text-xs text-warm-500 mb-1"><span data-lang="pt">Privacidade · SaaS · 2024–2025</span><span data-lang="en">Privacy · SaaS · 2024–2025</span></p>
+                                <p class="text-xs text-[#b0aca2] mb-1"><span data-lang="pt">Privacidade · SaaS · 2024–2025</span><span data-lang="en">Privacy · SaaS · 2024–2025</span></p>
                                 <h3 class="font-semibold text-warm-100 mb-2">Proton — <span data-lang="pt">Auditoria de Canais Pagos</span><span data-lang="en">Paid Channels Audit</span></h3>
                                 <p class="text-sm text-warm-400 leading-relaxed"><span data-lang="pt">Auditoria e reestruturação de canais de mídia paga para o ecossistema Proton.</span><span data-lang="en">Audit and restructuring of paid media channels for the Proton ecosystem.</span></p>
                             </div>
                             <div class="mt-auto">
                                 <button type="button" disabled aria-disabled="true"
-                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-warm-900 text-warm-500 rounded-lg text-xs font-medium opacity-60 cursor-not-allowed pointer-events-none">
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-warm-900 text-[#b0aca2] rounded-lg text-xs font-medium opacity-60 cursor-not-allowed pointer-events-none">
                                     <i data-lucide="check" class="w-3.5 h-3.5"></i>
                                     <span data-lang="pt">Entregue</span><span data-lang="en">Delivered</span>
                                 </button>
@@ -499,11 +504,11 @@
                         <!-- Placeholder -->
                         <div class="carousel-card bg-warm-800/40 rounded-2xl p-6 flex flex-col gap-4 border border-dashed border-warm-700 flex-shrink-0">
                             <div class="w-10 h-10 bg-warm-800 rounded-xl flex items-center justify-center">
-                                <i data-lucide="plus" class="w-5 h-5 text-warm-600"></i>
+                                <i data-lucide="plus" class="w-5 h-5 text-[#8f8b81]"></i>
                             </div>
                             <div>
-                                <p class="text-xs text-warm-600 mb-1"><span data-lang="pt">Em breve</span><span data-lang="en">Coming soon</span></p>
-                                <h3 class="font-semibold text-warm-600 mb-2"><span data-lang="pt">Próximo case</span><span data-lang="en">Next case</span></h3>
+                                <p class="text-xs text-[#8f8b81] mb-1"><span data-lang="pt">Em breve</span><span data-lang="en">Coming soon</span></p>
+                                <h3 class="font-semibold text-[#8f8b81] mb-2"><span data-lang="pt">Próximo case</span><span data-lang="en">Next case</span></h3>
                                 <p class="text-sm text-warm-700 leading-relaxed"><span data-lang="pt">Novos projetos sendo documentados.</span><span data-lang="en">New projects being documented.</span></p>
                             </div>
                         </div>
@@ -862,22 +867,22 @@
             </div>
             
             <div class="pt-8 border-t border-warm-800 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-warm-500">
+                <p class="text-sm text-[#b0aca2]">
                     © <span id="current-year">2025</span> Felipi Fernandes. <span data-lang="pt">Todos os direitos reservados.</span><span data-lang="en">All rights reserved.</span>
                 </p>
                 <div class="flex items-center gap-4">
                     <a href="https://linkedin.com/in/felipifernandes" target="_blank" rel="noopener" 
-                       class="text-warm-500 hover:text-warm-100 transition-colors" title="LinkedIn">
+                       class="text-[#b0aca2] hover:text-warm-100 transition-colors" title="LinkedIn">
                         <i data-lucide="linkedin" class="w-5 h-5"></i>
                         <span class="sr-only">LinkedIn</span>
                     </a>
                     <a href="https://github.com/felipefernandesrj" target="_blank" rel="noopener" 
-                       class="text-warm-500 hover:text-warm-100 transition-colors" title="GitHub">
+                       class="text-[#b0aca2] hover:text-warm-100 transition-colors" title="GitHub">
                         <i data-lucide="github" class="w-5 h-5"></i>
                         <span class="sr-only">GitHub</span>
                     </a>
                     <a href="mailto:felipi.fernandes@proton.me" 
-                       class="text-warm-500 hover:text-warm-100 transition-colors" title="Email">
+                       class="text-[#b0aca2] hover:text-warm-100 transition-colors" title="Email">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                         <span class="sr-only">Email</span>
                     </a>
