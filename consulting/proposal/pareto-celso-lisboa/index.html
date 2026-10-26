@@ -103,6 +103,8 @@ table,.invest,li,.objetivo,.nota{break-inside:avoid}
 .card{box-decoration-break:clone;-webkit-box-decoration-break:clone}
 h2,h3,.sec-head{break-after:avoid}
 @media print{.page{max-width:none}.escopo{break-before:auto}}
+@media screen and (max-width:768px){html,body{overflow-x:hidden;max-width:100%}img,svg{max-width:100%}.page{margin:0;padding:5mm 4mm;border-radius:0;max-width:100%;overflow-x:hidden}.topbar{flex-direction:column;align-items:stretch;gap:4mm}.parceria{flex-wrap:wrap;white-space:normal;gap:2.5mm}.logo-selo{position:static;transform:none;width:100%;max-width:100%;flex-wrap:wrap;justify-content:space-between;gap:3mm}.selo-txt{white-space:normal}.logo-selo img{max-width:45%;height:auto;max-height:8.5mm}.solicitante{grid-template-columns:1fr 1fr;gap:3mm 4mm}.solicitante>div{min-width:0;overflow-wrap:anywhere;word-break:break-word}.solicitante .k{white-space:normal;letter-spacing:.1em}.sobre{grid-template-columns:1fr}.empresa{position:static;transform:none;width:auto}.kpis{grid-template-columns:repeat(2,1fr)}.kpis b{white-space:normal}h1{font-size:20pt}.invest{flex-wrap:wrap}.invest div{flex:1 1 45%}table.resumo{display:block;overflow-x:auto}.foot{flex-wrap:wrap;gap:3mm}}
+@media screen and (max-width:480px){.solicitante{grid-template-columns:1fr}.sol-nome{grid-column:auto}.invest div{flex-basis:100%;border-right:0;border-bottom:1px solid var(--w800)}}
 </style><style>
 #lock-screen{position:fixed;inset:0;z-index:999;background:#faf9f7;display:flex;align-items:center;justify-content:center;font-family:Inter,system-ui,-apple-system,sans-serif;transition:opacity .5s ease,visibility .5s ease}
 #lock-screen.fade-out{opacity:0;visibility:hidden}
