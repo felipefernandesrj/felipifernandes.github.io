@@ -132,7 +132,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"></script>
     
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -176,6 +176,11 @@
         .corner-ribbon a:hover {
             background: linear-gradient(135deg, #007a3d 0%, #005c2e 100%);
             box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Keep the ribbon below the nav where it would cover the nav icons */
+        @media (max-width: 1365px) {
+            .corner-ribbon { top: 64px; }
         }
 
         /* Language Toggle */
@@ -226,7 +231,7 @@
                     <div class="w-8 h-8 bg-warm-900 rounded-lg flex items-center justify-center">
                         <span class="text-warm-100 text-xs font-bold">FF</span>
                     </div>
-                    <span class="hidden sm:inline">Felipi Fernandes</span>
+                    <span class="hidden lg:inline">Felipi Fernandes</span>
                 </a>
                 
                 <!-- Nav Links -->
@@ -263,15 +268,15 @@
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
         <!-- Background overlay: transparent photo -->
-        <img src="assets/images/felipi-transparent.png"
-             alt=""
+        <img src="assets/images/felipi-transparent.webp"
+             alt="" width="1080" height="1450" decoding="async" fetchpriority="low"
              aria-hidden="true"
              class="pointer-events-none select-none absolute bottom-0 right-0 h-full w-auto max-w-none object-contain object-bottom"
              style="opacity:0.10;">
         <div class="max-w-4xl mx-auto px-6 text-center relative z-10" data-aos="fade-up" data-aos-duration="800">
             <!-- Avatar/Photo -->
             <div class="mb-8">
-                <img src="assets/images/felipi-linkedin.png" alt="Felipi Fernandes" 
+                <img src="assets/images/felipi-linkedin-256.webp" alt="Felipi Fernandes" width="128" height="128" 
                      class="w-32 h-32 mx-auto rounded-2xl object-cover shadow-2xl shadow-warm-900/20 border-4 border-warm-100">
             </div>
             
@@ -427,7 +432,7 @@
                         <a href="consulting/proposal/34-embelleze/index.html"
                             class="carousel-card group bg-warm-800 rounded-2xl p-6 hover:bg-warm-700 transition-colors flex flex-col gap-4 flex-shrink-0">
                             <div class="flex items-start justify-between">
-                                <img src="assets/images/embelleze-logo.svg" alt="Embelleze" style="height:28px;width:auto;opacity:0.85;">
+                                <img src="assets/images/embelleze-logo.svg" width="107" height="28" loading="lazy" decoding="async" alt="Embelleze" style="height:28px;width:auto;opacity:0.85;">
                                 <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-warm-900 text-warm-400 rounded-full text-xs font-medium">
                                     <i data-lucide="lock" class="w-3 h-3"></i>
                                     <span data-lang="pt">Restrito</span><span data-lang="en">Restricted</span>
@@ -449,7 +454,7 @@
                         <a href="retrospectiva/profarma.html"
                             class="carousel-card group bg-warm-800 rounded-2xl p-6 hover:bg-warm-700 transition-colors flex flex-col gap-4 flex-shrink-0">
                             <div class="flex items-start justify-between">
-                                <img src="assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_04_rgb_cropped.png" alt="Rede d1000" style="height:28px;width:auto;opacity:0.85;">
+                                <img src="assets/docs/Performance/d1000-Profarma/logotipos/dm_marca_f_04_rgb_cropped.png" width="62" height="28" loading="lazy" decoding="async" alt="Rede d1000" style="height:28px;width:auto;opacity:0.85;">
                                 <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-warm-900 text-warm-400 rounded-full text-xs font-medium">
                                     <i data-lucide="book-open" class="w-3 h-3"></i>
                                     <span data-lang="pt">Retrospectiva</span><span data-lang="en">Retrospective</span>
@@ -471,7 +476,7 @@
                         <div aria-disabled="true"
                             class="carousel-card bg-warm-800 rounded-2xl p-6 flex flex-col gap-4 flex-shrink-0 cursor-default">
                             <div class="flex items-start justify-between">
-                                <img src="assets/docs/Performance/d1000-Profarma/logotipos/proton.svg" alt="Proton" style="height:28px;width:auto;opacity:0.85;filter:brightness(0) invert(1);">
+                                <img src="assets/docs/Performance/d1000-Profarma/logotipos/proton.svg" width="87" height="28" loading="lazy" decoding="async" alt="Proton" style="height:28px;width:auto;opacity:0.85;filter:brightness(0) invert(1);">
                                 <span class="inline-flex items-center gap-1 px-2.5 py-1 bg-warm-900 text-warm-400 rounded-full text-xs font-medium">
                                     <i data-lucide="lock" class="w-3 h-3"></i>
                                     <span data-lang="pt">Restrito</span><span data-lang="en">Restricted</span>
